@@ -932,7 +932,7 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
           <!-- week 3 -->
           <div class="cal-day">10</div><div class="cal-day">11</div>
           <div class="cal-day">12</div><div class="cal-day">13</div>
-          <div class="cal-day highlight">14</div>
+          <div class="cal-day">14</div>
           <div class="cal-day">15</div><div class="cal-day">16</div>
           <!-- week 4 -->
           <div class="cal-day">17</div><div class="cal-day">18</div>
@@ -1007,47 +1007,6 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
       <div class="bitem"><div class="bdot"></div><span>Padrón público auditable íntegramente por <strong>cualquier organización o veedor</strong></span></div>
     </div>
     <span class="srcbadge">Fuente: Transparencia Venezuela · Sección II</span>
-  </div>
-  <!-- CÉDULA PIT — visible en móvil en lugar del panel derecho -->
-  <div class="pit" style="top:10%;right:5%">
-    <div style="width:220px;background:#F0EAD6;border-radius:8px;box-shadow:3px 6px 22px rgba(0,0,0,.6);transform:rotate(2deg);overflow:hidden;font-family:Arial,sans-serif">
-      <!-- Header azul -->
-      <div style="background:#1a4099;padding:5px 8px 4px;text-align:center">
-        <div style="font-size:6px;font-weight:700;color:rgba(255,255,255,.8);letter-spacing:1.2px;margin-bottom:1px">REPÚBLICA BOLIVARIANA DE VENEZUELA</div>
-        <div style="font-size:10px;font-weight:900;color:#F5C800;letter-spacing:2px">CÉDULA DE IDENTIDAD</div>
-      </div>
-      <!-- Tricolor bar -->
-      <div style="display:flex;height:5px">
-        <div style="flex:1;background:#CF9B00"></div>
-        <div style="flex:1;background:#1a4099"></div>
-        <div style="flex:1;background:#E8172E"></div>
-      </div>
-      <!-- Cuerpo -->
-      <div style="padding:8px 10px;display:flex;gap:10px;align-items:flex-start">
-        <!-- Foto -->
-        <div style="width:54px;height:70px;background:#d0cbbe;border-radius:3px;flex-shrink:0;overflow:hidden;display:flex;align-items:flex-end;justify-content:center">
-          <svg width="46" height="58" viewBox="0 0 46 58" fill="none">
-            <ellipse cx="23" cy="18" rx="11" ry="13" fill="#a89880"/>
-            <path d="M2 58 Q2 36 23 36 Q44 36 44 58" fill="#a89880"/>
-          </svg>
-        </div>
-        <!-- Datos -->
-        <div style="flex:1;padding-top:2px">
-          <div style="font-size:6.5px;color:#777;text-transform:uppercase;letter-spacing:.4px">Apellidos</div>
-          <div style="font-size:9px;font-weight:700;color:#1a1a1a;letter-spacing:.3px;margin-bottom:5px">MARTÍNEZ C.</div>
-          <div style="font-size:6.5px;color:#777;text-transform:uppercase;letter-spacing:.4px">Nombres</div>
-          <div style="font-size:9px;font-weight:700;color:#1a1a1a;margin-bottom:5px">ANDREÍNA J.</div>
-          <div style="font-size:6.5px;color:#777;text-transform:uppercase;letter-spacing:.4px">Cédula</div>
-          <div style="font-size:11px;font-weight:900;color:#1a4099;letter-spacing:1px">V-12.345.678</div>
-        </div>
-      </div>
-      <!-- Footer -->
-      <div style="background:#1a4099;padding:3px 8px;display:flex;justify-content:center;align-items:center;gap:6px">
-        <div style="width:8px;height:8px;background:#CF9B00;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%)"></div>
-        <div style="font-size:7px;font-weight:700;color:#fff;letter-spacing:2px">VENEZOLANO/A</div>
-        <div style="width:8px;height:8px;background:#E8172E;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%)"></div>
-      </div>
-    </div>
   </div>
   <!-- RIGHT: cédula venezolana ilustrada -->
   <div class="cal-panel" style="align-items:center;justify-content:center">
@@ -1406,7 +1365,7 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
     <div class="blob" style="width:420px;height:320px;background:#003d1a;top:0%;right:-50px;opacity:.48"></div>
     <div class="blob" style="width:300px;height:300px;background:#1E3A8A;bottom:5%;left:0%;opacity:.38"></div>
   </div>
-  <div class="pit wright-pit" style="top:58px;left:50%;transform:translateX(-50%);z-index:30">
+  <div class="pit wright-pit" style="top:14%;right:4%;left:auto;transform:rotate(-1.5deg);z-index:30">
     <div class="picard y" style="width:260px;font-size:15px;transform:rotate(-1.5deg)">"El siguiente paso es ir hacia unas elecciones democráticas. Yo espero y confío en que será durante la administración de Donald Trump."<em class="pisrc">— Doug Wright, Secretario de Energía de EEUU</em></div>
   </div>
   <div class="panel">
@@ -1752,49 +1711,78 @@ function drawSerp(progress){
     ctx.save();
     ctx.globalAlpha=alpha;
 
-    /* ── paper fill path ── */
+    /* ── 1. Paper fill ── */
     ctx.beginPath();
-    // left edge top→bottom
-    for(let i=0;i<=steps;i++){
-      const {ox,oy}=perp(i,1);
-      i===0?ctx.moveTo(spine[i].x+ox,spine[i].y+oy):ctx.lineTo(spine[i].x+ox,spine[i].y+oy);
-    }
-    // right edge bottom→top
-    for(let i=steps;i>=0;i--){
-      const {ox,oy}=perp(i,-1);
-      ctx.lineTo(spine[i].x+ox,spine[i].y+oy);
-    }
+    for(let i=0;i<=steps;i++){const {ox,oy}=perp(i,1);i===0?ctx.moveTo(spine[i].x+ox,spine[i].y+oy):ctx.lineTo(spine[i].x+ox,spine[i].y+oy);}
+    for(let i=steps;i>=0;i--){const {ox,oy}=perp(i,-1);ctx.lineTo(spine[i].x+ox,spine[i].y+oy);}
     ctx.closePath();
-    ctx.fillStyle='#EDF1F9';
-    ctx.fill();
-    ctx.strokeStyle='rgba(0,50,120,0.20)';ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle='#F6F5EF';ctx.fill();
 
-    /* ── thin blue edge lines (left & right borders of the ribbon) ── */
-    ctx.strokeStyle='rgba(0,60,150,0.28)';ctx.lineWidth=2;
-    ['left','right'].forEach(side=>{
-      const sg=side==='left'?1:-1;
+    /* ── 2. Blue diagonal-stripe borders (left & right, like real CNE acta) ── */
+    const bw=sw*0.22;
+    [1,-1].forEach(sg=>{
+      /* build clip path for this border strip */
+      ctx.save();
       ctx.beginPath();
       for(let i=0;i<=steps;i++){
         const {ox,oy}=perp(i,sg);
         i===0?ctx.moveTo(spine[i].x+ox,spine[i].y+oy):ctx.lineTo(spine[i].x+ox,spine[i].y+oy);
       }
-      ctx.stroke();
+      for(let i=steps;i>=0;i--){
+        const nx2=i<steps?(spine[i+1].x-spine[i].x):(spine[i].x-spine[i-1].x);
+        const ny2=i<steps?(spine[i+1].y-spine[i].y):segH;
+        const l2=Math.sqrt(nx2*nx2+ny2*ny2)||1;
+        ctx.lineTo(spine[i].x+(-ny2/l2)*(sw/2-bw)*sg, spine[i].y+(nx2/l2)*(sw/2-bw)*sg);
+      }
+      ctx.closePath();
+      ctx.clip();
+      /* blue fill */
+      ctx.fillStyle='#1a3570';ctx.fillRect(-W,-H,W*3,H*3);
+      /* white diagonal stripes */
+      ctx.strokeStyle='rgba(255,255,255,0.42)';ctx.lineWidth=2;
+      for(let d=-H*3;d<H*3;d+=8){
+        ctx.beginPath();ctx.moveTo(-W,d);ctx.lineTo(W*2,d+W*3);ctx.stroke();
+      }
+      ctx.restore();
     });
 
-    /* ── 3 CNE stamps at 15 / 50 / 85% of ribbon ── */
+    /* ── 3. CNE logo × 3 at 15 / 50 / 85% ── */
     [.15,.50,.85].forEach(frac=>{
       const idx=Math.min(Math.round(frac*steps),steps);
       const pt=spine[idx];
-      if(!pt||pt.y<-30||pt.y>H+30)return;
+      if(!pt||pt.y<-50||pt.y>H+50)return;
       const cx=pt.x,cy=pt.y;
-      ctx.beginPath();ctx.arc(cx,cy,14,0,Math.PI*2);
-      ctx.strokeStyle='rgba(0,50,160,0.52)';ctx.lineWidth=1.5;ctx.stroke();
-      ctx.beginPath();ctx.arc(cx,cy,9,0,Math.PI*2);
-      ctx.strokeStyle='rgba(0,50,160,0.36)';ctx.lineWidth=1;ctx.stroke();
-      ctx.fillStyle='rgba(0,50,160,0.62)';
-      ctx.font="bold 6px 'DM Sans',Arial,sans-serif";
+      const ls=sw*0.46; /* logo size proportional to strip */
+      const hw=ls/2, r=ls*0.12;
+
+      /* outer rounded-rect */
+      ctx.strokeStyle='#1a3570';ctx.lineWidth=1.5;
+      ctx.beginPath();
+      ctx.moveTo(cx-hw+r,cy-hw);ctx.lineTo(cx+hw-r,cy-hw);ctx.arcTo(cx+hw,cy-hw,cx+hw,cy-hw+r,r);
+      ctx.lineTo(cx+hw,cy+hw-r);ctx.arcTo(cx+hw,cy+hw,cx+hw-r,cy+hw,r);
+      ctx.lineTo(cx-hw+r,cy+hw);ctx.arcTo(cx-hw,cy+hw,cx-hw,cy+hw-r,r);
+      ctx.lineTo(cx-hw,cy-hw+r);ctx.arcTo(cx-hw,cy-hw,cx-hw+r,cy-hw,r);
+      ctx.closePath();ctx.stroke();
+
+      /* inner rounded-rect (double border like real logo) */
+      const iw=hw*0.78,ir=r*0.7;
+      ctx.lineWidth=0.8;
+      ctx.beginPath();
+      ctx.moveTo(cx-iw+ir,cy-iw);ctx.lineTo(cx+iw-ir,cy-iw);ctx.arcTo(cx+iw,cy-iw,cx+iw,cy-iw+ir,ir);
+      ctx.lineTo(cx+iw,cy+iw-ir);ctx.arcTo(cx+iw,cy+iw,cx+iw-ir,cy+iw,ir);
+      ctx.lineTo(cx-iw+ir,cy+iw);ctx.arcTo(cx-iw,cy+iw,cx-iw,cy+iw-ir,ir);
+      ctx.lineTo(cx-iw,cy-iw+ir);ctx.arcTo(cx-iw,cy-iw,cx-iw+ir,cy-iw,ir);
+      ctx.closePath();ctx.stroke();
+
+      /* CNE text */
+      ctx.fillStyle='#1a3570';
+      ctx.font=`bold ${ls*0.38}px Arial,sans-serif`;
       ctx.textAlign='center';ctx.textBaseline='middle';
       ctx.fillText('CNE',cx,cy);
+
+      /* PODER ELECTORAL below */
+      ctx.font=`${ls*0.22}px Arial,sans-serif`;
+      ctx.fillText('PODER ELECTORAL',cx,cy+ls*0.74);
     });
 
     ctx.restore();
