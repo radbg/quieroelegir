@@ -1,0 +1,2119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>quieroelegir.org — Venezuela merece elegir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=DM+Sans:wght@300;400;500;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#E8172E;--red2:#FF3347;--gold:#F5B800;--gold2:#FFD040;
+  --cream:#F5EDD8;--white:#FFFFFF;--text:#F0EBE0;--muted:rgba(240,235,224,.62);
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --hand:'Caveat',cursive;
+}
+html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased}
+
+/* ── APP ── */
+#app{width:100%;height:100dvh;position:relative;overflow:hidden}
+
+/* ── SLIDE ── */
+.slide{
+  position:absolute;inset:0;
+  display:grid;
+  opacity:0;pointer-events:none;
+  transition:opacity .5s ease;
+}
+.slide.active{opacity:1;pointer-events:all}
+.slide.exit{opacity:0}
+
+/* default: full-width single column */
+.slide{grid-template-columns:1fr;grid-template-rows:1fr}
+/* split layout */
+.slide.split{grid-template-columns:1fr 1fr}
+/* firma */
+#s10{display:block;overflow:hidden;padding:0;scrollbar-width:none;-ms-overflow-style:none}
+#s10::-webkit-scrollbar{display:none}
+
+/* share column — desktop right side */
+.share-column{flex:0 0 220px;display:flex;flex-direction:column;justify-content:center}
+
+/* mobile share footer */
+.mobile-share-footer{
+  display:none;position:absolute;bottom:64px;left:0;right:0;
+  padding:10px 20px;
+  background:linear-gradient(to top,rgba(11,22,40,1) 0%,rgba(11,22,40,.85) 100%);
+  justify-content:center;gap:10px;z-index:50;
+}
+
+/* ── MINI ILLUSTRATIONS (mobile only) ── */
+.mini-ill{
+  display:none; /* hidden on desktop — shown via mobile media query */
+  margin-top:16px;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.mini-ill-chart{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:12px;
+  padding:12px 16px;
+  display:flex;align-items:center;gap:14px;
+  width:100%;
+}
+.slide-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.slide-bg::after{
+  content:'';position:absolute;inset:0;z-index:2;
+  background:linear-gradient(160deg,rgba(0,0,0,.08) 0%,rgba(0,0,0,.35) 40%,rgba(0,0,0,.75) 80%,rgba(0,0,0,.92) 100%);
+}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+
+/* ── PROGRESS ── */
+.prog{position:absolute;top:0;left:0;right:0;z-index:80;display:flex;gap:4px;padding:14px 22px 0}
+.pseg{flex:1;height:3px;background:rgba(255,255,255,.2);border-radius:2px;overflow:hidden}
+.pfill{height:100%;background:var(--gold);border-radius:2px;transition:width .07s linear}
+
+/* ── PAUSE ── */
+#pauseBtn{
+  position:absolute;top:12px;right:18px;z-index:80;
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;backdrop-filter:blur(6px);transition:background .2s;
+}
+#pauseBtn:hover{background:rgba(255,255,255,.24)}
+#pauseBtn svg{width:14px;height:14px}
+
+/* ── CONTENT PANEL ── */
+.panel{
+  position:relative;z-index:10;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:60px 36px 108px;
+}
+.panel.right{
+  justify-content:center;padding:60px 36px 108px 24px;
+}
+
+/* ── TAG ── */
+.tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);border:1.5px solid rgba(245,184,0,.5);
+  padding:4px 14px;border-radius:3px;margin-bottom:18px;width:fit-content;
+}
+.tag-dot{width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0}
+
+/* ── TITLE ── */
+.t1{
+  font-family:var(--serif);
+  font-size:clamp(34px,5.5vw,68px);
+  font-weight:900;line-height:1.0;
+  margin-bottom:18px;letter-spacing:-.02em;color:#fff;
+}
+.t1 em{color:var(--red2);font-style:italic}
+.t1 b {color:var(--gold2)}
+
+/* ── BODY ── */
+.body{font-size:clamp(17px,2.2vw,20px);line-height:1.72;color:var(--muted);font-weight:300}
+
+/* ── SOURCE ── */
+.srcbadge{
+  display:inline-flex;align-items:center;gap:8px;margin-top:18px;
+  font-size:10px;letter-spacing:.1em;color:rgba(240,235,224,.32);text-transform:uppercase;
+}
+.srcbadge::before{content:'';width:20px;height:1px;background:rgba(240,235,224,.22)}
+
+/* ── STAT CARDS ── */
+.sgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin-top:20px}
+.scard{
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;padding:16px 18px;backdrop-filter:blur(10px);
+  position:relative;overflow:hidden;
+}
+.scard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);opacity:.7}
+.snum{font-family:var(--serif);font-size:clamp(26px,4vw,40px);font-weight:700;color:var(--gold);line-height:1}
+.snum small{font-size:.55em}
+.slabel{font-size:14px;color:var(--muted);margin-top:5px;line-height:1.4}
+
+/* ── BIG STAT ── */
+.bigstat{margin-top:20px;display:flex;align-items:flex-end;gap:14px}
+.bignum{font-family:var(--serif);font-size:clamp(72px,16vw,130px);font-weight:900;color:var(--gold2);line-height:.9;letter-spacing:-.04em}
+.bigdesc{font-size:clamp(16px,2vw,19px);color:var(--muted);max-width:200px;line-height:1.55;padding-bottom:10px}
+
+/* ── BULLETS ── */
+.blist{margin-top:18px;display:flex;flex-direction:column;gap:11px}
+.bitem{display:flex;align-items:flex-start;gap:13px;font-size:clamp(16px,2.2vw,18px);line-height:1.58;color:#fff}
+.bdot{width:8px;height:8px;min-width:8px;border-radius:50%;background:var(--red);margin-top:6px;flex-shrink:0}
+.bitem strong{color:var(--gold2);font-weight:600}
+
+/* ── QUOTE ── */
+.qblock{
+  margin-top:18px;border-left:4px solid var(--gold);padding:12px 18px;
+  font-size:clamp(16px,2.2vw,18px);font-style:italic;line-height:1.7;color:#fff;
+  background:rgba(245,184,0,.07);border-radius:0 8px 8px 0;
+}
+.qsrc{font-size:11px;font-style:normal;color:var(--gold);display:block;margin-top:8px;font-weight:600;letter-spacing:.06em}
+
+/* ── COMPARISON ── */
+.cmpr{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:18px}
+.cpanel{border-radius:14px;padding:18px;backdrop-filter:blur(8px)}
+.cpanel.bad {background:rgba(232,23,46,.16);border:1.5px solid rgba(232,23,46,.45)}
+.cpanel.good{background:rgba(245,184,0,.14);border:1.5px solid rgba(245,184,0,.45)}
+.cphead{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+.cphead.bad {color:var(--red2)}
+.cphead.good{color:var(--gold2)}
+.cpitem{font-size:clamp(14px,1.8vw,16px);line-height:1.55;color:var(--muted);margin-bottom:8px;padding-left:14px;position:relative}
+.cpitem::before{content:'';position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%}
+.cpitem.bad::before {background:var(--red2)}
+.cpitem.good::before{background:var(--gold2)}
+
+/* ── POST-ITS (bigger) ── */
+.pit{position:absolute;z-index:20;pointer-events:none}
+.picard{
+  font-family:var(--hand);font-size:18px;line-height:1.45;
+  padding:22px 20px 32px;width:230px;
+  box-shadow:4px 7px 24px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.12) inset;
+  position:relative;
+}
+.picard::before{
+  content:'';position:absolute;top:-7px;left:50%;transform:translateX(-50%);
+  width:14px;height:14px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#ff8080,#c0392b);
+  box-shadow:0 2px 5px rgba(0,0,0,.5);
+}
+.picard.y{background:#F7E84E;color:#1a1a1a;transform:rotate(-3deg)}
+.picard.b{background:#A8CCEE;color:#1a1a1a;transform:rotate(2.5deg)}
+.picard.p{background:#F5AABF;color:#1a1a1a;transform:rotate(-1.8deg)}
+.picard.g{background:#9EE8B4;color:#1a1a1a;transform:rotate(2.2deg)}
+.picard.o{background:#FFB347;color:#1a1a1a;transform:rotate(-2deg)}
+.pisrc{display:block;font-size:12px;font-family:var(--sans);margin-top:10px;opacity:.65;font-weight:600;font-style:normal}
+
+/* ── DOT ROW ── */
+.dotrow{display:flex;gap:7px;margin-top:20px;flex-wrap:wrap}
+.dot    {width:36px;height:5px;border-radius:3px;background:rgba(255,255,255,.15)}
+.dot.done{background:var(--gold)}
+.dot.curr{background:var(--red2)}
+
+/* ── CTA BUTTON ── */
+.ctabtn{
+  display:inline-flex;align-items:center;gap:10px;margin-top:22px;
+  padding:16px 36px;background:var(--red);color:#fff;
+  font-weight:700;font-size:clamp(15px,2vw,18px);
+  border-radius:4px;cursor:pointer;border:none;
+  font-family:var(--sans);letter-spacing:.02em;
+  transition:background .2s,transform .15s;
+  box-shadow:0 4px 22px rgba(232,23,46,.45);
+  position:relative;z-index:40;
+}
+.ctabtn:hover{background:#c40d22;transform:translateY(-2px)}
+
+/* ── SHARE BUTTONS ── */
+.share-strip{
+  display:flex;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap;
+}
+.share-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 20px;border-radius:100px;
+  font-family:var(--sans);font-size:13px;font-weight:600;
+  cursor:pointer;border:none;transition:all .2s;
+  letter-spacing:.01em;
+}
+.share-btn.x{background:#000;color:#fff;box-shadow:0 2px 12px rgba(0,0,0,.4)}
+.share-btn.x:hover{background:#222}
+.share-btn.ig{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;box-shadow:0 2px 12px rgba(220,39,67,.4)}
+.share-btn.ig:hover{opacity:.9}
+.share-btn svg{width:16px;height:16px;flex-shrink:0}
+
+/* ── BOTTOM BAR ── */
+.bot{
+  position:absolute;bottom:0;left:0;right:0;z-index:70;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 26px 22px;
+  background:linear-gradient(to top,rgba(0,0,0,.85) 0%,transparent 100%);
+}
+.logo{font-family:var(--serif);font-size:18px;font-weight:900;letter-spacing:-.02em;user-select:none;color:#fff}
+.logo span{color:var(--red2)}
+.ctr{font-size:12px;color:var(--muted)}
+
+#btnLike{
+  display:flex;align-items:center;gap:7px;
+  padding:9px 18px;border-radius:100px;
+  border:1px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.08);
+  color:#fff;font-size:13px;font-weight:600;
+  cursor:pointer;font-family:var(--sans);
+  backdrop-filter:blur(6px);transition:all .2s;
+}
+#btnLike:hover{border-color:rgba(245,184,0,.6);background:rgba(245,184,0,.12)}
+#btnLike.liked{background:rgba(245,184,0,.22);border-color:var(--gold);color:var(--gold2)}
+#btnLike svg{width:16px;height:16px}
+
+/* ── NAV ZONES ── */
+.nl,.nr{position:absolute;top:0;bottom:0;width:38%;z-index:25;cursor:pointer}
+.nl{left:0}.nr{right:0}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+@keyframes scaleInCenter{from{opacity:0;transform:translateX(-50%) scale(.9)}to{opacity:1;transform:translateX(-50%) scale(1)}}
+@keyframes countUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.slide.active .panel>*{animation:fadeUp .5s both}
+.slide.active .panel>*:nth-child(1){animation-delay:.05s}
+.slide.active .panel>*:nth-child(2){animation-delay:.13s}
+.slide.active .panel>*:nth-child(3){animation-delay:.21s}
+.slide.active .panel>*:nth-child(4){animation-delay:.29s}
+.slide.active .panel>*:nth-child(5){animation-delay:.37s}
+.slide.active .pit{animation:scaleIn .6s .28s both}
+.slide.active .wright-pit{animation:scaleInCenter .6s .28s both}
+.slide.active .chart-panel{animation:fadeUp .6s .15s both}
+
+/* ── SERPENTINE CANVAS ── */
+#serp{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:0}
+
+/* ── CHART PANEL (slide 2) ── */
+.chart-panel{
+  position:relative;z-index:10;
+  display:flex;flex-direction:column;justify-content:center;
+  align-items:center;gap:20px;
+  padding:60px 36px 108px 0;
+}
+.donut-wrap{position:relative;width:220px;height:220px}
+.donut-wrap svg{width:100%;height:100%}
+.donut-center{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  text-align:center;pointer-events:none;
+}
+.donut-pct{font-family:var(--serif);font-size:52px;font-weight:900;color:var(--red2);line-height:1}
+.donut-label{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.3}
+
+.donut-legend{display:flex;flex-direction:column;gap:10px;width:100%;max-width:240px}
+.legend-item{display:flex;align-items:center;gap:10px}
+.legend-dot{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.legend-text{font-size:16px;color:#fff;line-height:1.3}
+.legend-text small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+
+/* mobile-only stat block replacing donut on small screens */
+.mobile-diag-stat{display:none}
+
+/* ── CALENDAR PANEL (slide 4) ── */
+.cal-panel{
+  position:relative;z-index:10;
+  display:flex;flex-direction:column;justify-content:center;
+  align-items:center;padding:60px 24px 108px 0;
+}
+.acrylic-cal{
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(20px);
+  border-radius:20px;
+  padding:24px;width:260px;
+  box-shadow:0 8px 40px rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.8) inset;
+  position:relative;
+}
+.cal-header{
+  background:var(--red);color:#fff;
+  border-radius:10px 10px 0 0;margin:-24px -24px 16px;
+  padding:14px 24px;text-align:center;
+}
+.cal-month{font-family:var(--serif);font-size:22px;font-weight:900;letter-spacing:.02em}
+.cal-year{font-size:12px;opacity:.85;font-weight:500;margin-top:2px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.cal-day-name{font-size:9px;font-weight:700;color:#666;text-transform:uppercase;padding-bottom:4px}
+.cal-day{
+  font-size:12px;font-weight:500;color:#333;
+  width:28px;height:28px;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;margin:0 auto;
+}
+.cal-day.empty{color:transparent}
+.cal-day.highlight{
+  background:var(--red);color:#fff;font-weight:800;
+  font-size:14px;border-radius:50%;
+  box-shadow:0 2px 10px rgba(232,23,46,.5);
+  position:relative;
+}
+.cal-pit{
+  position:absolute;top:-18px;right:-24px;
+  background:#F7E84E;color:#1a1a1a;
+  font-family:var(--hand);font-size:14px;
+  padding:10px 14px 16px;width:140px;
+  transform:rotate(3deg);
+  box-shadow:2px 4px 14px rgba(0,0,0,.4);
+}
+.cal-pit::before{
+  content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+  width:12px;height:12px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#ff8080,#c0392b);
+}
+
+/* ── ACTA ILLUSTRATION (slide 7) ── */
+.acta-panel{
+  position:relative;z-index:10;
+  display:flex;flex-direction:column;justify-content:center;
+  align-items:center;padding:60px 24px 108px 0;
+}
+.acta-card{
+  background:#F5F0E8;border-radius:8px;
+  width:240px;padding:16px;
+  box-shadow:4px 6px 30px rgba(0,0,0,.55);
+  position:relative;overflow:hidden;
+  border:1px solid rgba(0,0,0,.1);
+}
+.acta-header{
+  background:#8B0000;color:#fff;
+  margin:-16px -16px 12px;padding:10px 16px;
+  text-align:center;
+}
+.acta-header-title{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.acta-header-sub{font-size:9px;opacity:.8;margin-top:2px}
+.acta-lines{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.acta-line{height:2px;background:#ccc;border-radius:1px}
+.acta-line:nth-child(2){width:70%}
+.acta-line:nth-child(3){width:85%}
+.acta-line.short{width:50%}
+.acta-stamp{
+  position:absolute;bottom:16px;right:12px;
+  width:56px;height:56px;border-radius:50%;
+  border:3px solid rgba(139,0,0,.6);
+  display:flex;align-items:center;justify-content:center;
+  transform:rotate(-12deg);
+  background:rgba(139,0,0,.05);
+}
+.acta-stamp-text{font-size:7px;font-weight:700;color:#8B0000;text-align:center;letter-spacing:.05em;line-height:1.3}
+
+/* watermark lines */
+.acta-watermark{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:repeating-linear-gradient(
+    90deg,
+    transparent,transparent 18px,
+    rgba(139,0,0,.06) 18px,rgba(139,0,0,.06) 19px
+  );
+}
+
+/* ── FIRMA SLIDE ── */
+.firma-wrap{position:relative;z-index:40;width:100%;max-width:440px;margin:0 auto}
+.firma-head{text-align:center;margin-bottom:clamp(6px,1vh,14px)}
+.firma-head h2{font-family:var(--serif);font-size:clamp(22px,4.5vh,46px);font-weight:900;line-height:1.0;margin-bottom:clamp(4px,.8vh,10px);letter-spacing:-.02em;color:#fff}
+.firma-head h2 em{color:var(--red2);font-style:italic}
+.firma-head p{font-size:clamp(12px,1.6vh,15px);color:var(--muted);line-height:1.45;max-width:360px;margin:0 auto}
+.counter-band{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin-bottom:clamp(6px,1vh,12px);
+  padding:clamp(6px,1vh,11px) 14px;
+  background:rgba(245,184,0,.1);border:1px solid rgba(245,184,0,.25);border-radius:8px;
+}
+.counter-num{font-family:var(--serif);font-size:clamp(20px,3.5vh,28px);font-weight:900;color:var(--gold2)}
+.counter-label{font-size:clamp(10px,1.4vh,13px);color:var(--muted);line-height:1.35}
+.fform{display:flex;flex-direction:column;gap:clamp(5px,.9vh,9px)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:clamp(5px,.9vh,9px)}
+.finput{
+  width:100%;padding:clamp(8px,1.2vh,12px) 13px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+  border-radius:8px;color:#fff;font-family:var(--sans);font-size:clamp(12px,1.5vh,14px);
+  outline:none;transition:border-color .2s,background .2s;-webkit-appearance:none;
+}
+.finput::placeholder{color:rgba(255,255,255,.3)}
+.finput:focus{border-color:rgba(245,184,0,.6);background:rgba(255,255,255,.11)}
+.fselect{
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='rgba(255,255,255,0.35)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 13px center;cursor:pointer;
+}
+.fselect option{background:#1a2540;color:#fff}
+#fciudad.finput{background-image:none}
+.fcheck{display:flex;align-items:flex-start;gap:9px;cursor:pointer}
+.fcheck input[type="checkbox"]{width:15px;height:15px;min-width:15px;margin-top:2px;accent-color:var(--red);cursor:pointer}
+.fcheck span{font-size:clamp(10px,1.4vh,12px);color:var(--muted);line-height:1.45}
+.fcheck a{color:var(--gold);text-decoration:none}
+.fbtn{
+  width:100%;padding:clamp(10px,1.6vh,14px);background:var(--red);color:#fff;
+  font-family:var(--sans);font-size:clamp(13px,1.8vh,15px);font-weight:700;
+  border:none;border-radius:5px;cursor:pointer;
+  transition:background .2s,opacity .2s,transform .15s;letter-spacing:.02em;
+  box-shadow:0 4px 18px rgba(232,23,46,.4);
+}
+.fbtn:hover:not(:disabled){background:#c40d22;transform:translateY(-1px)}
+.fbtn:disabled{opacity:.38;cursor:not-allowed;box-shadow:none}
+.success-wrap{display:none;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:10px 0}
+.success-icon{width:72px;height:72px;border-radius:50%;background:rgba(245,184,0,.14);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center}
+.success-wrap h3{font-family:var(--serif);font-size:34px;font-weight:900;color:var(--gold2)}
+.success-wrap>p{font-size:14px;color:var(--muted);line-height:1.65;max-width:300px}
+
+/* ══════════════════════════════════════
+   RESPONSIVE — MOBILE FIRST
+══════════════════════════════════════ */
+
+/* ── SMALL MOBILE (< 480px) ── */
+@media(max-width:480px){
+
+  /* panel becomes flex column to absorb post-its in flow */
+  .panel{
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:52px 20px 90px;
+  }
+  /* ── POST-ITS ON MOBILE: absolute at top-center of each slide ── */
+  .pit{
+    position:absolute !important;
+    top:54px !important;
+    left:50% !important;
+    transform:translateX(-50%) !important;
+    right:auto !important;
+    bottom:auto !important;
+    margin-top:0 !important;
+    z-index:28 !important;
+    pointer-events:none;
+  }
+  .picard{
+    width:210px !important;
+    min-height:auto !important;
+    font-size:13px !important;
+    padding:14px 14px 20px !important;
+    transform:rotate(-1.5deg) !important;
+    box-shadow:2px 3px 12px rgba(0,0,0,.45) !important;
+    display:inline-block;
+  }
+  /* Slide 1 (portada) post-it: bigger */
+  #s0 .picard{
+    width:240px !important;
+    font-size:15px !important;
+    padding:18px 18px 26px !important;
+  }
+  .wright-pit{
+    position:absolute !important;
+    top:54px !important;
+    left:50% !important;
+    transform:translateX(-50%) !important;
+    margin-top:0 !important;
+    z-index:28 !important;
+  }
+  .wright-pit .picard{
+    width:210px !important;
+    min-height:auto !important;
+    font-size:13px !important;
+    padding:14px 14px 22px !important;
+    transform:rotate(-1.5deg) !important;
+  }
+  .slide.split{
+    grid-template-columns:1fr;
+    grid-template-rows:1fr;
+    overflow-y:auto;
+  }
+
+  /* show mini illustrations on mobile */
+  .mini-ill{display:flex}
+
+  /* hide graphic panels — text only */
+  .chart-panel,.cal-panel,.acta-panel{display:none !important}
+  .panel.right{display:none !important}
+
+  /* show mobile stat replacing donut */
+  .mobile-diag-stat{display:block}
+
+  /* titles */
+  .t1{font-size:clamp(28px,8vw,40px);margin-bottom:12px}
+  .body{font-size:15px}
+
+  /* stat grid */
+  .sgrid{grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+  .scard{padding:12px 14px}
+  .snum{font-size:26px}
+  .slabel{font-size:11px}
+
+  /* big stat */
+  .bignum{font-size:68px}
+  .bigdesc{font-size:14px;max-width:180px}
+
+  /* bullets */
+  .blist{gap:9px;margin-top:14px}
+  .bitem{font-size:14px}
+
+  /* comparison panels */
+  .cmpr{grid-template-columns:1fr;gap:8px;margin-top:14px}
+  .cpitem{font-size:13px}
+
+  /* quote */
+  .qblock{font-size:14px;padding:10px 14px}
+
+  /* dot row */
+  .dotrow{gap:5px;margin-top:16px}
+  .dot{width:26px;height:4px}
+
+  /* CTA */
+  .ctabtn{padding:14px 24px;font-size:15px;margin-top:16px}
+
+  /* tag */
+  .tag{font-size:10px;padding:3px 10px;margin-bottom:12px}
+
+  /* source */
+  .srcbadge{font-size:9px;margin-top:12px}
+
+  /* bottom bar */
+  .bot{padding:12px 18px 16px}
+  .logo{font-size:15px}
+  .ctr{font-size:11px}
+  #btnLike{padding:7px 12px;font-size:12px}
+
+  /* progress */
+  .prog{padding:10px 14px 0;gap:3px}
+  #pauseBtn{top:10px;right:14px;width:32px;height:32px}
+
+  /* firma slide */
+  #s10{padding:0}
+  .firma-wrap{max-width:100%}
+  .share-column{display:none}
+  .mobile-share-footer{display:flex}
+  .firma-head h2{font-size:clamp(20px,6vw,28px);margin-bottom:5px}
+  .firma-head p{font-size:12px;line-height:1.45}
+  .counter-band{padding:8px 12px;gap:10px;margin-bottom:8px;border-radius:7px}
+  .counter-num{font-size:22px}
+  .counter-label{font-size:11px}
+  .fform{gap:7px}
+  .frow{grid-template-columns:1fr}
+  .finput{padding:10px 12px;font-size:13px}
+  .fbtn{padding:12px;font-size:14px}
+  .fcheck span{font-size:11px}
+  .success-wrap h3{font-size:24px}
+  .share-strip{gap:8px;flex-wrap:wrap}
+  .share-btn{padding:8px 12px;font-size:12px}
+}
+
+/* ── MEDIUM MOBILE (480–767px) ── */
+@media(min-width:480px) and (max-width:767px){
+
+  .slide{padding:54px 26px 100px}
+  .slide.split{grid-template-columns:1fr}
+
+  .panel.right{display:none !important}
+  .chart-panel{
+    display:flex;padding:0 26px 100px;
+    justify-content:flex-start;align-items:center;
+    flex-direction:row;gap:20px;
+  }
+  .cal-panel,.acta-panel{display:none !important}
+  .mobile-diag-stat{display:none}
+
+  /* post-its: inline, smaller */
+  .pit{
+    position:relative !important;
+    top:auto !important;right:auto !important;
+    left:auto !important;bottom:auto !important;
+    margin-top:12px;
+    display:block;
+  }
+  .picard{
+    width:175px !important;
+    min-height:175px !important;
+    font-size:15px !important;
+    padding:16px 16px 24px !important;
+    transform:rotate(-2deg) !important;
+    display:inline-block;
+  }
+  .pit:nth-child(even) .picard{ transform:rotate(2deg) !important }
+  .wright-pit{
+    position:absolute !important;
+    top:58px !important;
+    left:50% !important;
+    transform:translateX(-50%) !important;
+    margin-top:0 !important;
+    z-index:28 !important;
+  }
+  .wright-pit .picard{
+    width:210px !important;
+    min-height:auto !important;
+    font-size:14px !important;
+    transform:rotate(-1.5deg) !important;
+  }
+
+  .t1{font-size:clamp(30px,7vw,44px)}
+  .sgrid{grid-template-columns:1fr 1fr;gap:9px}
+  .snum{font-size:28px}
+  .cmpr{grid-template-columns:1fr 1fr}
+  .bignum{font-size:80px}
+  .donut-wrap{width:150px;height:150px}
+  .donut-pct{font-size:36px}
+  .donut-label{font-size:10px}
+  .legend-text{font-size:14px}
+  .legend-text small{font-size:11px}
+
+  #s10{padding:50px 24px 90px}
+  .frow{grid-template-columns:1fr}
+  .firma-head h2{font-size:clamp(28px,7vw,40px)}
+}
+
+/* ── TABLET (768–1023px) ── */
+@media(min-width:768px) and (max-width:1023px){
+
+  .slide{padding:58px 40px 108px}
+  #s10{padding:50px 40px 100px}
+  .slide.split{grid-template-columns:1fr 1fr}
+  .panel{padding:58px 32px 108px}
+  .panel.right{padding:58px 32px 108px 20px}
+
+  .pit{position:absolute !important; top:58px !important}
+  .picard{width:190px;font-size:16px;padding:18px 16px 28px}
+  /* restore horizontal position from inline style — only override top */
+  /* wright stays at its own position */
+  .wright-pit{top:58px !important}
+
+  .t1{font-size:clamp(30px,4.5vw,52px)}
+  .donut-wrap{width:190px;height:190px}
+  .donut-pct{font-size:44px}
+  .acrylic-cal{width:240px}
+  .firma-wrap{max-width:460px}
+  .frow{grid-template-columns:1fr 1fr}
+}
+
+/* ── DESKTOP (≥ 1024px) ── */
+@media(min-width:1024px){
+  .slide{padding:64px 64px 116px}
+  .panel{padding:64px 56px 116px}
+  .panel.right{padding:64px 56px 116px 28px}
+  #s10{padding:52px 56px 108px}
+  .inner{max-width:680px}
+  .pit{position:absolute !important; top:58px !important}
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+<canvas id="serp"></canvas>
+<div class="prog" id="prog"></div>
+<button id="pauseBtn" onclick="togglePause()" title="Pausar (P)">
+  <svg id="pauseIcon" viewBox="0 0 20 20" fill="currentColor">
+    <rect x="4" y="3" width="4" height="14" rx="1"/>
+    <rect x="12" y="3" width="4" height="14" rx="1"/>
+  </svg>
+</button>
+
+<!-- ════════════════════════════════
+     S0 — PORTADA
+════════════════════════════════ -->
+<div class="slide active" id="s0">
+  <div class="slide-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(145deg,#0B1628 0%,#1a0520 50%,#2a0808 100%)"></div>
+    <div class="blob" style="width:600px;height:600px;background:#C8102E;top:-120px;right:-120px;opacity:.32"></div>
+    <div class="blob" style="width:400px;height:400px;background:#1E3A8A;bottom:-80px;left:-80px;opacity:.45"></div>
+    <div class="blob" style="width:300px;height:200px;background:#F5B800;top:40%;left:30%;opacity:.12"></div>
+  </div>
+  <div class="pit" style="top:12%;right:6%">
+    <div class="picard y">"Venezuela tiene todo el derecho constitucional de elegir."<em class="pisrc">— Jesús María Casal, constitucionalista</em></div>
+  </div>
+  <div class="panel">
+    <span class="tag"><span class="tag-dot"></span>Propuesta ciudadana · Abril 2026</span>
+    <h1 class="t1">Venezuela<br>merece <em>elegir.</em></h1>
+    <p class="body">El problema electoral venezolano no son fallas aisladas — es un colapso estructural. Estas son las condiciones mínimas para una transición democrática real.</p>
+    <div class="share-strip" style="margin-top:22px">
+      <span style="font-size:12px;color:var(--muted)">Comparte:</span>
+      <button class="share-btn x" onclick="compartir('twitter')">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+        Compartir en X
+      </button>
+      <button class="share-btn ig" onclick="compartir('instagram')">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        Historia de Instagram
+      </button>
+    </div>
+    <span class="srcbadge">Fuente: Transparencia Venezuela en el Exilio · transparenciave.org</span>
+    <!-- NAV HINT -->
+    <div style="display:flex;align-items:center;gap:10px;margin-top:18px;opacity:.55">
+      <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:.8"><circle cx="12" cy="12" r="10"/><path d="M15 12H9M12 9l-3 3 3 3"/></svg>
+        retroceder
+      </div>
+      <div style="width:1px;height:14px;background:rgba(240,235,224,.2)"></div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)">
+        avanzar
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:.8"><circle cx="12" cy="12" r="10"/><path d="M9 12h6M12 15l3-3-3-3"/></svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     S1 — DIAGNÓSTICO (split)
+════════════════════════════════ -->
+<div class="slide split" id="s1">
+  <div class="slide-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(150deg,#0B1628 0%,#0F2040 55%,#1a1030 100%)"></div>
+    <div class="blob" style="width:500px;height:400px;background:#1E3A8A;top:5%;left:-100px;opacity:.45"></div>
+    <div class="blob" style="width:350px;height:350px;background:#8B0000;bottom:0%;right:0%;opacity:.38"></div>
+  </div>
+  <div class="pit" style="top:12%;left:42%;z-index:30">
+    <div class="picard b">"No son fallas puntuales. Es un problema estructural."<em class="pisrc">— Transparencia Venezuela, 2026</em></div>
+  </div>
+  <!-- LEFT -->
+  <div class="panel">
+    <span class="tag"><span class="tag-dot"></span>El diagnóstico</span>
+    <h2 class="t1">No son errores.<br>Es un <em>sistema.</em></h2>
+    <div class="sgrid">
+      <div class="scard"><div class="snum">7.9<small>M</small></div><div class="slabel">venezolanos en el exterior (R4V, nov. 2025)</div></div>
+      <div class="scard"><div class="snum">69.211</div><div class="slabel">inscritos para votar afuera en 2024</div></div>
+    </div>
+    <!-- MOBILE-ONLY stat replacing donut -->
+    <div class="mobile-diag-stat">
+      <div style="display:flex;gap:12px;margin-top:14px">
+        <div class="scard" style="flex:1;border-top:2px solid var(--red2)">
+          <div class="snum" style="color:var(--red2)">98.6<small>%</small></div>
+          <div class="slabel">no puede votar en el exterior</div>
+        </div>
+        <div class="scard" style="flex:1;border-top:2px solid var(--gold)">
+          <div class="snum" style="color:var(--gold)">1.4<small>%</small></div>
+          <div class="slabel">sí puede — solo 69.211 personas</div>
+        </div>
+      </div>
+    </div>
+    <span class="srcbadge">Fuente: Transparencia Venezuela · Registro Electoral 2024</span>
+    <!-- MINI ILLUSTRATION — mobile only -->
+    <div class="mini-ill">
+      <div class="mini-ill-chart">
+        <svg width="72" height="72" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+          <circle cx="36" cy="36" r="28" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="10"/>
+          <circle cx="36" cy="36" r="28" fill="none" stroke="#E8172E" stroke-width="10"
+            stroke-dasharray="173.5 175.9" stroke-dashoffset="0" stroke-linecap="butt"
+            transform="rotate(-90 36 36)"/>
+          <circle cx="36" cy="36" r="28" fill="none" stroke="#F5B800" stroke-width="13"
+            stroke-dasharray="2.46 175.9" stroke-dashoffset="-173.5" stroke-linecap="butt"
+            transform="rotate(-90 36 36)"/>
+          <text x="36" y="40" text-anchor="middle" font-family="Georgia,serif" font-size="13" font-weight="900" fill="#E8172E">98.6%</text>
+        </svg>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px">De la diáspora <span style="color:var(--red2)">no puede votar</span></div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.4">Solo el <strong style="color:var(--gold2)">1.4%</strong> — 69.211 de 7.9M venezolanos — tenía voto efectivo en 2024</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- RIGHT: donut chart -->
+  <div class="chart-panel">
+    <div class="donut-wrap">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <!-- background ring -->
+        <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="22"/>
+        <!--
+          Circumference = 2π × 80 = 502.655
+          98.6% = 495.619  gap = 7.036
+          1.4%  =   7.037  gap = 495.618
+          Start at top (-90°), red fills almost everything,
+          gold occupies the tiny remaining arc at the end.
+          We offset gold by 495.619 so it starts right after red ends.
+        -->
+        <!-- RED: 98.6% -->
+        <circle cx="100" cy="100" r="80" fill="none"
+          stroke="#E8172E" stroke-width="22"
+          stroke-dasharray="495.619 502.655"
+          stroke-dashoffset="0"
+          stroke-linecap="butt"
+          filter="url(#glow)"
+          transform="rotate(-90 100 100)"/>
+        <!-- GOLD: 1.4% — starts exactly where red ends -->
+        <circle cx="100" cy="100" r="80" fill="none"
+          stroke="#F5B800" stroke-width="26"
+          stroke-dasharray="7.037 502.655"
+          stroke-dashoffset="-495.619"
+          stroke-linecap="butt"
+          transform="rotate(-90 100 100)"/>
+      </svg>
+      <div class="donut-center">
+        <div class="donut-pct">98.6%</div>
+        <div class="donut-label">no puede<br>votar</div>
+      </div>
+    </div>
+    <div class="donut-legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--red2)"></div>
+        <div class="legend-text">
+          <strong style="color:#fff;font-size:15px">98.6% excluidos</strong>
+          <small>+7.8 millones sin voto efectivo</small>
+        </div>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--gold)"></div>
+        <div class="legend-text">
+          <strong style="color:#fff;font-size:15px">1.4% puede votar</strong>
+          <small>Solo 69.211 de 7.9M en diáspora</small>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:8px">
+      <span style="font-family:var(--serif);font-size:13px;color:rgba(240,235,224,.45);letter-spacing:.06em;text-transform:uppercase">Diáspora venezolana · 2024</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     S2 — CNE INDEPENDIENTE
+════════════════════════════════ -->
+<div class="slide" id="s2">
+  <div class="slide-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0B1628 0%,#101C38 60%,#0d1520 100%)"></div>
+    <div class="blob" style="width:420px;height:420px;background:#2B5BA8;top:-60px;right:-60px;opacity:.42"></div>
+    <div class="blob" style="width:280px;height:280px;background:#E8172E;bottom:10%;left:5%;opacity:.28"></div>
+  </div>
+  <div class="pit" style="top:12%;right:5%">
+    <div class="picard p">"Ninguna reforma producirá confianza si el CNE sigue capturado por el poder."<em class="pisrc">— Eugenio G. Martínez, Transparencia VE</em></div>
+  </div>
+  <div class="panel">
+    <span class="tag"><span class="tag-dot"></span>Condición 1</span>
+    <h2 class="t1">CNE <em>independiente</em><br>de verdad</h2>
+    <div class="blist">
+      <div class="bitem"><div class="bdot"></div><span>Rectores elegidos por <strong>mérito y trazabilidad pública</strong>, no por cuotas</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Régimen de <strong>incompatibilidades estricto</strong>: sin militancia ni vínculos gubernamentales</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Decisiones del directorio con <strong>publicidad, motivación y votos salvados</strong></span></div>
+      <div class="bitem"><div class="bdot"></div><span>Contrataciones por <strong>licitación abierta</strong> incluyendo software electoral</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     S3 — FECHA FIJA (split + calendar)
+════════════════════════════════ -->
+<div class="slide split" id="s3">
+  <div class="slide-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(155deg,#0B1628 0%,#0e1c34 55%,#1a1000 100%)"></div>
+    <div class="blob" style="width:500px;height:280px;background:#F5B800;top:0%;right:-100px;opacity:.18"></div>
+    <div class="blob" style="width:350px;height:350px;background:#0F2040;bottom:-50px;left:-50px;opacity:.6"></div>
+  </div>
+  <!-- WRIGHT POST-IT — desktop: top center; mobile: inline in flow -->
+  <div class="pit wright-pit" style="top:58px;left:50%;transform:translateX(-50%);z-index:30">
+    <div class="picard y" style="width:260px;font-size:15px;transform:rotate(-1.5deg)">"El siguiente paso es ir hacia unas elecciones democráticas. Yo espero y confío en que será durante la administración de Donald Trump."<em class="pisrc">— Doug Wright, Secretario de Energía de EEUU</em></div>
+  </div>
+  <!-- LEFT -->
+  <div class="panel">
+    <span class="tag"><span class="tag-dot"></span>Condición 2</span>
+    <h2 class="t1">Fecha electoral<br><b>fija</b> e inamovible</h2>
+    <div class="bigstat">
+      <div class="bignum">6</div>
+      <div class="bigdesc">meses mínimos de anticipación obligatoria — Art. 298 constitucional</div>
+    </div>
+    <div class="blist" style="margin-top:16px">
+      <div class="bitem"><div class="bdot"></div><span>El cronograma <strong>no puede ser modificado</strong> por el CNE ni otros poderes</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Sanciones por actividad política <strong>fuera del período de campaña</strong></span></div>
+    </div>
+  </div>
+  <!-- RIGHT: acrylic calendar -->
+  <div class="cal-panel">
+    <div style="position:relative">
+      <div class="acrylic-cal">
+        <div class="cal-header">
+          <div class="cal-month" style="color:#fff;font-family:var(--serif)">DICIEMBRE</div>
+          <div class="cal-year" style="color:rgba(255,255,255,.8);font-family:var(--sans)">2025</div>
+        </div>
+        <div class="cal-grid">
+          <div class="cal-day-name">L</div><div class="cal-day-name">M</div>
+          <div class="cal-day-name">X</div><div class="cal-day-name">J</div>
+          <div class="cal-day-name">V</div><div class="cal-day-name">S</div>
+          <div class="cal-day-name">D</div>
+          <!-- week 1 -->
+          <div class="cal-day empty"></div><div class="cal-day empty"></div>
+          <div class="cal-day empty"></div><div class="cal-day empty"></div>
+          <div class="cal-day empty"></div><div class="cal-day">1</div>
+          <div class="cal-day">2</div>
+          <!-- week 2 -->
+          <div class="cal-day">3</div><div class="cal-day">4</div>
+          <div class="cal-day">5</div><div class="cal-day">6</div>
+          <div class="cal-day">7</div><div class="cal-day">8</div>
+          <div class="cal-day">9</div>
+          <!-- week 3 -->
+          <div class="cal-day">10</div><div class="cal-day">11</div>
+          <div class="cal-day">12</div><div class="cal-day">13</div>
+          <div class="cal-day highlight">14</div>
+          <div class="cal-day">15</div><div class="cal-day">16</div>
+          <!-- week 4 -->
+          <div class="cal-day">17</div><div class="cal-day">18</div>
+          <div class="cal-day">19</div><div class="cal-day">20</div>
+          <div class="cal-day">21</div><div class="cal-day">22</div>
+          <div class="cal-day">23</div>
+          <!-- week 5 -->
+          <div class="cal-day">24</div><div class="cal-day">25</div>
+          <div class="cal-day">26</div><div class="cal-day">27</div>
+          <div class="cal-day">28</div><div class="cal-day">29</div>
+          <div class="cal-day">30</div>
+          <div class="cal-day">31</div>
+        </div>
+      </div>
+      <!-- post-it on calendar -->
+      <div class="cal-pit" style="position:absolute;top:-20px;right:-30px">
+        📌 ¡Día fijo de elecciones!
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     S4 — VOTO EXTERIOR
+════════════════════════════════ -->
+<div class="slide" id="s4">
+  <div class="slide-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(140deg,#0B1628 0%,#0d1e30 55%,#0a1800 100%)"></div>
+    <div class="blob" style="width:420px;height:420px;background:#1a5c1a;top:-60px;left:-60px;opacity:.32"></div>
+    <div class="blob" style="width:300px;height:300px;background:#C8102E;bottom:8%;right:3%;opacity:.28"></div>
+  </div>
+  <div class="pit" style="top:12%;right:5%">
+    <div class="picard g">"Apenas el 1.4% de la diáspora pudo votar en 2024. Es exclusión estructural."<em class="pisrc">— Transparencia Venezuela</em></div>
+  </div>
+  <div class="panel">
+    <span class="tag"><span class="tag-dot"></span>Condición 3</span>
+    <h2 class="t1">Voto en el exterior<br><em>real.</em></h2>
+    <div class="cmpr">
+      <div class="cpanel bad">
+        <div class="cphead bad">Hoy</div>
+        <div class="cpitem bad">Art. 124 LOPRE exige residencia legal</div>
+        <div class="cpitem bad">Solo consulados habilitados, sin red</div>
+        <div class="cpitem bad">69.211 inscritos de 7.9M</div>
+        <div class="cpitem bad">Circulares restrictivas del CNE</div>
+      </div>
+      <div class="cpanel good">
+        <div class="cphead good">Lo que se exige</div>
+        <div class="cpitem good">Reformar el art. 124 de la LOPRE</div>
+        <div class="cpitem good">Registro remoto + consulados</div>
+        <div class="cpitem good">Asistencia de ACNUR y OIM</div>
+        <div class="cpitem good">Inscripción vinculada a cédula</div>
+      </div>
+    </div>
+    <span class="srcbadge">Fuente: Transparencia Venezuela · R4V noviembre 2025</span>
+    <!-- MINI ILLUSTRATION — mobile only -->
+    <div class="mini-ill">
+      <div class="mini-ill-chart" style="justify-content:center;gap:16px">
+        <div style="background:rgba(255,255,255,.9);border-radius:10px;overflow:hidden;width:100px;flex-shrink:0;box-shadow:2px 4px 14px rgba(0,0,0,.4)">
+          <div style="background:var(--red);padding:6px;text-align:center">
+            <div style="font-family:var(--serif);font-size:11px;font-weight:900;color:#fff;letter-spacing:.05em">DICIEMBRE</div>
+          </div>
+          <div style="padding:6px;display:flex;justify-content:center;align-items:center;gap:4px">
+            <div style="width:22px;height:22px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff">14</div>
+            <div style="font-family:var(--hand);font-size:11px;color:#333;line-height:1.2">Día<br>fijo ✓</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--text);line-height:1.5">
+          Fecha publicada con <strong style="color:var(--gold2)">mínimo 6 meses</strong> de anticipación, inamovible por ley
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     S5 — REGISTRO ELECTORAL
+════════════════════════════════ -->
+<div class="slide split" id="s5">
+  <div class="slide-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(145deg,#0B1628 0%,#0f1e3a 60%,#00121a 100%)"></div>
+    <div class="blob" style="width:400px;height:400px;background:#005580;top:-80px;right:-50px;opacity:.38"></div>
+    <div class="blob" style="width:280px;height:280px;background:#E8172E;bottom:5%;left:5%;opacity:.22"></div>
+  </div>
+  <!-- LEFT -->
+  <div class="panel">
+    <span class="tag"><span class="tag-dot"></span>Condición 4</span>
+    <h2 class="t1">Registro electoral<br><em>abierto</em> todo el año</h2>
+    <div class="blist">
+      <div class="bitem"><div class="bdot"></div><span>Puntos de inscripción en los <strong>335 municipios</strong>, no solo capitales estadales</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Operativos móviles para <strong>zonas rurales, fronterizas y de difícil acceso</strong></span></div>
+      <div class="bitem"><div class="bdot"></div><span>Incorporación <strong>automática al cumplir 18 años</strong> en coordinación con el Registro Civil</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Padrón público auditable íntegramente por <strong>cualquier organización o veedor</strong></span></div>
+    </div>
+    <span class="srcbadge">Fuente: Transparencia Venezuela · Sección II</span>
+    <!-- MINI ILLUSTRATION — mobile only -->
+    <div class="mini-ill">
+      <div class="mini-ill-chart" style="padding:10px 14px">
+        <svg width="80" height="52" viewBox="0 0 300 192" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;border-radius:4px;overflow:hidden">
+          <rect width="300" height="192" rx="6" fill="#E8E8E8"/>
+          <rect x="0" y="0" width="300" height="8" fill="#1a2f6e"/>
+          <rect x="0" y="4" width="300" height="4" fill="#F5C800"/>
+          <rect x="0" y="8" width="300" height="4" fill="#E8172E"/>
+          <text x="150" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#1a2f6e" font-family="Arial,sans-serif" letter-spacing="1">CÉDULA</text>
+          <text x="150" y="44" text-anchor="middle" font-size="11" fill="#333" font-family="Arial,sans-serif">V-12.345.678</text>
+          <text x="12" y="62" font-size="9" fill="#666" font-family="Arial,sans-serif">MARTÍNEZ COLMENARES</text>
+          <text x="12" y="76" font-size="9" fill="#666" font-family="Arial,sans-serif">ANDREÍNA JOSEFINA</text>
+          <g transform="translate(22,110)" opacity=".5">
+            <ellipse cx="0" cy="0" rx="6" ry="8" fill="none" stroke="#333" stroke-width=".8"/>
+            <ellipse cx="0" cy="0" rx="12" ry="16" fill="none" stroke="#333" stroke-width=".7"/>
+            <ellipse cx="0" cy="0" rx="18" ry="24" fill="none" stroke="#333" stroke-width=".6"/>
+            <ellipse cx="0" cy="0" rx="22" ry="30" fill="#E8E8E8" opacity=".9"/>
+          </g>
+          <text x="150" y="185" text-anchor="middle" font-size="16" font-weight="900" fill="#111" font-family="Arial Black,Arial,sans-serif" letter-spacing="2">VENEZOLANO</text>
+          <rect x="0" y="178" width="300" height="14" fill="#1a2f6e"/>
+          <text x="150" y="189" text-anchor="middle" font-size="10" font-weight="700" fill="#fff" font-family="Arial,sans-serif" letter-spacing="1">VENEZOLANO</text>
+        </svg>
+        <div style="font-size:13px;color:var(--text);line-height:1.5">
+          <strong style="color:var(--gold2)">Sin cédula no hay voto.</strong><br>
+          <span style="color:var(--muted)">Inscripción automática al cumplir 18 años en los 335 municipios</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- RIGHT: cédula venezolana ilustrada -->
+  <div class="cal-panel" style="align-items:center;justify-content:center">
+    <div style="position:relative;transform:rotate(-2deg);filter:drop-shadow(4px 8px 24px rgba(0,0,0,.7))">
+      <svg width="300" height="192" viewBox="0 0 300 192" xmlns="http://www.w3.org/2000/svg" style="display:block">
+        <defs>
+          <linearGradient id="cardgrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F0EAD6"/>
+            <stop offset="100%" stop-color="#E0D8C0"/>
+          </linearGradient>
+          <linearGradient id="stripeY" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#CF9B00"/>
+            <stop offset="100%" stop-color="#F5C800"/>
+          </linearGradient>
+          <!-- fingerprint radial lines filter -->
+          <filter id="fp">
+            <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="4" seed="5"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 12 -4" result="mask"/>
+            <feComposite in="SourceGraphic" in2="mask" operator="in"/>
+          </filter>
+          <clipPath id="card-clip">
+            <rect width="300" height="192" rx="10"/>
+          </clipPath>
+        </defs>
+
+        <!-- CARD BASE -->
+        <rect width="300" height="192" rx="10" fill="url(#cardgrad)"/>
+
+        <!-- PLASTIC SHEEN -->
+        <rect width="300" height="192" rx="10" fill="none"
+          stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+
+        <!-- TOP TRICOLOR STRIPE -->
+        <rect x="0" y="0" width="300" height="12" rx="0" clip-path="url(#card-clip)" fill="url(#stripeY)"/>
+        <rect x="0" y="4" width="300" height="4" fill="#CF1020"/>
+        <rect x="0" y="0" width="300" height="4" fill="#1a4099"/>
+        <rect x="0" y="8" width="300" height="4" fill="#E8172E"/>
+        <!-- stripe outline pill -->
+        <rect x="8" y="14" width="284" height="16" rx="8" fill="none" stroke="#1a4099" stroke-width="1"/>
+        <text x="150" y="25" text-anchor="middle" font-size="8" font-weight="700"
+          fill="#1a4099" font-family="Arial,sans-serif" letter-spacing="2.5">
+          REPÚBLICA BOLIVARIANA DE VENEZUELA
+        </text>
+
+        <!-- CÉDULA LABEL PILL -->
+        <rect x="50" y="33" width="200" height="14" rx="7" fill="none" stroke="#888" stroke-width=".8"/>
+        <text x="150" y="43" text-anchor="middle" font-size="7.5" font-weight="600"
+          fill="#555" font-family="Arial,sans-serif" letter-spacing="3">
+          CÉDULA DE IDENTIDAD
+        </text>
+
+        <!-- CÉDULA NUMBER -->
+        <text x="95" y="62" text-anchor="middle" font-size="10" font-weight="700"
+          fill="#222" font-family="Arial,sans-serif" letter-spacing="1">
+          V-12.345.678
+        </text>
+
+        <!-- SECTION NUMBER top right -->
+        <text x="280" y="62" text-anchor="end" font-size="9" fill="#444"
+          font-family="Arial,sans-serif">028</text>
+
+        <!-- APELLIDOS -->
+        <text x="12" y="77" font-size="6.5" fill="#666" font-family="Arial,sans-serif"
+          letter-spacing=".5">APELLIDOS</text>
+        <text x="12" y="89" font-size="11" font-weight="700" fill="#111"
+          font-family="Arial,sans-serif" letter-spacing=".5">MARTÍNEZ COLMENARES</text>
+
+        <!-- NOMBRES -->
+        <text x="12" y="101" font-size="6.5" fill="#666" font-family="Arial,sans-serif"
+          letter-spacing=".5">NOMBRES</text>
+        <text x="12" y="113" font-size="11" font-weight="700" fill="#111"
+          font-family="Arial,sans-serif" letter-spacing=".5">ANDREÍNA JOSEFINA</text>
+
+        <!-- FIRMA TITULAR label -->
+        <text x="12" y="168" font-size="5.5" fill="#888" font-family="Arial,sans-serif"
+          letter-spacing=".5">FIRMA TITULAR</text>
+
+        <!-- Signature (stylized path) -->
+        <path d="M 14,155 C 20,148 28,145 34,148 C 40,151 36,158 44,154
+                 C 50,151 52,145 58,148 C 62,150 60,157 66,154"
+          fill="none" stroke="#222" stroke-width="1.2"
+          stroke-linecap="round" stroke-linejoin="round"/>
+
+        <!-- FINGERPRINT (stylized concentric arcs) -->
+        <g transform="translate(28,130)" opacity=".55">
+          <!-- center -->
+          <ellipse cx="0" cy="0" rx="2" ry="3" fill="none" stroke="#333" stroke-width=".7"/>
+          <!-- rings -->
+          <ellipse cx="0" cy="0" rx="5" ry="7"   fill="none" stroke="#333" stroke-width=".65"/>
+          <ellipse cx="0" cy="0" rx="9" ry="12"  fill="none" stroke="#333" stroke-width=".6"/>
+          <ellipse cx="0" cy="0" rx="13" ry="17" fill="none" stroke="#2a2a2a" stroke-width=".6"/>
+          <ellipse cx="0" cy="0" rx="17" ry="22" fill="none" stroke="#2a2a2a" stroke-width=".55"/>
+          <ellipse cx="0" cy="0" rx="21" ry="27" fill="none" stroke="#2a2a2a" stroke-width=".5"/>
+          <ellipse cx="0" cy="0" rx="25" ry="32" fill="none" stroke="#333" stroke-width=".5"/>
+          <ellipse cx="0" cy="0" rx="29" ry="37" fill="none" stroke="#333" stroke-width=".45"/>
+          <!-- clip to thumb shape -->
+          <ellipse cx="0" cy="0" rx="31" ry="40" fill="url(#cardgrad)" opacity=".85"/>
+        </g>
+
+        <!-- ESCUDO DE ARMAS — simplified SVG -->
+        <g transform="translate(155,95) scale(.65)" opacity=".22">
+          <!-- Shield outline -->
+          <path d="M0,-40 L35,-40 L35,10 Q35,40 0,55 Q-35,40 -35,10 L-35,-40 Z"
+            fill="#C8940A" stroke="#A07008" stroke-width="1.5"/>
+          <!-- left red field -->
+          <path d="M-35,-40 L0,-40 L0,55 Q-18,48 -35,35 L-35,-40 Z"
+            fill="#8B0000" opacity=".6"/>
+          <!-- right blue field -->
+          <path d="M0,-40 L35,-40 L35,35 Q18,48 0,55 L0,-40 Z"
+            fill="#1a3080" opacity=".6"/>
+          <!-- stars row -->
+          <g fill="#F5C800">
+            <polygon points="0,-8 1.5,-3 6,-3 2.5,0 4,5 0,2 -4,5 -2.5,0 -6,-3 -1.5,-3" transform="translate(-20,15)"/>
+            <polygon points="0,-8 1.5,-3 6,-3 2.5,0 4,5 0,2 -4,5 -2.5,0 -6,-3 -1.5,-3" transform="translate(-10,15)"/>
+            <polygon points="0,-8 1.5,-3 6,-3 2.5,0 4,5 0,2 -4,5 -2.5,0 -6,-3 -1.5,-3" transform="translate(0,15)"/>
+            <polygon points="0,-8 1.5,-3 6,-3 2.5,0 4,5 0,2 -4,5 -2.5,0 -6,-3 -1.5,-3" transform="translate(10,15)"/>
+            <polygon points="0,-8 1.5,-3 6,-3 2.5,0 4,5 0,2 -4,5 -2.5,0 -6,-3 -1.5,-3" transform="translate(20,15)"/>
+          </g>
+          <!-- laurel branches suggestion -->
+          <path d="M-40,35 Q-30,20 -20,0" fill="none" stroke="#2a6e00" stroke-width="3" stroke-linecap="round"/>
+          <path d="M40,35 Q30,20 20,0"  fill="none" stroke="#2a6e00" stroke-width="3" stroke-linecap="round"/>
+        </g>
+
+        <!-- DATES SECTION -->
+        <text x="90" y="135" font-size="5.5" fill="#777" font-family="Arial,sans-serif">F. NACIMIENTO</text>
+        <text x="90" y="145" font-size="9" font-weight="700" fill="#222" font-family="Arial,sans-serif">15/03/1990</text>
+        <text x="140" y="135" font-size="5.5" fill="#777" font-family="Arial,sans-serif">EDO CIVIL</text>
+        <text x="140" y="145" font-size="9" font-weight="700" fill="#222" font-family="Arial,sans-serif">SOLTERO</text>
+
+        <text x="90" y="160" font-size="5.5" fill="#777" font-family="Arial,sans-serif">F. EXPEDICION</text>
+        <text x="90" y="170" font-size="9" font-weight="700" fill="#222" font-family="Arial,sans-serif">10/06/2019</text>
+        <text x="140" y="160" font-size="5.5" fill="#777" font-family="Arial,sans-serif">F. VENCIMIENTO</text>
+        <text x="140" y="170" font-size="9" font-weight="700" fill="#222" font-family="Arial,sans-serif">06/2029</text>
+
+        <!-- VENEZOLANO bottom label -->
+        <text x="150" y="186" text-anchor="middle" font-size="13" font-weight="900"
+          fill="#111" font-family="Arial Black,Arial,sans-serif" letter-spacing="3">
+          VENEZOLANO
+        </text>
+
+        <!-- PHOTO PLACEHOLDER — empty box with X -->
+        <rect x="218" y="58" width="68" height="88" rx="3"
+          fill="#D8D0B8" stroke="#AAA" stroke-width=".8"/>
+        <line x1="218" y1="58" x2="286" y2="146" stroke="#BBB" stroke-width=".8"/>
+        <line x1="286" y1="58" x2="218" y2="146" stroke="#BBB" stroke-width=".8"/>
+        <text x="252" y="107" text-anchor="middle" font-size="7" fill="#999"
+          font-family="Arial,sans-serif">FOTO</text>
+
+        <!-- DIRECTOR signature area -->
+        <path d="M 228,75 C 234,70 242,68 248,71 C 252,73 250,78 256,75"
+          fill="none" stroke="#333" stroke-width=".9" stroke-linecap="round"/>
+        <text x="228" y="84" font-size="5.5" fill="#555" font-family="Arial,sans-serif">Juan Dugarte</text>
+        <text x="228" y="91" font-size="5" fill="#777" font-family="Arial,sans-serif">Director</text>
+
+        <!-- plastic holographic hint — diagonal shimmer lines -->
+        <g opacity=".06">
+          <line x1="0" y1="0" x2="300" y2="192" stroke="white" stroke-width="8"/>
+          <line x1="20" y1="0" x2="300" y2="170" stroke="white" stroke-width="4"/>
+          <line x1="0" y1="20" x2="280" y2="192" stroke="white" stroke-width="4"/>
+        </g>
+      </svg>
+      <!-- small post-it on card -->
+      <div style="
+        position:absolute;bottom:-18px;right:-24px;
+        background:#F7E84E;color:#1a1a1a;
+        font-family:var(--hand);font-size:14px;
+        padding:12px 14px 18px;width:140px;
+        transform:rotate(3deg);
+        box-shadow:2px 4px 14px rgba(0,0,0,.5);
+        line-height:1.4;
+      ">¡Sin cédula no hay voto!</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     S6 — RESULTADOS ACTA POR ACTA (split + acta illustration)
+════════════════════════════════ -->
+<div class="slide split" id="s6">
+  <div class="slide-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(150deg,#0B1628 0%,#120a28 55%,#0d0820 100%)"></div>
+    <div class="blob" style="width:460px;height:360px;background:#4B0082;top:-60px;left:-80px;opacity:.38"></div>
+    <div class="blob" style="width:300px;height:300px;background:#F5B800;bottom:5%;right:-30px;opacity:.18"></div>
+  </div>
+  <div class="pit" style="top:12%;left:42%;z-index:30">
+    <div class="picard o">"En 2024 el CNE mostró parcialidad a favor del oficialismo en todas las etapas."<em class="pisrc">— Centro Carter, Informe 2024</em></div>
+  </div>
+  <!-- LEFT -->
+  <div class="panel">
+    <span class="tag"><span class="tag-dot"></span>Condición 5</span>
+    <h2 class="t1">Resultados publicados<br><em>acta por acta.</em></h2>
+    <p class="body">El Estatuto Electoral Especial debe garantizar publicación íntegra, oportuna y desagregada de todos los resultados.</p>
+    <div class="blist">
+      <div class="bitem"><div class="bdot"></div><span>Por <strong>mesa, centro, parroquia, municipio y estado</strong></span></div>
+      <div class="bitem"><div class="bdot"></div><span>Negativa a publicar = <strong>delito electoral</strong> tipificado</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Impugnaciones con lapsos <strong>perentorios de 72 horas</strong></span></div>
+    </div>
+  </div>
+  <!-- RIGHT: acta CNE illustrated -->
+  <div class="acta-panel">
+    <div style="position:relative;display:inline-block">
+      <svg width="210" height="310" viewBox="0 0 210 310" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <!-- diagonal stripe pattern — blue/white like real CNE acta border -->
+          <pattern id="diag" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(0)">
+            <rect width="10" height="10" fill="#fff"/>
+            <polygon points="0,0 5,0 0,10" fill="#1a2f6e"/>
+            <polygon points="5,0 10,0 10,10 5,10" fill="#1a2f6e"/>
+          </pattern>
+          <!-- paper texture -->
+          <filter id="paper">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" seed="2" result="noise"/>
+            <feColorMatrix type="saturate" values="0" in="noise" result="grey"/>
+            <feBlend in="SourceGraphic" in2="grey" mode="multiply" result="blend"/>
+            <feComposite in="blend" in2="SourceGraphic" operator="in"/>
+          </filter>
+          <!-- pen roughness for map -->
+          <filter id="boli" x="-4%" y="-4%" width="108%" height="108%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="3" seed="7" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+        </defs>
+
+        <!-- ── CARD BACKGROUND ── -->
+        <rect x="0" y="0" width="210" height="310" rx="6" fill="#DCDCDC" filter="url(#paper)"/>
+
+        <!-- ── TOP DIAGONAL STRIPE BORDER ── -->
+        <rect x="0" y="0" width="210" height="20" rx="0" fill="url(#diag)"/>
+        <rect x="0" y="0" width="210" height="20" rx="0" fill="none" stroke="rgba(0,0,0,.1)" stroke-width=".5"/>
+
+        <!-- ── 3 CNE LOGO BLOCKS (stacked) ── -->
+        <!-- separator lines -->
+        <line x1="12" y1="120" x2="198" y2="120" stroke="rgba(0,0,0,.12)" stroke-width=".8"/>
+        <line x1="12" y1="208" x2="198" y2="208" stroke="rgba(0,0,0,.12)" stroke-width=".8"/>
+
+        <!-- BLOCK 1 -->
+        <text x="105" y="36" text-anchor="middle" font-size="6.5" font-weight="700" fill="#1a2f6e" font-family="Arial,sans-serif" letter-spacing="1.5" opacity=".75">PODER ELECTORAL</text>
+        <!-- CNE diamond logo block 1 -->
+        <g transform="translate(63,42)">
+          <polygon points="0,16 16,0 32,16 16,32" fill="#C8102E"/>
+          <polygon points="16,16 32,0 48,16 32,32" fill="#F5B800"/>
+          <polygon points="32,16 48,0 64,16 48,32" fill="#1a2f6e"/>
+          <!-- inner white diamond overlaps -->
+          <polygon points="16,16 24,8 32,16 24,24" fill="white" opacity=".35"/>
+          <polygon points="32,16 40,8 48,16 40,24" fill="white" opacity=".35"/>
+          <text x="32" y="20" text-anchor="middle" font-size="11" font-weight="900" fill="white" font-family="Arial Black,sans-serif" letter-spacing=".5">CNE</text>
+        </g>
+        <text x="105" y="86" text-anchor="middle" font-size="6" font-weight="600" fill="#1a2f6e" font-family="Arial,sans-serif" letter-spacing="1" opacity=".6">PODER ELECTORAL</text>
+
+        <!-- BLOCK 2 -->
+        <text x="105" y="103" text-anchor="middle" font-size="6.5" font-weight="700" fill="#1a2f6e" font-family="Arial,sans-serif" letter-spacing="1.5" opacity=".75">PODER ELECTORAL</text>
+        <g transform="translate(63,109)">
+          <polygon points="0,16 16,0 32,16 16,32" fill="#C8102E"/>
+          <polygon points="16,16 32,0 48,16 32,32" fill="#F5B800"/>
+          <polygon points="32,16 48,0 64,16 48,32" fill="#1a2f6e"/>
+          <polygon points="16,16 24,8 32,16 24,24" fill="white" opacity=".35"/>
+          <polygon points="32,16 40,8 48,16 40,24" fill="white" opacity=".35"/>
+          <text x="32" y="20" text-anchor="middle" font-size="11" font-weight="900" fill="white" font-family="Arial Black,sans-serif" letter-spacing=".5">CNE</text>
+        </g>
+        <text x="105" y="153" text-anchor="middle" font-size="6" font-weight="600" fill="#1a2f6e" font-family="Arial,sans-serif" letter-spacing="1" opacity=".6">PODER ELECTORAL</text>
+
+        <!-- BLOCK 3 -->
+        <text x="105" y="170" text-anchor="middle" font-size="6.5" font-weight="700" fill="#1a2f6e" font-family="Arial,sans-serif" letter-spacing="1.5" opacity=".75">PODER ELECTORAL</text>
+        <g transform="translate(63,176)">
+          <polygon points="0,16 16,0 32,16 16,32" fill="#C8102E"/>
+          <polygon points="16,16 32,0 48,16 32,32" fill="#F5B800"/>
+          <polygon points="32,16 48,0 64,16 48,32" fill="#1a2f6e"/>
+          <polygon points="16,16 24,8 32,16 24,24" fill="white" opacity=".35"/>
+          <polygon points="32,16 40,8 48,16 40,24" fill="white" opacity=".35"/>
+          <text x="32" y="20" text-anchor="middle" font-size="11" font-weight="900" fill="white" font-family="Arial Black,sans-serif" letter-spacing=".5">CNE</text>
+        </g>
+        <text x="105" y="220" text-anchor="middle" font-size="6" font-weight="600" fill="#1a2f6e" font-family="Arial,sans-serif" letter-spacing="1" opacity=".6">PODER ELECTORAL</text>
+
+        <!-- ── VENEZUELA MAP — bolígrafo style ── -->
+        <!-- Map sits below the 3 logos, in the lower portion of the acta -->
+        <g transform="translate(10,228)" filter="url(#boli)">
+          <!-- Main silhouette — pen stroke, dashed, recognizable shape -->
+          <path
+            d="M 14,38 C 11,34 8,29 9,24 C 10,19 14,16 18,15
+               C 20,14 22,15 23,13 C 24,11 22,8 24,6
+               C 26,4 29,5 31,4 C 33,3 34,1 37,1
+               C 40,1 41,3 44,3 C 47,3 48,1 51,1
+               C 54,1 55,3 58,3 C 61,3 62,1 65,2
+               C 68,3 69,5 72,5 C 75,5 76,3 79,4
+               C 82,5 83,7 86,8 C 88,9 90,8 92,9
+               C 95,10 96,13 99,14 C 102,15 104,13 107,14
+               C 110,15 111,18 113,19 C 115,20 117,18 119,20
+               C 121,22 121,25 123,27 C 125,29 127,30 128,33
+               C 129,36 127,39 126,42 C 125,45 123,47 122,50
+               C 121,53 121,56 119,58 C 117,60 114,60 112,62
+               C 110,64 109,67 107,68 C 105,69 102,68 100,70
+               C 98,72 97,75 95,76 C 93,77 91,75 89,76
+               C 87,77 86,80 84,81 C 82,82 80,80 78,81
+               C 76,82 75,85 73,86 C 71,87 69,85 67,86
+               C 65,87 64,90 62,91 C 60,92 58,90 56,91
+               C 54,92 53,95 51,95 C 49,95 48,92 46,92
+               C 44,92 42,95 40,95 C 38,95 37,92 35,91
+               C 33,90 31,91 29,90 C 27,89 26,86 24,86
+               C 22,86 20,88 18,87 C 16,86 15,83 14,81
+               C 13,79 14,76 13,74 C 12,72 10,70 10,67
+               C 10,64 12,62 12,59 C 12,56 10,54 10,51
+               C 10,48 13,46 14,43 C 15,40 14,38 14,38 Z"
+            fill="rgba(26,47,110,0.06)"
+            stroke="#1a2f6e"
+            stroke-width="1.4"
+            stroke-dasharray="4,2.5"
+            stroke-linejoin="round"
+            stroke-linecap="round"
+            opacity=".8"
+          />
+          <!-- Paria peninsula NE -->
+          <path d="M 119,20 C 124,19 128,17 130,16 C 132,15 133,13 131,12 C 129,11 126,13 124,14 C 122,15 121,18 119,20"
+            fill="none" stroke="#1a2f6e" stroke-width="1" stroke-dasharray="3,2" opacity=".6"/>
+          <!-- Golfo de Venezuela NW indent -->
+          <path d="M 14,38 C 16,41 15,45 16,48 C 17,51 20,51 21,48 C 22,45 21,41 22,38"
+            fill="none" stroke="#1a2f6e" stroke-width="1" stroke-dasharray="3,2" opacity=".5"/>
+          <!-- Orinoco river hint -->
+          <path d="M 35,91 C 48,87 62,84 75,83 C 88,82 100,82 112,80 C 118,75 122,68 123,62"
+            fill="none" stroke="#1a2f6e" stroke-width=".7" stroke-dasharray="2,3" opacity=".3"/>
+          <!-- Cities -->
+          <circle cx="72" cy="28" r="2.5" fill="#C8102E" opacity=".8"/>
+          <text x="75" y="32" font-size="7" fill="#1a2f6e" font-family="Georgia,serif" font-weight="700" opacity=".85">Caracas</text>
+          <circle cx="20" cy="35" r="1.8" fill="#1a2f6e" opacity=".6"/>
+          <text x="4" y="33" font-size="6" fill="#1a2f6e" font-family="Georgia,serif" opacity=".65">Mcbo.</text>
+          <circle cx="95" cy="58" r="1.8" fill="#1a2f6e" opacity=".5"/>
+        </g>
+
+        <!-- ── BOTTOM DIAGONAL STRIPE BORDER ── -->
+        <rect x="0" y="290" width="210" height="20" fill="url(#diag)"/>
+        <rect x="0" y="290" width="210" height="20" fill="none" stroke="rgba(0,0,0,.1)" stroke-width=".5"/>
+
+        <!-- outer card border -->
+        <rect x="0" y="0" width="210" height="310" rx="6" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1"/>
+      </svg>
+
+      <!-- POST-IT -->
+      <div style="
+        position:absolute;bottom:-18px;right:-34px;
+        background:#F7E84E;color:#1a1a1a;
+        font-family:var(--hand);font-size:18px;line-height:1.4;
+        padding:18px 18px 26px;width:185px;
+        transform:rotate(3.5deg);
+        box-shadow:3px 6px 20px rgba(0,0,0,.6);
+        z-index:30;position:absolute;
+      ">¿Dónde están las actas del 28J?</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     S7 — OBSERVACIÓN
+════════════════════════════════ -->
+<div class="slide" id="s7">
+  <div class="slide-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(140deg,#0B1628 0%,#0d1e20 55%,#001a10 100%)"></div>
+    <div class="blob" style="width:420px;height:320px;background:#003d1a;top:0%;right:-50px;opacity:.48"></div>
+    <div class="blob" style="width:300px;height:300px;background:#1E3A8A;bottom:5%;left:0%;opacity:.38"></div>
+  </div>
+  <div class="panel">
+    <span class="tag"><span class="tag-dot"></span>Condición 6</span>
+    <h2 class="t1">Observación internacional<br><em>sin restricciones.</em></h2>
+    <div class="qblock">
+      La MOE UE 2021 identificó falta de transparencia del CNE, publicación tardía de resoluciones, debilidad en separación de poderes y restricciones al acceso oportuno a la información.
+      <span class="qsrc">— Misión de Observación Electoral UE · Venezuela 2021</span>
+    </div>
+    <div class="blist" style="margin-top:16px">
+      <div class="bitem"><div class="bdot"></div><span>Acceso irrestricto para <strong>ONU, OEA y Unión Europea</strong> en todas las etapas</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Observadores nacionales (OEV, Súmate, CEPAZ) con <strong>acreditación automática</strong></span></div>
+      <div class="bitem"><div class="bdot"></div><span>Impedimento de acceso = <strong>delito electoral</strong> con respuesta en 24 horas</span></div>
+    </div>
+    <span class="srcbadge">Fuente: MOE UE Venezuela 2021 · Transparencia Venezuela</span>
+    <!-- MINI ILLUSTRATION — mobile only -->
+    <div class="mini-ill">
+      <div class="mini-ill-chart" style="padding:10px 14px">
+        <svg width="68" height="90" viewBox="0 0 210 310" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;border-radius:4px">
+          <rect width="210" height="310" rx="4" fill="#DCDCDC"/>
+          <rect x="0" y="0" width="210" height="14" fill="none"/>
+          <defs><pattern id="dm" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#fff"/><polygon points="0,0 5,0 0,10" fill="#1a2f6e"/><polygon points="5,0 10,0 10,10 5,10" fill="#1a2f6e"/></pattern></defs>
+          <rect x="0" y="0" width="210" height="16" fill="url(#dm)"/>
+          <text x="105" y="30" text-anchor="middle" font-size="7" font-weight="700" fill="#1a2f6e" font-family="Arial,sans-serif" letter-spacing="1.5" opacity=".8">PODER ELECTORAL</text>
+          <g transform="translate(63,36)">
+            <polygon points="0,14 14,0 28,14 14,28" fill="#C8102E"/>
+            <polygon points="14,14 28,0 42,14 28,28" fill="#F5B800"/>
+            <polygon points="28,14 42,0 56,14 42,28" fill="#1a2f6e"/>
+            <text x="28" y="18" text-anchor="middle" font-size="9" font-weight="900" fill="white" font-family="Arial,sans-serif">CNE</text>
+          </g>
+          <text x="105" y="76" text-anchor="middle" font-size="6" fill="#1a2f6e" font-family="Arial,sans-serif" opacity=".65">PODER ELECTORAL</text>
+          <line x1="10" y1="82" x2="200" y2="82" stroke="rgba(0,0,0,.1)" stroke-width=".6"/>
+          <g transform="translate(63,88)"><polygon points="0,14 14,0 28,14 14,28" fill="#C8102E"/><polygon points="14,14 28,0 42,14 28,28" fill="#F5B800"/><polygon points="28,14 42,0 56,14 42,28" fill="#1a2f6e"/><text x="28" y="18" text-anchor="middle" font-size="9" font-weight="900" fill="white" font-family="Arial,sans-serif">CNE</text></g>
+          <text x="105" y="128" text-anchor="middle" font-size="6" fill="#1a2f6e" font-family="Arial,sans-serif" opacity=".65">PODER ELECTORAL</text>
+          <line x1="10" y1="134" x2="200" y2="134" stroke="rgba(0,0,0,.1)" stroke-width=".6"/>
+          <g transform="translate(63,140)"><polygon points="0,14 14,0 28,14 14,28" fill="#C8102E"/><polygon points="14,14 28,0 42,14 28,28" fill="#F5B800"/><polygon points="28,14 42,0 56,14 42,28" fill="#1a2f6e"/><text x="28" y="18" text-anchor="middle" font-size="9" font-weight="900" fill="white" font-family="Arial,sans-serif">CNE</text></g>
+          <text x="105" y="180" text-anchor="middle" font-size="6" fill="#1a2f6e" font-family="Arial,sans-serif" opacity=".65">PODER ELECTORAL</text>
+          <rect x="0" y="294" width="210" height="16" fill="url(#dm)"/>
+          <rect width="210" height="310" rx="4" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+        </svg>
+        <div style="font-size:13px;color:var(--text);line-height:1.5">
+          <strong style="color:var(--red2)">¿Dónde están las actas del 28J?</strong><br>
+          <span style="color:var(--muted)">Resultados publicados acta por acta — mesa, centro, parroquia, municipio y estado</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     S8 — INHABILITACIONES
+════════════════════════════════ -->
+<div class="slide" id="s8">
+  <div class="slide-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(155deg,#0B1628 0%,#160820 55%,#200010 100%)"></div>
+    <div class="blob" style="width:400px;height:400px;background:#6B0020;top:-60px;right:-60px;opacity:.42"></div>
+    <div class="blob" style="width:280px;height:280px;background:#1E3A8A;bottom:8%;left:-30px;opacity:.38"></div>
+  </div>
+  <div class="pit" style="top:12%;right:5%">
+    <div class="picard b">"Un proceso que excluye competidores por vía administrativa no cumple estándares democráticos mínimos."<em class="pisrc">— Transparencia Venezuela</em></div>
+  </div>
+  <div class="panel">
+    <span class="tag"><span class="tag-dot"></span>Condición 7</span>
+    <h2 class="t1">Inhabilitaciones revisadas.<br><em>Candidaturas libres.</em></h2>
+    <div class="blist">
+      <div class="bitem"><div class="bdot"></div><span>Toda inhabilitación revisada por el <strong>TSJ en sala constitucional</strong></span></div>
+      <div class="bitem"><div class="bdot"></div><span>Criterios <strong>objetivos y no discrecionales</strong> para registro de nuevas organizaciones</span></div>
+      <div class="bitem"><div class="bdot"></div><span><strong>Prohibición expresa</strong> de modificación sobrevenida de tarjetas electorales</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Derecho a <strong>revisión judicial expedita</strong> de cualquier exclusión</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     S9 — EL ESTATUTO
+════════════════════════════════ -->
+<div class="slide" id="s9">
+  <div class="slide-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(145deg,#0B1628 0%,#120d20 50%,#1a0008 100%)"></div>
+    <div class="blob" style="width:550px;height:550px;background:#C8102E;top:-100px;right:-120px;opacity:.26"></div>
+    <div class="blob" style="width:420px;height:420px;background:#1E3A8A;bottom:-90px;left:-90px;opacity:.32"></div>
+    <div class="blob" style="width:250px;height:250px;background:#F5B800;top:30%;left:40%;opacity:.12"></div>
+  </div>
+  <div class="panel">
+    <span class="tag"><span class="tag-dot"></span>La solución · Transparencia Venezuela</span>
+    <h2 class="t1">Un <em>Estatuto Electoral<br>Especial</em> lo hace posible</h2>
+    <p class="body">Transitorio, taxativo, con caducidad automática. No una derogación total — una corrección excepcional de lo que hoy permite la arbitrariedad y la exclusión.</p>
+    <div class="dotrow">
+      <div class="dot done"></div><div class="dot done"></div>
+      <div class="dot done"></div><div class="dot done"></div>
+      <div class="dot done"></div><div class="dot done"></div>
+      <div class="dot done"></div><div class="dot curr"></div>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-top:10px">7 condiciones mínimas para una elección legítima</p>
+    <button class="ctabtn" onclick="nav(1)">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
+      Quiero elegir — firma aquí
+    </button>
+    <span class="srcbadge">Basado en: Transparencia Venezuela en el Exilio · transparenciave.org · Abril 2026</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     S10 — FIRMA
+════════════════════════════════ -->
+<div class="slide" id="s10">
+  <div class="slide-bg">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,#1a0820 0%,#0B1628 65%)"></div>
+    <div class="blob" style="width:700px;height:400px;background:#C8102E;top:-120px;left:50%;transform:translateX(-50%);opacity:.2"></div>
+  </div>
+
+  <!-- layout: form left, share right on desktop -->
+  <div style="position:relative;z-index:40;width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:44px 28px 80px;gap:40px;flex-wrap:nowrap;overflow:hidden">
+
+    <!-- FORM COLUMN -->
+    <div class="firma-wrap" style="position:relative;z-index:40;flex:1;min-width:280px;max-width:460px">
+      <div id="fstate">
+        <div class="firma-head">
+          <h2>¿Quieres <em>elegir?</em><br>Firma aquí.</h2>
+          <p>Únete a los venezolanos que exigimos elecciones libres y verificadas.</p>
+        </div>
+        <div class="counter-band">
+          <div class="counter-num" id="sigCount">12.847</div>
+          <div class="counter-label">personas ya han<br>firmado esta propuesta</div>
+        </div>
+        <div class="fform">
+          <div class="frow">
+            <input class="finput" id="fnombre" type="text" placeholder="Nombre" autocomplete="given-name">
+            <input class="finput" id="fapellido" type="text" placeholder="Apellido" autocomplete="family-name">
+          </div>
+          <input class="finput" id="femail" type="email" placeholder="Correo electrónico" autocomplete="email">
+          <div class="frow">
+            <select class="finput fselect" id="fpais">
+              <option value="" disabled selected>País de residencia</option>
+              <option>Venezuela</option>
+              <option>──────────</option>
+              <option>Afganistán</option><option>Albania</option><option>Alemania</option>
+              <option>Andorra</option><option>Angola</option><option>Antigua y Barbuda</option>
+              <option>Arabia Saudita</option><option>Argelia</option><option>Argentina</option>
+              <option>Armenia</option><option>Australia</option><option>Austria</option>
+              <option>Azerbaiyán</option><option>Bahamas</option><option>Bahréin</option>
+              <option>Bangladesh</option><option>Barbados</option><option>Bélgica</option>
+              <option>Belice</option><option>Benín</option><option>Bielorrusia</option>
+              <option>Bolivia</option><option>Bosnia y Herzegovina</option><option>Botsuana</option>
+              <option>Brasil</option><option>Brunéi</option><option>Bulgaria</option>
+              <option>Burkina Faso</option><option>Burundi</option><option>Bután</option>
+              <option>Cabo Verde</option><option>Camboya</option><option>Camerún</option>
+              <option>Canadá</option><option>Catar</option><option>Chad</option>
+              <option>Chile</option><option>China</option><option>Chipre</option>
+              <option>Colombia</option><option>Comoras</option><option>Congo</option>
+              <option>Corea del Norte</option><option>Corea del Sur</option><option>Costa de Marfil</option>
+              <option>Costa Rica</option><option>Croacia</option><option>Cuba</option>
+              <option>Dinamarca</option><option>Dominica</option><option>Ecuador</option>
+              <option>Egipto</option><option>El Salvador</option><option>Emiratos Árabes Unidos</option>
+              <option>Eritrea</option><option>Eslovaquia</option><option>Eslovenia</option>
+              <option>España</option><option>Estados Unidos</option><option>Estonia</option>
+              <option>Etiopía</option><option>Filipinas</option><option>Finlandia</option>
+              <option>Fiyi</option><option>Francia</option><option>Gabón</option>
+              <option>Gambia</option><option>Georgia</option><option>Ghana</option>
+              <option>Granada</option><option>Grecia</option><option>Guatemala</option>
+              <option>Guinea</option><option>Guinea-Bisáu</option><option>Guinea Ecuatorial</option>
+              <option>Guyana</option><option>Haití</option><option>Honduras</option>
+              <option>Hungría</option><option>India</option><option>Indonesia</option>
+              <option>Irak</option><option>Irán</option><option>Irlanda</option>
+              <option>Islandia</option><option>Islas Marshall</option><option>Islas Salomón</option>
+              <option>Israel</option><option>Italia</option><option>Jamaica</option>
+              <option>Japón</option><option>Jordania</option><option>Kazajistán</option>
+              <option>Kenia</option><option>Kirguistán</option><option>Kiribati</option>
+              <option>Kuwait</option><option>Laos</option><option>Lesoto</option>
+              <option>Letonia</option><option>Líbano</option><option>Liberia</option>
+              <option>Libia</option><option>Liechtenstein</option><option>Lituania</option>
+              <option>Luxemburgo</option><option>Madagascar</option><option>Malasia</option>
+              <option>Malaui</option><option>Maldivas</option><option>Malí</option>
+              <option>Malta</option><option>Marruecos</option><option>Mauricio</option>
+              <option>Mauritania</option><option>México</option><option>Micronesia</option>
+              <option>Moldavia</option><option>Mónaco</option><option>Mongolia</option>
+              <option>Montenegro</option><option>Mozambique</option><option>Myanmar</option>
+              <option>Namibia</option><option>Nauru</option><option>Nepal</option>
+              <option>Nicaragua</option><option>Níger</option><option>Nigeria</option>
+              <option>Noruega</option><option>Nueva Zelanda</option><option>Omán</option>
+              <option>Países Bajos</option><option>Pakistán</option><option>Palaos</option>
+              <option>Panamá</option><option>Papúa Nueva Guinea</option><option>Paraguay</option>
+              <option>Perú</option><option>Polonia</option><option>Portugal</option>
+              <option>Reino Unido</option><option>República Centroafricana</option><option>República Checa</option>
+              <option>República Democrática del Congo</option><option>República Dominicana</option>
+              <option>Ruanda</option><option>Rumanía</option><option>Rusia</option>
+              <option>Samoa</option><option>San Cristóbal y Nieves</option><option>San Marino</option>
+              <option>San Vicente y las Granadinas</option><option>Santa Lucía</option>
+              <option>Santo Tomé y Príncipe</option><option>Senegal</option><option>Serbia</option>
+              <option>Seychelles</option><option>Sierra Leona</option><option>Singapur</option>
+              <option>Siria</option><option>Somalia</option><option>Sri Lanka</option>
+              <option>Suazilandia</option><option>Sudáfrica</option><option>Sudán</option>
+              <option>Sudán del Sur</option><option>Suecia</option><option>Suiza</option>
+              <option>Surinam</option><option>Tailandia</option><option>Tanzania</option>
+              <option>Tayikistán</option><option>Timor Oriental</option><option>Togo</option>
+              <option>Tonga</option><option>Trinidad y Tobago</option><option>Túnez</option>
+              <option>Turkmenistán</option><option>Turquía</option><option>Tuvalu</option>
+              <option>Ucrania</option><option>Uganda</option><option>Uruguay</option>
+              <option>Uzbekistán</option><option>Vanuatu</option><option>Ciudad del Vaticano</option>
+              <option>Vietnam</option><option>Yemen</option><option>Yibuti</option>
+              <option>Zambia</option><option>Zimbabue</option>
+            </select>
+            <input class="finput" id="fciudad" type="text" placeholder="Tu ciudad" autocomplete="address-level2">
+          </div>
+          <label class="fcheck">
+            <input type="checkbox" id="fterms">
+            <span>Acepto que mis datos sean usados exclusivamente para esta campaña ciudadana. <a href="#">Política de privacidad.</a></span>
+          </label>
+          <input class="finput" id="femail2" type="email" placeholder="Confirma tu correo electrónico" autocomplete="off" onpaste="return false">
+          <div id="emailError" style="display:none;font-size:12px;color:#FF3347;margin-top:-6px;padding-left:4px">⚠ Los correos no coinciden</div>
+          <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:8px 12px;display:flex;align-items:center;gap:10px">
+            <div style="flex:1">
+              <div style="font-size:9px;color:var(--muted);margin-bottom:3px;letter-spacing:.08em;text-transform:uppercase">Verificación — no soy un robot</div>
+              <div style="font-size:14px;color:#fff;font-weight:600;font-family:var(--sans)" id="captchaQ"></div>
+            </div>
+            <input class="finput" id="fcaptcha" type="number" placeholder="=" autocomplete="off"
+              style="width:60px;flex-shrink:0;text-align:center;font-size:16px;font-weight:700;padding:7px 6px">
+          </div>
+          <div id="captchaError" style="display:none;font-size:12px;color:#FF3347;margin-top:-6px;padding-left:4px">⚠ Respuesta incorrecta, inténtalo de nuevo</div>
+          <button class="fbtn" id="fbtn" disabled onclick="firmar()">Firmar la propuesta</button>
+        </div>
+      </div>
+
+      <!-- SUCCESS STATE -->
+      <div class="success-wrap" id="fsuccess">
+        <div class="success-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F5B800" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <h3>¡Tu firma cuenta!</h3>
+        <p>Quedaste registrado como parte de esta propuesta ciudadana por elecciones libres en Venezuela.</p>
+        <div class="counter-band" style="margin-top:0">
+          <div class="counter-num" id="sigCount2">12.848</div>
+          <div class="counter-label">personas firmando esta propuesta</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHARE COLUMN — desktop: right side; mobile: hidden here, shown in footer -->
+    <div class="share-column">
+      <div style="font-family:var(--serif);font-size:clamp(22px,3vw,34px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:20px">
+        Comparte<br>y suma<br><em style="color:var(--red2)">más voces.</em>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <button class="share-btn x" style="justify-content:center;padding:14px 24px;font-size:15px;border-radius:8px" onclick="compartir('twitter')">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          Compartir en X
+        </button>
+        <button class="share-btn ig" style="justify-content:center;padding:14px 24px;font-size:15px;border-radius:8px" onclick="compartir('instagram')">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          Historia de Instagram
+        </button>
+      </div>
+      <p style="font-size:11px;color:var(--muted);margin-top:16px;line-height:1.5;max-width:200px">
+        quieroelegir.org<br>
+        <span style="opacity:.6">Basado en: Transparencia Venezuela<br>en el Exilio · Abril 2026</span>
+      </p>
+    </div>
+
+  </div>
+
+  <!-- MOBILE FOOTER: share buttons shown below form on mobile -->
+  <div class="mobile-share-footer">
+    <button class="share-btn x" onclick="compartir('twitter')">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+      Compartir en X
+    </button>
+    <button class="share-btn ig" onclick="compartir('instagram')">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      Historia de Instagram
+    </button>
+  </div>
+</div>
+
+<!-- BOTTOM BAR -->
+<div class="bot">
+  <div class="logo">quiero<span>elegir</span>.org</div>
+  <span class="ctr" id="ctr">1 / 11</span>
+  <button id="btnLike" onclick="toggleLike()">
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9">
+      <path d="M6 9V17M2 10.5V17a.5.5 0 0 0 .5.5H5a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1H2.5A.5.5 0 0 0 2 8.5v2ZM6 9s1-1 1-3.5a2.5 2.5 0 0 1 5 0c0 2-.5 3.5-.5 3.5H15a2 2 0 0 1 1.94 2.5l-1.5 5A2 2 0 0 1 13.5 18H6"/>
+    </svg>
+    <span id="likeCount">0</span>
+  </button>
+</div>
+<div class="nl" id="navL" onclick="nav(-1)"></div>
+<div class="nr" id="navR" onclick="nav(1)"></div>
+
+<script>
+/* ── STATE ── */
+const N=11, DUR=10000;
+let cur=0, tmr=null, t0=null, paused=false;
+let liked=false;
+
+/* ── SERPENTINE ── */
+const canvas=document.getElementById('serp');
+const ctx=canvas.getContext('2d');
+let serpAnim=null, serpLocked=false;
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
+window.addEventListener('resize',resize);resize();
+
+function drawSerp(progress){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  const W=canvas.width,H=canvas.height;
+  const strips=3;
+  for(let s=0;s<strips;s++){
+    const delay=s*.16;
+    const p=Math.max(0,Math.min(1,(progress-delay)*1.4));
+    if(p<=0)continue;
+
+    const xBase=W*(.22+s*.28);
+    const sw=58+s*8;      // paper width (narrow ribbon)
+    const steps=80;       // many segments = smooth curve
+    const segH=H*1.6/steps;
+    const amp=55+s*18;    // big horizontal amplitude → real snake shape
+    const freq=0.13;      // slow frequency → full S-curves visible
+    const phase=s*1.3;
+
+    /* ribbon height = full spine length */
+    const sh=segH*steps; // = H*1.6
+    /* ribbon enters fully from off-screen top (bottom edge at y=−20 when p=0)
+       and exits fully off-screen bottom (top edge at H+20 when p=1) */
+    const yTop=(-sh-20)+p*(H+sh+40);
+    const alpha=Math.max(0,.92*(1-Math.max(0,p-.82)*5));
+    if(alpha<=0)continue;
+
+    /* build spine along the sine wave */
+    const spine=[];
+    for(let i=0;i<=steps;i++){
+      const y=yTop+i*segH;
+      const x=xBase+Math.sin(i*freq+phase)*amp;
+      spine.push({x,y});
+    }
+
+    /* perpendicular offset helper */
+    function perp(i,side){
+      const nx=i<steps?(spine[i+1].x-spine[i].x):(spine[i].x-spine[i-1].x);
+      const ny=i<steps?(spine[i+1].y-spine[i].y):segH;
+      const len=Math.sqrt(nx*nx+ny*ny)||1;
+      return {ox:(-ny/len)*(sw/2)*side, oy:(nx/len)*(sw/2)*side};
+    }
+
+    ctx.save();
+    ctx.globalAlpha=alpha;
+
+    /* ── paper fill path ── */
+    ctx.beginPath();
+    // left edge top→bottom
+    for(let i=0;i<=steps;i++){
+      const {ox,oy}=perp(i,1);
+      i===0?ctx.moveTo(spine[i].x+ox,spine[i].y+oy):ctx.lineTo(spine[i].x+ox,spine[i].y+oy);
+    }
+    // right edge bottom→top
+    for(let i=steps;i>=0;i--){
+      const {ox,oy}=perp(i,-1);
+      ctx.lineTo(spine[i].x+ox,spine[i].y+oy);
+    }
+    ctx.closePath();
+    ctx.fillStyle='#EDF1F9';
+    ctx.fill();
+    ctx.strokeStyle='rgba(0,50,120,0.20)';ctx.lineWidth=1;ctx.stroke();
+
+    /* ── thin blue edge lines (left & right borders of the ribbon) ── */
+    ctx.strokeStyle='rgba(0,60,150,0.28)';ctx.lineWidth=2;
+    ['left','right'].forEach(side=>{
+      const sg=side==='left'?1:-1;
+      ctx.beginPath();
+      for(let i=0;i<=steps;i++){
+        const {ox,oy}=perp(i,sg);
+        i===0?ctx.moveTo(spine[i].x+ox,spine[i].y+oy):ctx.lineTo(spine[i].x+ox,spine[i].y+oy);
+      }
+      ctx.stroke();
+    });
+
+    /* ── 3 CNE stamps at 15 / 50 / 85% of ribbon ── */
+    [.15,.50,.85].forEach(frac=>{
+      const idx=Math.min(Math.round(frac*steps),steps);
+      const pt=spine[idx];
+      if(!pt||pt.y<-30||pt.y>H+30)return;
+      const cx=pt.x,cy=pt.y;
+      ctx.beginPath();ctx.arc(cx,cy,14,0,Math.PI*2);
+      ctx.strokeStyle='rgba(0,50,160,0.52)';ctx.lineWidth=1.5;ctx.stroke();
+      ctx.beginPath();ctx.arc(cx,cy,9,0,Math.PI*2);
+      ctx.strokeStyle='rgba(0,50,160,0.36)';ctx.lineWidth=1;ctx.stroke();
+      ctx.fillStyle='rgba(0,50,160,0.62)';
+      ctx.font="bold 6px 'DM Sans',Arial,sans-serif";
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText('CNE',cx,cy);
+    });
+
+    ctx.restore();
+  }
+}
+
+function animateSerp(onMid){
+  if(serpAnim)cancelAnimationFrame(serpAnim);
+  serpLocked=true;
+  canvas.style.opacity='1';
+  const dur=2200,start=performance.now();
+  let midFired=false;
+  function frame(now){
+    const p=Math.min(1,(now-start)/dur);
+    try{drawSerp(p);}catch(e){console.error(e);}
+    if(!midFired&&p>=0.38){
+      midFired=true;
+      serpLocked=false; // unlock nav as soon as slide changes
+      if(onMid)onMid();
+    }
+    if(p<1){serpAnim=requestAnimationFrame(frame);}
+    else{
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      canvas.style.opacity='0';
+      serpAnim=null;
+      serpLocked=false;
+    }
+  }
+  serpAnim=requestAnimationFrame(frame);
+}
+
+/* ── PROGRESS ── */
+function buildProg(){
+  const b=document.getElementById('prog');b.innerHTML='';
+  for(let i=0;i<N;i++){
+    const s=document.createElement('div');s.className='pseg';s.id='ps'+i;
+    const f=document.createElement('div');f.className='pfill';f.id='pf'+i;
+    f.style.width=i<cur?'100%':'0%';
+    s.appendChild(f);b.appendChild(s);
+  }
+}
+
+/* ── NAVIGATION ── */
+function showSlide(idx){
+  document.getElementById('s'+cur).classList.remove('active');
+  cur=Math.max(0,Math.min(N-1,idx));
+  document.getElementById('s'+cur).classList.add('active');
+  document.getElementById('ctr').textContent=(cur+1)+' / '+N;
+  buildProg();
+  const firma=cur===N-1;
+  // On firma slide: left nav stays active (go back), right nav hidden (no forward)
+  document.getElementById('navL').style.pointerEvents='';
+  document.getElementById('navL').style.opacity='';
+  document.getElementById('navR').style.pointerEvents=firma?'none':'';
+  document.getElementById('navR').style.opacity=firma?'0':'';
+  if(firma)clearInterval(tmr);
+  else if(!paused)startTick();
+}
+
+function nav(d){
+  if(serpLocked)return;
+  const t=cur+d;
+  if(t<0||t>=N)return; // bounds check BEFORE clearing timer
+  clearInterval(tmr);
+  animateSerp(()=>showSlide(t));
+}
+
+function startTick(){
+  clearInterval(tmr);t0=Date.now();
+  const f=document.getElementById('pf'+cur);
+  if(!f)return;
+  tmr=setInterval(()=>{
+    if(paused)return;
+    const p=Math.min(100,(Date.now()-t0)/DUR*100);
+    if(f)f.style.width=p+'%';
+    if(p>=100)nav(1);
+  },60);
+}
+
+/* ── PAUSE ── */
+function togglePause(){
+  paused=!paused;
+  document.getElementById('pauseIcon').innerHTML=paused
+    ?'<polygon points="5,3 19,10 5,17" fill="currentColor"/>'
+    :'<rect x="4" y="3" width="4" height="14" rx="1"/><rect x="12" y="3" width="4" height="14" rx="1"/>';
+  if(!paused)t0=Date.now()-(parseFloat((document.getElementById('pf'+cur)||{}).style?.width||'0')/100*DUR);
+}
+
+/* ── LIKE (once per session) ── */
+function toggleLike(){
+  if(liked)return;
+  liked=true;
+  const btn=document.getElementById('btnLike');
+  btn.classList.add('liked');
+  const cnt=document.getElementById('likeCount');
+  cnt.textContent=parseInt(cnt.textContent)+1;
+  btn.style.cursor='default';
+}
+
+/* ── CAPTCHA ── */
+let captchaAnswer = 0;
+function genCaptcha(){
+  const ops=['+','+','+','-','×'];
+  const op=ops[Math.floor(Math.random()*ops.length)];
+  let a,b,ans;
+  if(op==='+'){a=Math.floor(Math.random()*20)+1;b=Math.floor(Math.random()*20)+1;ans=a+b}
+  else if(op==='-'){a=Math.floor(Math.random()*20)+10;b=Math.floor(Math.random()*10)+1;ans=a-b}
+  else{a=Math.floor(Math.random()*9)+2;b=Math.floor(Math.random()*9)+2;ans=a*b}
+  captchaAnswer=ans;
+  document.getElementById('captchaQ').textContent=`¿Cuánto es ${a} ${op} ${b}?`;
+  document.getElementById('fcaptcha').value='';
+}
+
+/* ── FORM VALIDATION ── */
+function validate(){
+  const nombre=document.getElementById('fnombre').value.trim();
+  const email1=document.getElementById('femail').value.trim();
+  const email2=document.getElementById('femail2').value.trim();
+  const pais  =document.getElementById('fpais').value;
+  const terms =document.getElementById('fterms').checked;
+  const cap   =parseInt(document.getElementById('fcaptcha').value);
+
+  // email match feedback
+  const errEl=document.getElementById('emailError');
+  if(email2&&email1&&email2!==email1){
+    errEl.style.display='block';
+  } else {
+    errEl.style.display='none';
+  }
+
+  const emailValid=email1.includes('@')&&email1.includes('.')&&email1===email2&&email2.length>0;
+  const captchaOk=!isNaN(cap)&&cap===captchaAnswer&&document.getElementById('fcaptcha').value!=='';
+  const ok=nombre&&emailValid&&pais&&terms&&captchaOk;
+  document.getElementById('fbtn').disabled=!ok;
+}
+['fnombre','fapellido','femail','femail2','fpais','fterms','fcaptcha'].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el){el.addEventListener('input',validate);el.addEventListener('change',validate)}
+});
+
+function firmar(){
+  // double-check captcha on submit
+  const cap=parseInt(document.getElementById('fcaptcha').value);
+  if(cap!==captchaAnswer){
+    document.getElementById('captchaError').style.display='block';
+    genCaptcha();
+    validate();
+    return;
+  }
+  document.getElementById('captchaError').style.display='none';
+  const n=(12847+Math.floor(Math.random()*60)+3).toLocaleString('es-VE');
+  document.getElementById('sigCount2').textContent=n;
+  document.getElementById('fstate').style.display='none';
+  const sw=document.getElementById('fsuccess');
+  sw.style.display='flex';
+}
+
+/* ── SHARE ── */
+function _rr(c,x,y,w,h,r){
+  c.beginPath();
+  c.moveTo(x+r,y);c.lineTo(x+w-r,y);c.arcTo(x+w,y,x+w,y+r,r);
+  c.lineTo(x+w,y+h-r);c.arcTo(x+w,y+h,x+w-r,y+h,r);
+  c.lineTo(x+r,y+h);c.arcTo(x,y+h,x,y+h-r,r);
+  c.lineTo(x,y+r);c.arcTo(x,y,x+r,y,r);
+  c.closePath();
+}
+
+async function generateStoryImage(){
+  await Promise.all([
+    document.fonts.load('900 120px "Playfair Display"'),
+    document.fonts.load('italic 900 120px "Playfair Display"'),
+    document.fonts.load('700 48px "DM Sans"'),
+    document.fonts.load('500 44px "DM Sans"'),
+  ]);
+  const W=1080,H=1920;
+  const sc=document.createElement('canvas');
+  sc.width=W;sc.height=H;
+  const c=sc.getContext('2d');
+
+  /* background */
+  const bg=c.createLinearGradient(0,0,W*.8,H);
+  bg.addColorStop(0,'#0B1628');bg.addColorStop(.5,'#1a0520');bg.addColorStop(1,'#2a0808');
+  c.fillStyle=bg;c.fillRect(0,0,W,H);
+
+  /* color blobs */
+  const rb=c.createRadialGradient(W+200,-150,0,W+200,-150,900);
+  rb.addColorStop(0,'rgba(200,16,46,0.38)');rb.addColorStop(1,'rgba(200,16,46,0)');
+  c.fillStyle=rb;c.fillRect(0,0,W,H);
+  const bb=c.createRadialGradient(-150,H+150,0,-150,H+150,800);
+  bb.addColorStop(0,'rgba(30,58,138,0.42)');bb.addColorStop(1,'rgba(30,58,138,0)');
+  c.fillStyle=bb;c.fillRect(0,0,W,H);
+  const gb=c.createRadialGradient(W*.3,H*.45,0,W*.3,H*.45,380);
+  gb.addColorStop(0,'rgba(245,184,0,0.10)');gb.addColorStop(1,'rgba(245,184,0,0)');
+  c.fillStyle=gb;c.fillRect(0,0,W,H);
+
+  /* right tricolor vertical pills */
+  const pilW=44,pilX=W-130,pilGap=24;
+  const pilH=(H-pilGap*2-120)/3;
+  [['#F5B800',0],['#1E3A8A',1],['#C8102E',2]].forEach(([col,i])=>{
+    const py=60+i*(pilH+pilGap);
+    _rr(c,pilX,py,pilW,pilH,pilW/2);
+    c.fillStyle=col;c.fill();
+  });
+
+  const lx=100;
+  const sepLen=W-lx-180;
+
+  /* tag badge */
+  c.font='600 40px "DM Sans",sans-serif';
+  const tagTxt='#QuieroElegir';
+  const tw=c.measureText(tagTxt).width;
+  _rr(c,lx,130,tw+44,58,29);
+  c.strokeStyle='rgba(245,184,0,0.75)';c.lineWidth=2;c.stroke();
+  c.fillStyle='rgba(240,235,220,0.88)';c.textBaseline='middle';c.fillText(tagTxt,lx+22,159);
+
+  /* main headline */
+  c.textBaseline='alphabetic';
+  c.fillStyle='#F0EBE0';
+  c.font='900 164px "Playfair Display",serif';
+  c.fillText('Venezuela',lx,440);
+  c.font='italic 900 164px "Playfair Display",serif';
+  c.fillText('merece',lx,630);
+  c.fillStyle='#F5B800';
+  c.fillText('elegir.',lx,820);
+
+  /* tricolor separator */
+  function triSep(y){
+    [['#F5B800',0],['#1E3A8A',1],['#C8102E',2]].forEach(([col,i])=>{
+      c.fillStyle=col;c.fillRect(lx+i*(sepLen/3),y,sepLen/3-6,5);
+    });
+  }
+  triSep(900);
+
+  /* body */
+  c.fillStyle='rgba(240,235,224,0.62)';
+  c.font='400 46px "DM Sans",sans-serif';
+  ['El problema electoral venezolano','no son fallas aisladas — es un','colapso estructural.']
+    .forEach((ln,i)=>c.fillText(ln,lx,990+i*70));
+
+  /* proposal badge */
+  c.fillStyle='rgba(240,235,224,0.42)';
+  c.font='500 40px "DM Sans",sans-serif';
+  c.fillText('Propuesta ciudadana · Abril 2026',lx,1240);
+  triSep(1284);
+
+  /* CTA */
+  c.fillStyle='rgba(240,235,224,0.90)';
+  c.font='700 56px "DM Sans",sans-serif';
+  c.fillText('Firma y comparte.',lx,1390);
+
+  /* source */
+  c.fillStyle='rgba(240,235,224,0.38)';
+  c.font='400 36px "DM Sans",sans-serif';
+  c.fillText('Fuente: Transparencia Venezuela en el Exilio',lx,1478);
+
+  /* bottom separator */
+  triSep(H-186);
+
+  /* URL */
+  c.fillStyle='rgba(240,235,224,0.90)';
+  c.font='700 58px "DM Sans",sans-serif';
+  c.fillText('quieroelegir.org',lx,H-108);
+
+  return sc;
+}
+
+function _showToast(msg){
+  let t=document.getElementById('_shareToast');
+  if(!t){
+    t=document.createElement('div');t.id='_shareToast';
+    t.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(10,20,44,.96);color:#F0EBE0;padding:13px 24px;border-radius:28px;font-size:14px;font-family:"DM Sans",sans-serif;z-index:9999;white-space:nowrap;box-shadow:0 4px 22px rgba(0,0,0,.55);pointer-events:none;transition:opacity .35s';
+    document.body.appendChild(t);
+  }
+  t.textContent=msg;t.style.opacity='1';
+  clearTimeout(t._t);t._t=setTimeout(()=>{t.style.opacity='0'},2800);
+}
+
+async function compartir(red){
+  const url='https://quieroelegir.org';
+  const txt='Me uno a la propuesta ciudadana por elecciones libres en Venezuela. Firma aquí: '+url+' #QuieroElegir #Venezuela';
+  if(red==='twitter'){
+    window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(txt),'_blank','noopener');
+    return;
+  }
+  if(red==='instagram'){
+    try{
+      const sc=await generateStoryImage();
+      const a=document.createElement('a');
+      a.href=sc.toDataURL('image/png');
+      a.download='quieroelegir-historia.png';
+      document.body.appendChild(a);a.click();document.body.removeChild(a);
+      navigator.clipboard?.writeText(url).catch(()=>{});
+      _showToast('✓ Imagen descargada · enlace copiado');
+    }catch(err){
+      console.error(err);
+      navigator.clipboard?.writeText(url+' '+txt).catch(()=>{});
+      _showToast('Enlace copiado — comparte en tu historia');
+    }
+  }
+}
+
+/* ── TOUCH / KEYBOARD ── */
+let tx=0,ty=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-tx;
+  const dy=Math.abs(e.changedTouches[0].clientY-ty);
+  if(Math.abs(dx)>48&&dy<70){
+    if(cur===N-1&&dx<0)return; // no forward from firma
+    nav(dx<0?1:-1);
+  }
+},{passive:true});
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '){
+    if(cur===N-1)return; // no forward from firma
+    e.preventDefault();nav(1);
+  }
+  if(e.key==='ArrowLeft'){e.preventDefault();nav(-1)}
+  if(e.key==='p'||e.key==='P')togglePause();
+});
+
+/* ── INIT ── */
+buildProg();startTick();genCaptcha();
+</script>
+</body>
+</html>
