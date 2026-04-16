@@ -469,19 +469,13 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
     pointer-events:none;
   }
   .picard{
-    width:210px !important;
+    width:250px !important;
     min-height:auto !important;
-    font-size:13px !important;
-    padding:14px 14px 20px !important;
+    font-size:15px !important;
+    padding:16px 16px 26px !important;
     transform:rotate(-1.5deg) !important;
     box-shadow:2px 3px 12px rgba(0,0,0,.45) !important;
     display:inline-block;
-  }
-  /* Slide 1 (portada) post-it: bigger */
-  #s0 .picard{
-    width:240px !important;
-    font-size:15px !important;
-    padding:18px 18px 26px !important;
   }
   .wright-pit{
     position:absolute !important;
@@ -882,10 +876,6 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
     <div class="blob" style="width:500px;height:280px;background:#F5B800;top:0%;right:-100px;opacity:.18"></div>
     <div class="blob" style="width:350px;height:350px;background:#0F2040;bottom:-50px;left:-50px;opacity:.6"></div>
   </div>
-  <!-- WRIGHT POST-IT — desktop: top center; mobile: inline in flow -->
-  <div class="pit wright-pit" style="top:58px;left:50%;transform:translateX(-50%);z-index:30">
-    <div class="picard y" style="width:260px;font-size:15px;transform:rotate(-1.5deg)">"El siguiente paso es ir hacia unas elecciones democráticas. Yo espero y confío en que será durante la administración de Donald Trump."<em class="pisrc">— Doug Wright, Secretario de Energía de EEUU</em></div>
-  </div>
   <!-- LEFT -->
   <div class="panel">
     <span class="tag"><span class="tag-dot"></span>Condición 2</span>
@@ -897,6 +887,23 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
     <div class="blist" style="margin-top:16px">
       <div class="bitem"><div class="bdot"></div><span>El cronograma <strong>no puede ser modificado</strong> por el CNE ni otros poderes</span></div>
       <div class="bitem"><div class="bdot"></div><span>Sanciones por actividad política <strong>fuera del período de campaña</strong></span></div>
+    </div>
+    <!-- MINI ILLUSTRATION — mobile only -->
+    <div class="mini-ill">
+      <div class="mini-ill-chart" style="justify-content:center;gap:16px">
+        <div style="background:rgba(255,255,255,.9);border-radius:10px;overflow:hidden;width:100px;flex-shrink:0;box-shadow:2px 4px 14px rgba(0,0,0,.4)">
+          <div style="background:var(--red);padding:6px;text-align:center">
+            <div style="font-family:var(--serif);font-size:11px;font-weight:900;color:#fff;letter-spacing:.05em">DICIEMBRE</div>
+          </div>
+          <div style="padding:6px;display:flex;justify-content:center;align-items:center;gap:4px">
+            <div style="width:22px;height:22px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff">14</div>
+            <div style="font-family:var(--hand);font-size:11px;color:#333;line-height:1.2">Día<br>fijo ✓</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--text);line-height:1.5">
+          Fecha publicada con <strong style="color:var(--gold2)">mínimo 6 meses</strong> de anticipación, inamovible por ley
+        </div>
+      </div>
     </div>
   </div>
   <!-- RIGHT: acrylic calendar -->
@@ -957,9 +964,6 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
     <div class="blob" style="width:420px;height:420px;background:#1a5c1a;top:-60px;left:-60px;opacity:.32"></div>
     <div class="blob" style="width:300px;height:300px;background:#C8102E;bottom:8%;right:3%;opacity:.28"></div>
   </div>
-  <div class="pit" style="top:12%;right:5%">
-    <div class="picard g">"Apenas el 1.4% de la diáspora pudo votar en 2024. Es exclusión estructural."<em class="pisrc">— Transparencia Venezuela</em></div>
-  </div>
   <div class="panel">
     <span class="tag"><span class="tag-dot"></span>Condición 3</span>
     <h2 class="t1">Voto en el exterior<br><em>real.</em></h2>
@@ -980,23 +984,6 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
       </div>
     </div>
     <span class="srcbadge">Fuente: Transparencia Venezuela · R4V noviembre 2025</span>
-    <!-- MINI ILLUSTRATION — mobile only -->
-    <div class="mini-ill">
-      <div class="mini-ill-chart" style="justify-content:center;gap:16px">
-        <div style="background:rgba(255,255,255,.9);border-radius:10px;overflow:hidden;width:100px;flex-shrink:0;box-shadow:2px 4px 14px rgba(0,0,0,.4)">
-          <div style="background:var(--red);padding:6px;text-align:center">
-            <div style="font-family:var(--serif);font-size:11px;font-weight:900;color:#fff;letter-spacing:.05em">DICIEMBRE</div>
-          </div>
-          <div style="padding:6px;display:flex;justify-content:center;align-items:center;gap:4px">
-            <div style="width:22px;height:22px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff">14</div>
-            <div style="font-family:var(--hand);font-size:11px;color:#333;line-height:1.2">Día<br>fijo ✓</div>
-          </div>
-        </div>
-        <div style="font-size:13px;color:var(--text);line-height:1.5">
-          Fecha publicada con <strong style="color:var(--gold2)">mínimo 6 meses</strong> de anticipación, inamovible por ley
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -1020,32 +1007,45 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
       <div class="bitem"><div class="bdot"></div><span>Padrón público auditable íntegramente por <strong>cualquier organización o veedor</strong></span></div>
     </div>
     <span class="srcbadge">Fuente: Transparencia Venezuela · Sección II</span>
-    <!-- MINI ILLUSTRATION — mobile only -->
-    <div class="mini-ill">
-      <div class="mini-ill-chart" style="padding:10px 14px">
-        <svg width="80" height="52" viewBox="0 0 300 192" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;border-radius:4px;overflow:hidden">
-          <rect width="300" height="192" rx="6" fill="#E8E8E8"/>
-          <rect x="0" y="0" width="300" height="8" fill="#1a2f6e"/>
-          <rect x="0" y="4" width="300" height="4" fill="#F5C800"/>
-          <rect x="0" y="8" width="300" height="4" fill="#E8172E"/>
-          <text x="150" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#1a2f6e" font-family="Arial,sans-serif" letter-spacing="1">CÉDULA</text>
-          <text x="150" y="44" text-anchor="middle" font-size="11" fill="#333" font-family="Arial,sans-serif">V-12.345.678</text>
-          <text x="12" y="62" font-size="9" fill="#666" font-family="Arial,sans-serif">MARTÍNEZ COLMENARES</text>
-          <text x="12" y="76" font-size="9" fill="#666" font-family="Arial,sans-serif">ANDREÍNA JOSEFINA</text>
-          <g transform="translate(22,110)" opacity=".5">
-            <ellipse cx="0" cy="0" rx="6" ry="8" fill="none" stroke="#333" stroke-width=".8"/>
-            <ellipse cx="0" cy="0" rx="12" ry="16" fill="none" stroke="#333" stroke-width=".7"/>
-            <ellipse cx="0" cy="0" rx="18" ry="24" fill="none" stroke="#333" stroke-width=".6"/>
-            <ellipse cx="0" cy="0" rx="22" ry="30" fill="#E8E8E8" opacity=".9"/>
-          </g>
-          <text x="150" y="185" text-anchor="middle" font-size="16" font-weight="900" fill="#111" font-family="Arial Black,Arial,sans-serif" letter-spacing="2">VENEZOLANO</text>
-          <rect x="0" y="178" width="300" height="14" fill="#1a2f6e"/>
-          <text x="150" y="189" text-anchor="middle" font-size="10" font-weight="700" fill="#fff" font-family="Arial,sans-serif" letter-spacing="1">VENEZOLANO</text>
-        </svg>
-        <div style="font-size:13px;color:var(--text);line-height:1.5">
-          <strong style="color:var(--gold2)">Sin cédula no hay voto.</strong><br>
-          <span style="color:var(--muted)">Inscripción automática al cumplir 18 años en los 335 municipios</span>
+  </div>
+  <!-- CÉDULA PIT — visible en móvil en lugar del panel derecho -->
+  <div class="pit" style="top:10%;right:5%">
+    <div style="width:220px;background:#F0EAD6;border-radius:8px;box-shadow:3px 6px 22px rgba(0,0,0,.6);transform:rotate(2deg);overflow:hidden;font-family:Arial,sans-serif">
+      <!-- Header azul -->
+      <div style="background:#1a4099;padding:5px 8px 4px;text-align:center">
+        <div style="font-size:6px;font-weight:700;color:rgba(255,255,255,.8);letter-spacing:1.2px;margin-bottom:1px">REPÚBLICA BOLIVARIANA DE VENEZUELA</div>
+        <div style="font-size:10px;font-weight:900;color:#F5C800;letter-spacing:2px">CÉDULA DE IDENTIDAD</div>
+      </div>
+      <!-- Tricolor bar -->
+      <div style="display:flex;height:5px">
+        <div style="flex:1;background:#CF9B00"></div>
+        <div style="flex:1;background:#1a4099"></div>
+        <div style="flex:1;background:#E8172E"></div>
+      </div>
+      <!-- Cuerpo -->
+      <div style="padding:8px 10px;display:flex;gap:10px;align-items:flex-start">
+        <!-- Foto -->
+        <div style="width:54px;height:70px;background:#d0cbbe;border-radius:3px;flex-shrink:0;overflow:hidden;display:flex;align-items:flex-end;justify-content:center">
+          <svg width="46" height="58" viewBox="0 0 46 58" fill="none">
+            <ellipse cx="23" cy="18" rx="11" ry="13" fill="#a89880"/>
+            <path d="M2 58 Q2 36 23 36 Q44 36 44 58" fill="#a89880"/>
+          </svg>
         </div>
+        <!-- Datos -->
+        <div style="flex:1;padding-top:2px">
+          <div style="font-size:6.5px;color:#777;text-transform:uppercase;letter-spacing:.4px">Apellidos</div>
+          <div style="font-size:9px;font-weight:700;color:#1a1a1a;letter-spacing:.3px;margin-bottom:5px">MARTÍNEZ C.</div>
+          <div style="font-size:6.5px;color:#777;text-transform:uppercase;letter-spacing:.4px">Nombres</div>
+          <div style="font-size:9px;font-weight:700;color:#1a1a1a;margin-bottom:5px">ANDREÍNA J.</div>
+          <div style="font-size:6.5px;color:#777;text-transform:uppercase;letter-spacing:.4px">Cédula</div>
+          <div style="font-size:11px;font-weight:900;color:#1a4099;letter-spacing:1px">V-12.345.678</div>
+        </div>
+      </div>
+      <!-- Footer -->
+      <div style="background:#1a4099;padding:3px 8px;display:flex;justify-content:center;align-items:center;gap:6px">
+        <div style="width:8px;height:8px;background:#CF9B00;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%)"></div>
+        <div style="font-size:7px;font-weight:700;color:#fff;letter-spacing:2px">VENEZOLANO/A</div>
+        <div style="width:8px;height:8px;background:#E8172E;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%)"></div>
       </div>
     </div>
   </div>
@@ -1406,6 +1406,9 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
     <div class="blob" style="width:420px;height:320px;background:#003d1a;top:0%;right:-50px;opacity:.48"></div>
     <div class="blob" style="width:300px;height:300px;background:#1E3A8A;bottom:5%;left:0%;opacity:.38"></div>
   </div>
+  <div class="pit wright-pit" style="top:58px;left:50%;transform:translateX(-50%);z-index:30">
+    <div class="picard y" style="width:260px;font-size:15px;transform:rotate(-1.5deg)">"El siguiente paso es ir hacia unas elecciones democráticas. Yo espero y confío en que será durante la administración de Donald Trump."<em class="pisrc">— Doug Wright, Secretario de Energía de EEUU</em></div>
+  </div>
   <div class="panel">
     <span class="tag"><span class="tag-dot"></span>Condición 6</span>
     <h2 class="t1">Observación internacional<br><em>sin restricciones.</em></h2>
@@ -1713,12 +1716,13 @@ function drawSerp(progress){
     const p=Math.max(0,Math.min(1,(progress-delay)*1.4));
     if(p<=0)continue;
 
+    const mobile=W<600;
     const xBase=W*(.22+s*.28);
-    const sw=58+s*8;      // paper width (narrow ribbon)
-    const steps=80;       // many segments = smooth curve
+    const sw=mobile?(50+s*6):(58+s*8);
+    const steps=mobile?35:80;
     const segH=H*1.6/steps;
-    const amp=55+s*18;    // big horizontal amplitude → real snake shape
-    const freq=0.13;      // slow frequency → full S-curves visible
+    const amp=mobile?(28+s*10):(55+s*18);
+    const freq=mobile?0.20:0.13;
     const phase=s*1.3;
 
     /* ribbon height = full spine length */
