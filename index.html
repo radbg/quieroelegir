@@ -286,6 +286,9 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 .s2-pits .picard{flex:0 0 252px;width:252px;font-size:16px}
 #s2 .panel{grid-row:2;justify-content:flex-end}
 
+/* ── S3: raise panel text to match other slides ── */
+#s3 .panel{justify-content:flex-start;padding-top:80px}
+
 /* ── Red-background slides: remap --red → yellow, --red2 → white ──
    Fixes: italic title, bullet dots, tag dots, any inline var(--red*) */
 #s5,#s6,#s7,#s8{
@@ -939,6 +942,10 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
       </div>
     </div>
   </div>
+  <!-- post-it top right -->
+  <div class="pit" style="top:8%;right:4%">
+    <div class="picard y">📌 ¡Día fijo de elecciones!</div>
+  </div>
   <!-- RIGHT: acrylic calendar -->
   <div class="cal-panel">
     <div style="position:relative">
@@ -979,10 +986,6 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
           <div class="cal-day">30</div>
           <div class="cal-day">31</div>
         </div>
-      </div>
-      <!-- post-it on calendar -->
-      <div class="cal-pit" style="position:absolute;top:-20px;right:-30px">
-        📌 ¡Día fijo de elecciones!
       </div>
     </div>
   </div>
