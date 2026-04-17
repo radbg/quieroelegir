@@ -10,7 +10,8 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --red:#E8172E;--red2:#FF3347;--gold:#F5B800;--gold2:#FFD040;
+  --red:#CF142B;--red2:#e83348;--gold:#FFD200;--gold2:#ffe040;
+  --flag-blue:#0032A0;--flag-red:#CF142B;--flag-yellow:#FFD200;
   --cream:#F5EDD8;--white:#FFFFFF;--text:#F0EBE0;--muted:rgba(240,235,224,.62);
   --serif:'Playfair Display',Georgia,serif;
   --sans:'DM Sans',system-ui,sans-serif;
@@ -46,7 +47,7 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 .mobile-share-footer{
   display:none;position:absolute;bottom:64px;left:0;right:0;
   padding:10px 20px;
-  background:linear-gradient(to top,rgba(11,22,40,1) 0%,rgba(11,22,40,.85) 100%);
+  background:linear-gradient(to top,rgba(0,25,80,.92) 0%,rgba(0,25,80,.7) 100%);
   justify-content:center;gap:10px;z-index:50;
 }
 
@@ -69,7 +70,7 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 .slide-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
 .slide-bg::after{
   content:'';position:absolute;inset:0;z-index:2;
-  background:linear-gradient(160deg,rgba(0,0,0,.08) 0%,rgba(0,0,0,.35) 40%,rgba(0,0,0,.75) 80%,rgba(0,0,0,.92) 100%);
+  background:linear-gradient(160deg,rgba(0,0,0,.04) 0%,rgba(0,0,0,.18) 40%,rgba(0,0,0,.52) 80%,rgba(0,0,0,.72) 100%);
 }
 .blob{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
 
@@ -692,10 +693,10 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 ════════════════════════════════ -->
 <div class="slide active" id="s0">
   <div class="slide-bg">
-    <div style="position:absolute;inset:0;background:linear-gradient(145deg,#1e3a6e 0%,#3d1a6e 50%,#5c1a28 100%)"></div>
-    <div class="blob" style="width:600px;height:600px;background:#C8102E;top:-120px;right:-120px;opacity:.32"></div>
-    <div class="blob" style="width:400px;height:400px;background:#1E3A8A;bottom:-80px;left:-80px;opacity:.45"></div>
-    <div class="blob" style="width:300px;height:200px;background:#F5B800;top:40%;left:30%;opacity:.12"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(145deg,#001870 0%,#0032A0 45%,#3a78d4 75%,#c8e0ff 92%,#f0f8ff 100%)"></div>
+    <div class="blob" style="width:600px;height:600px;background:#4a90e0;top:-120px;right:-120px;opacity:.35"></div>
+    <div class="blob" style="width:400px;height:400px;background:#0032A0;bottom:-80px;left:-80px;opacity:.5"></div>
+    <div class="blob" style="width:300px;height:200px;background:#FFD200;top:40%;left:30%;opacity:.1"></div>
   </div>
   <div class="pit" style="top:12%;right:6%">
     <div class="picard y">"Venezuela tiene todo el derecho constitucional de elegir."<em class="pisrc">— Jesús María Casal, constitucionalista</em></div>
@@ -736,9 +737,9 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 ════════════════════════════════ -->
 <div class="slide split" id="s1">
   <div class="slide-bg">
-    <div style="position:absolute;inset:0;background:linear-gradient(150deg,#1e3a6e 0%,#244882 55%,#2e1e58 100%)"></div>
-    <div class="blob" style="width:500px;height:400px;background:#1E3A8A;top:5%;left:-100px;opacity:.45"></div>
-    <div class="blob" style="width:350px;height:350px;background:#8B0000;bottom:0%;right:0%;opacity:.38"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(150deg,#0032A0 0%,#1a5abf 45%,#5090e0 75%,#c0d8ff 90%,#f0f8ff 100%)"></div>
+    <div class="blob" style="width:500px;height:400px;background:#2060c0;top:5%;left:-100px;opacity:.45"></div>
+    <div class="blob" style="width:350px;height:350px;background:#001870;bottom:0%;right:0%;opacity:.4"></div>
   </div>
   <div class="pit" style="top:12%;left:42%;z-index:30">
     <div class="picard b">"No son fallas puntuales. Es un problema estructural."<em class="pisrc">— Transparencia Venezuela, 2026</em></div>
@@ -850,9 +851,9 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 ════════════════════════════════ -->
 <div class="slide" id="s2">
   <div class="slide-bg">
-    <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1e3a6e 0%,#1e3565 60%,#0d1520 100%)"></div>
-    <div class="blob" style="width:420px;height:420px;background:#2B5BA8;top:-60px;right:-60px;opacity:.42"></div>
-    <div class="blob" style="width:280px;height:280px;background:#E8172E;bottom:10%;left:5%;opacity:.28"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,#001a80 0%,#0032A0 50%,#4880d0 75%,#b8d4ff 90%,#eef5ff 100%)"></div>
+    <div class="blob" style="width:420px;height:420px;background:#3070c8;top:-60px;right:-60px;opacity:.42"></div>
+    <div class="blob" style="width:280px;height:280px;background:#CF142B;bottom:10%;left:5%;opacity:.18"></div>
   </div>
   <div class="pit" style="top:12%;right:5%">
     <div class="picard p">"Ninguna reforma producirá confianza si el CNE sigue capturado por el poder."<em class="pisrc">— Eugenio G. Martínez, Transparencia VE</em></div>
@@ -877,9 +878,9 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 ════════════════════════════════ -->
 <div class="slide split" id="s3">
   <div class="slide-bg">
-    <div style="position:absolute;inset:0;background:linear-gradient(155deg,#1e3a6e 0%,#1e3468 55%,#2e2800 100%)"></div>
-    <div class="blob" style="width:500px;height:280px;background:#F5B800;top:0%;right:-100px;opacity:.18"></div>
-    <div class="blob" style="width:350px;height:350px;background:#244882;bottom:-50px;left:-50px;opacity:.6"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(155deg,#0032A0 0%,#4a1880 45%,#CF142B 80%,#ffd0d0 95%,#fff5f5 100%)"></div>
+    <div class="blob" style="width:500px;height:280px;background:#CF142B;top:0%;right:-100px;opacity:.25"></div>
+    <div class="blob" style="width:350px;height:350px;background:#0032A0;bottom:-50px;left:-50px;opacity:.55"></div>
   </div>
   <!-- LEFT -->
   <div class="panel">
@@ -965,9 +966,9 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 ════════════════════════════════ -->
 <div class="slide" id="s4">
   <div class="slide-bg">
-    <div style="position:absolute;inset:0;background:linear-gradient(140deg,#1e3a6e 0%,#1a3255 55%,#162800 100%)"></div>
-    <div class="blob" style="width:420px;height:420px;background:#1a5c1a;top:-60px;left:-60px;opacity:.32"></div>
-    <div class="blob" style="width:300px;height:300px;background:#C8102E;bottom:8%;right:3%;opacity:.28"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(140deg,#0032A0 0%,#7a0820 45%,#CF142B 75%,#ffb8b8 92%,#fff5f5 100%)"></div>
+    <div class="blob" style="width:420px;height:420px;background:#CF142B;top:-60px;left:-60px;opacity:.3"></div>
+    <div class="blob" style="width:300px;height:300px;background:#0032A0;bottom:8%;right:3%;opacity:.28"></div>
   </div>
   <div class="panel">
     <span class="tag"><span class="tag-dot"></span>Condición 3</span>
@@ -997,9 +998,9 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 ════════════════════════════════ -->
 <div class="slide split" id="s5">
   <div class="slide-bg">
-    <div style="position:absolute;inset:0;background:linear-gradient(145deg,#1e3a6e 0%,#0f1e3a 60%,#00121a 100%)"></div>
-    <div class="blob" style="width:400px;height:400px;background:#005580;top:-80px;right:-50px;opacity:.38"></div>
-    <div class="blob" style="width:280px;height:280px;background:#E8172E;bottom:5%;left:5%;opacity:.22"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(145deg,#7a000e 0%,#CF142B 50%,#e85070 78%,#ffd8d8 92%,#fff5f5 100%)"></div>
+    <div class="blob" style="width:400px;height:400px;background:#a00018;top:-80px;right:-50px;opacity:.4"></div>
+    <div class="blob" style="width:280px;height:280px;background:#CF142B;bottom:5%;left:5%;opacity:.25"></div>
   </div>
   <!-- LEFT -->
   <div class="panel">
@@ -1192,9 +1193,9 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 ════════════════════════════════ -->
 <div class="slide split" id="s6">
   <div class="slide-bg">
-    <div style="position:absolute;inset:0;background:linear-gradient(150deg,#1e3a6e 0%,#120a28 55%,#0d0820 100%)"></div>
-    <div class="blob" style="width:460px;height:360px;background:#4B0082;top:-60px;left:-80px;opacity:.38"></div>
-    <div class="blob" style="width:300px;height:300px;background:#F5B800;bottom:5%;right:-30px;opacity:.18"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(150deg,#6a0010 0%,#CF142B 50%,#e06060 78%,#ffc8c8 92%,#fff0f0 100%)"></div>
+    <div class="blob" style="width:460px;height:360px;background:#8a0010;top:-60px;left:-80px;opacity:.45"></div>
+    <div class="blob" style="width:300px;height:300px;background:#e03050;bottom:5%;right:-30px;opacity:.25"></div>
   </div>
   <div class="pit" style="top:12%;left:42%;z-index:30">
     <div class="picard o">"En 2024 el CNE mostró parcialidad a favor del oficialismo en todas las etapas."<em class="pisrc">— Centro Carter, Informe 2024</em></div>
@@ -1366,9 +1367,9 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 ════════════════════════════════ -->
 <div class="slide" id="s7">
   <div class="slide-bg">
-    <div style="position:absolute;inset:0;background:linear-gradient(140deg,#1e3a6e 0%,#0d1e20 55%,#001a10 100%)"></div>
-    <div class="blob" style="width:420px;height:320px;background:#003d1a;top:0%;right:-50px;opacity:.48"></div>
-    <div class="blob" style="width:300px;height:300px;background:#1E3A8A;bottom:5%;left:0%;opacity:.38"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(140deg,#CF142B 0%,#d84020 40%,#e89020 70%,#FFD200 85%,#fffce0 100%)"></div>
+    <div class="blob" style="width:420px;height:320px;background:#e06020;top:0%;right:-50px;opacity:.4"></div>
+    <div class="blob" style="width:300px;height:300px;background:#CF142B;bottom:5%;left:0%;opacity:.35"></div>
   </div>
   <div class="pit wright-pit" style="top:14%;right:4%;left:auto;transform:rotate(-1.5deg);z-index:30">
     <div class="picard y" style="width:260px;font-size:15px;transform:rotate(-1.5deg)">"El siguiente paso es ir hacia unas elecciones democráticas. Yo espero y confío en que será durante la administración de Donald Trump."<em class="pisrc">— Doug Wright, Secretario de Energía de EEUU</em></div>
@@ -1425,9 +1426,9 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 ════════════════════════════════ -->
 <div class="slide" id="s8">
   <div class="slide-bg">
-    <div style="position:absolute;inset:0;background:linear-gradient(155deg,#1e3a6e 0%,#160820 55%,#200010 100%)"></div>
-    <div class="blob" style="width:400px;height:400px;background:#6B0020;top:-60px;right:-60px;opacity:.42"></div>
-    <div class="blob" style="width:280px;height:280px;background:#1E3A8A;bottom:8%;left:-30px;opacity:.38"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(155deg,#CF142B 0%,#d87010 40%,#FFD200 72%,#fff5a0 90%,#fffef0 100%)"></div>
+    <div class="blob" style="width:400px;height:400px;background:#d86010;top:-60px;right:-60px;opacity:.4"></div>
+    <div class="blob" style="width:280px;height:280px;background:#CF142B;bottom:8%;left:-30px;opacity:.3"></div>
   </div>
   <div class="pit" style="top:12%;right:5%">
     <div class="picard b">"Un proceso que excluye competidores por vía administrativa no cumple estándares democráticos mínimos."<em class="pisrc">— Transparencia Venezuela</em></div>
@@ -1449,10 +1450,10 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 ════════════════════════════════ -->
 <div class="slide" id="s9">
   <div class="slide-bg">
-    <div style="position:absolute;inset:0;background:linear-gradient(145deg,#1e3a6e 0%,#120d20 50%,#1a0008 100%)"></div>
-    <div class="blob" style="width:550px;height:550px;background:#C8102E;top:-100px;right:-120px;opacity:.26"></div>
-    <div class="blob" style="width:420px;height:420px;background:#1E3A8A;bottom:-90px;left:-90px;opacity:.32"></div>
-    <div class="blob" style="width:250px;height:250px;background:#F5B800;top:30%;left:40%;opacity:.12"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(145deg,#b08000 0%,#d4a800 40%,#FFD200 65%,#fff5a0 88%,#fffef5 100%)"></div>
+    <div class="blob" style="width:550px;height:550px;background:#e0a800;top:-100px;right:-120px;opacity:.35"></div>
+    <div class="blob" style="width:420px;height:420px;background:#c89000;bottom:-90px;left:-90px;opacity:.38"></div>
+    <div class="blob" style="width:250px;height:250px;background:#CF142B;top:30%;left:40%;opacity:.1"></div>
   </div>
   <div class="panel">
     <span class="tag"><span class="tag-dot"></span>La solución · Transparencia Venezuela</span>
@@ -1478,8 +1479,8 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 ════════════════════════════════ -->
 <div class="slide" id="s10">
   <div class="slide-bg">
-    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,#1a0820 0%,#1e3a6e 65%)"></div>
-    <div class="blob" style="width:700px;height:400px;background:#C8102E;top:-120px;left:50%;transform:translateX(-50%);opacity:.2"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 35%,#fff8d0 0%,#FFD200 45%,#c89800 75%,#a07000 100%)"></div>
+    <div class="blob" style="width:700px;height:400px;background:#CF142B;top:-120px;left:50%;transform:translateX(-50%);opacity:.15"></div>
   </div>
 
   <!-- layout: form left, share right on desktop -->
