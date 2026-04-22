@@ -18,54 +18,26 @@
   --hand:'Caveat',cursive;
 }
 html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased}
-
-/* ── APP ── */
 #app{width:100%;height:100dvh;position:relative;overflow:hidden}
-
-/* ── SLIDE ── */
-.slide{
-  position:absolute;inset:0;
-  display:grid;
-  opacity:0;pointer-events:none;
-  transition:opacity .5s ease;
-}
+.slide{position:absolute;inset:0;display:grid;opacity:0;pointer-events:none;transition:opacity .5s ease;}
 .slide.active{opacity:1;pointer-events:all}
 .slide.exit{opacity:0}
-
-/* default: full-width single column */
 .slide{grid-template-columns:1fr;grid-template-rows:1fr}
-/* split layout */
 .slide.split{grid-template-columns:1fr 1fr}
-/* firma */
-#s10{display:block;overflow:hidden;padding:0;scrollbar-width:none;-ms-overflow-style:none}
-#s10::-webkit-scrollbar{display:none}
-
-/* share column — desktop right side */
+/* firma slide */
+#s15{display:block;overflow:hidden;padding:0;scrollbar-width:none;-ms-overflow-style:none}
+#s15::-webkit-scrollbar{display:none}
 .share-column{flex:0 0 220px;display:flex;flex-direction:column;justify-content:center}
-
-/* mobile share footer */
 .mobile-share-footer{
   display:none;position:absolute;bottom:64px;left:0;right:0;
   padding:10px 20px;
   background:linear-gradient(to top,rgba(0,25,80,.92) 0%,rgba(0,25,80,.7) 100%);
   justify-content:center;gap:10px;z-index:50;
 }
-
-/* ── MINI ILLUSTRATIONS (mobile only) ── */
-.mini-ill{
-  display:none; /* hidden on desktop — shown via mobile media query */
-  margin-top:16px;
-  align-items:center;
-  gap:14px;
-  flex-wrap:wrap;
-}
+.mini-ill{display:none;margin-top:16px;align-items:center;gap:14px;flex-wrap:wrap;}
 .mini-ill-chart{
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:12px;
-  padding:12px 16px;
-  display:flex;align-items:center;gap:14px;
-  width:100%;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:14px;width:100%;
 }
 .slide-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
 .slide-bg::after{
@@ -73,13 +45,9 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
   background:linear-gradient(160deg,rgba(0,0,0,.04) 0%,rgba(0,0,0,.18) 40%,rgba(0,0,0,.52) 80%,rgba(0,0,0,.72) 100%);
 }
 .blob{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
-
-/* ── PROGRESS ── */
 .prog{position:absolute;top:0;left:0;right:0;z-index:80;display:flex;gap:4px;padding:14px 22px 0}
 .pseg{flex:1;height:3px;background:rgba(255,255,255,.2);border-radius:2px;overflow:hidden}
 .pfill{height:100%;background:var(--gold);border-radius:2px;transition:width .07s linear}
-
-/* ── PAUSE ── */
 #pauseBtn{
   position:absolute;top:12px;right:18px;z-index:80;
   width:36px;height:36px;border-radius:50%;
@@ -89,18 +57,12 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 }
 #pauseBtn:hover{background:rgba(255,255,255,.24)}
 #pauseBtn svg{width:14px;height:14px}
-
-/* ── CONTENT PANEL ── */
 .panel{
   position:relative;z-index:10;
   display:flex;flex-direction:column;justify-content:flex-end;
   padding:60px 36px 108px;
 }
-.panel.right{
-  justify-content:center;padding:60px 36px 108px 24px;
-}
-
-/* ── TAG ── */
+.panel.right{justify-content:center;padding:60px 36px 108px 24px;}
 .tag{
   display:inline-flex;align-items:center;gap:8px;
   font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
@@ -108,8 +70,6 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
   padding:4px 14px;border-radius:3px;margin-bottom:18px;width:fit-content;
 }
 .tag-dot{width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0}
-
-/* ── TITLE ── */
 .t1{
   font-family:var(--serif);
   font-size:clamp(34px,5.5vw,68px);
@@ -117,19 +77,19 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
   margin-bottom:18px;letter-spacing:-.02em;color:#fff;
 }
 .t1 em{color:var(--red2);font-style:italic}
-.t1 b {color:var(--gold2)}
-
-/* ── BODY ── */
+.t1 b{color:var(--gold2)}
 .body{font-size:clamp(17px,2.2vw,20px);line-height:1.72;color:var(--muted);font-weight:300}
-
-/* ── SOURCE ── */
+/* emotional hook paragraph */
+.hook{
+  font-size:clamp(16px,2vw,19px);line-height:1.65;color:rgba(240,235,224,.88);
+  font-weight:400;margin-bottom:16px;
+  border-left:3px solid var(--red2);padding-left:14px;
+}
 .srcbadge{
   display:inline-flex;align-items:center;gap:8px;margin-top:18px;
   font-size:10px;letter-spacing:.1em;color:rgba(240,235,224,.32);text-transform:uppercase;
 }
 .srcbadge::before{content:'';width:20px;height:1px;background:rgba(240,235,224,.22)}
-
-/* ── STAT CARDS ── */
 .sgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin-top:20px}
 .scard{
   background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
@@ -140,40 +100,30 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 .snum{font-family:var(--serif);font-size:clamp(26px,4vw,40px);font-weight:700;color:var(--gold);line-height:1}
 .snum small{font-size:.55em}
 .slabel{font-size:14px;color:var(--muted);margin-top:5px;line-height:1.4}
-
-/* ── BIG STAT ── */
 .bigstat{margin-top:20px;display:flex;align-items:flex-end;gap:14px}
 .bignum{font-family:var(--serif);font-size:clamp(72px,16vw,130px);font-weight:900;color:var(--gold2);line-height:.9;letter-spacing:-.04em}
 .bigdesc{font-size:clamp(16px,2vw,19px);color:var(--muted);max-width:200px;line-height:1.55;padding-bottom:10px}
-
-/* ── BULLETS ── */
 .blist{margin-top:18px;display:flex;flex-direction:column;gap:11px}
 .bitem{display:flex;align-items:flex-start;gap:13px;font-size:clamp(16px,2.2vw,18px);line-height:1.58;color:#fff}
 .bdot{width:8px;height:8px;min-width:8px;border-radius:50%;background:var(--red);margin-top:6px;flex-shrink:0}
 .bitem strong{color:var(--gold2);font-weight:600}
-
-/* ── QUOTE ── */
 .qblock{
   margin-top:18px;border-left:4px solid var(--gold);padding:12px 18px;
   font-size:clamp(16px,2.2vw,18px);font-style:italic;line-height:1.7;color:#fff;
   background:rgba(245,184,0,.07);border-radius:0 8px 8px 0;
 }
 .qsrc{font-size:11px;font-style:normal;color:var(--gold);display:block;margin-top:8px;font-weight:600;letter-spacing:.06em}
-
-/* ── COMPARISON ── */
 .cmpr{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:18px}
 .cpanel{border-radius:14px;padding:18px;backdrop-filter:blur(8px)}
-.cpanel.bad {background:rgba(232,23,46,.16);border:1.5px solid rgba(232,23,46,.45)}
+.cpanel.bad{background:rgba(232,23,46,.16);border:1.5px solid rgba(232,23,46,.45)}
 .cpanel.good{background:rgba(245,184,0,.14);border:1.5px solid rgba(245,184,0,.45)}
 .cphead{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
-.cphead.bad {color:var(--red2)}
+.cphead.bad{color:var(--red2)}
 .cphead.good{color:var(--gold2)}
 .cpitem{font-size:clamp(14px,1.8vw,16px);line-height:1.55;color:var(--muted);margin-bottom:8px;padding-left:14px;position:relative}
 .cpitem::before{content:'';position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%}
-.cpitem.bad::before {background:var(--red2)}
+.cpitem.bad::before{background:var(--red2)}
 .cpitem.good::before{background:var(--gold2)}
-
-/* ── POST-ITS (bigger) ── */
 .pit{position:absolute;z-index:20;pointer-events:none}
 .picard{
   font-family:var(--hand);font-size:18px;line-height:1.45;
@@ -193,14 +143,10 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 .picard.g{background:#9EE8B4;color:#1a1a1a;transform:rotate(2.2deg)}
 .picard.o{background:#FFB347;color:#1a1a1a;transform:rotate(-2deg)}
 .pisrc{display:block;font-size:12px;font-family:var(--sans);margin-top:10px;opacity:.65;font-weight:600;font-style:normal}
-
-/* ── DOT ROW ── */
 .dotrow{display:flex;gap:7px;margin-top:20px;flex-wrap:wrap}
-.dot    {width:36px;height:5px;border-radius:3px;background:rgba(255,255,255,.15)}
+.dot{width:36px;height:5px;border-radius:3px;background:rgba(255,255,255,.15)}
 .dot.done{background:var(--gold)}
 .dot.curr{background:var(--red2)}
-
-/* ── CTA BUTTON ── */
 .ctabtn{
   display:inline-flex;align-items:center;gap:10px;margin-top:22px;
   padding:16px 36px;background:var(--red);color:#fff;
@@ -212,25 +158,54 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
   position:relative;z-index:40;
 }
 .ctabtn:hover{background:#c40d22;transform:translateY(-2px)}
-
-/* ── SHARE BUTTONS ── */
-.share-strip{
-  display:flex;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap;
+/* counter on S0 */
+.s0-counter{
+  display:inline-flex;align-items:center;gap:12px;
+  margin-bottom:14px;
+  padding:10px 18px;
+  background:rgba(245,184,0,.12);border:1.5px solid rgba(245,184,0,.35);
+  border-radius:8px;width:fit-content;
 }
+.s0-counter-num{
+  font-family:var(--serif);font-size:clamp(22px,3vw,30px);font-weight:900;
+  color:var(--gold2);animation:pulse 2s ease-in-out infinite;
+}
+.s0-counter-label{font-size:clamp(12px,1.5vw,14px);color:var(--muted);line-height:1.3}
+@keyframes pulse{0%,100%{opacity:1;text-shadow:0 0 0 rgba(255,208,0,0)}50%{opacity:.85;text-shadow:0 0 18px rgba(255,208,0,.6)}}
+/* urgency bar */
+.urgency-bar{
+  display:inline-flex;align-items:center;gap:10px;margin-top:14px;
+  padding:10px 18px;background:rgba(207,20,43,.18);
+  border:1.5px solid rgba(207,20,43,.5);border-radius:6px;
+  font-size:clamp(13px,1.6vw,15px);color:#fff;font-weight:600;width:fit-content;
+}
+.urgency-bar::before{content:'⚡';font-size:14px}
+/* secondary CTA — ghost button */
+.ctabtn-ghost{
+  display:inline-flex;align-items:center;gap:10px;margin-top:14px;
+  padding:13px 30px;background:transparent;color:#fff;
+  font-weight:600;font-size:clamp(14px,1.8vw,16px);
+  border-radius:4px;cursor:pointer;
+  border:1.5px solid rgba(255,255,255,.35);
+  font-family:var(--sans);letter-spacing:.02em;
+  transition:background .2s,border-color .2s,transform .15s;
+  position:relative;z-index:40;
+}
+.ctabtn-ghost:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.6);transform:translateY(-1px)}
+/* share buttons */
+.share-strip{display:flex;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap;}
 .share-btn{
   display:inline-flex;align-items:center;gap:8px;
   padding:10px 20px;border-radius:100px;
   font-family:var(--sans);font-size:13px;font-weight:600;
-  cursor:pointer;border:none;transition:all .2s;
-  letter-spacing:.01em;
+  cursor:pointer;border:none;transition:all .2s;letter-spacing:.01em;
 }
 .share-btn.x{background:#000;color:#fff;box-shadow:0 2px 12px rgba(0,0,0,.4)}
 .share-btn.x:hover{background:#222}
 .share-btn.ig{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;box-shadow:0 2px 12px rgba(220,39,67,.4)}
 .share-btn.ig:hover{opacity:.9}
 .share-btn svg{width:16px;height:16px;flex-shrink:0}
-
-/* ── BOTTOM BAR ── */
+/* bottom bar */
 .bot{
   position:absolute;bottom:0;left:0;right:0;z-index:70;
   display:flex;align-items:center;justify-content:space-between;
@@ -240,182 +215,74 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 .logo{font-family:var(--serif);font-size:18px;font-weight:900;letter-spacing:-.02em;user-select:none;color:#fff}
 .logo span{color:var(--red2)}
 .ctr{font-size:12px;color:var(--muted)}
-
 #btnLike{
   display:flex;align-items:center;gap:7px;
   padding:9px 18px;border-radius:100px;
-  border:1px solid rgba(255,255,255,.2);
-  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);
   color:#fff;font-size:13px;font-weight:600;
-  cursor:pointer;font-family:var(--sans);
-  backdrop-filter:blur(6px);transition:all .2s;
+  cursor:pointer;font-family:var(--sans);backdrop-filter:blur(6px);transition:all .2s;
 }
 #btnLike:hover{border-color:rgba(245,184,0,.6);background:rgba(245,184,0,.12)}
 #btnLike.liked{background:rgba(245,184,0,.22);border-color:var(--gold);color:var(--gold2)}
 #btnLike svg{width:16px;height:16px}
-
-/* ── NAV ZONES ── */
+/* nav zones */
 .nl,.nr{position:absolute;top:0;bottom:0;width:38%;z-index:25;cursor:pointer}
 .nl{left:0}.nr{right:0}
-
-/* ── ANIMATIONS ── */
+/* animations */
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 @keyframes scaleIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
 @keyframes scaleInCenter{from{opacity:0;transform:translateX(-50%) scale(.9)}to{opacity:1;transform:translateX(-50%) scale(1)}}
-@keyframes countUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
 .slide.active .panel>*{animation:fadeUp .5s both}
 .slide.active .panel>*:nth-child(1){animation-delay:.05s}
 .slide.active .panel>*:nth-child(2){animation-delay:.13s}
 .slide.active .panel>*:nth-child(3){animation-delay:.21s}
 .slide.active .panel>*:nth-child(4){animation-delay:.29s}
 .slide.active .panel>*:nth-child(5){animation-delay:.37s}
+.slide.active .panel>*:nth-child(6){animation-delay:.44s}
 .slide.active .pit{animation:scaleIn .6s .28s both}
 .slide.active .wright-pit{animation:scaleInCenter .6s .28s both}
 .slide.active .chart-panel{animation:fadeUp .6s .15s both}
 .slide.active .s2-pits{animation:scaleIn .6s .28s both}
-
-/* ── S2: pit absolute top-right, panel text starts from top-left ── */
-.s2-pits{
-  position:absolute;top:56px;right:4%;
-  z-index:20;pointer-events:none;width:260px;
-}
+/* S2 pits position */
+.s2-pits{position:absolute;top:56px;right:4%;z-index:20;pointer-events:none;width:260px;}
 .s2-pits .picard{width:100%;font-size:16px}
 #s2 .panel{justify-content:flex-start;padding-top:80px}
-
-/* ── S3: raise panel text to match other slides ── */
 #s3 .panel{justify-content:flex-start;padding-top:80px}
-
-/* ── Red-background slides: remap --red → yellow, --red2 → white ──
-   Fixes: italic title, bullet dots, tag dots, any inline var(--red*) */
-#s5,#s6,#s7,#s8{
-  --red:#FFD200;
-  --red2:#ffffff;
-}
-
-/* ── SERPENTINE CANVAS ── */
+/* red-bg slides: remap --red→yellow, --red2→white so bullets/titles visible */
+#s5,#s6,#s7,#s8,#s11{--red:#FFD200;--red2:#ffffff;}
+/* serpentine canvas */
 #serp{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:0}
-
-/* ── CHART PANEL (slide 2) ── */
+/* chart panel (slide S1) */
 .chart-panel{
   position:relative;z-index:10;
   display:flex;flex-direction:column;justify-content:center;
-  align-items:center;gap:20px;
-  padding:60px 36px 108px 0;
+  align-items:center;gap:20px;padding:60px 36px 108px 0;
 }
 .donut-wrap{position:relative;width:220px;height:220px}
 .donut-wrap svg{width:100%;height:100%}
-.donut-center{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  text-align:center;pointer-events:none;
-}
+.donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;}
 .donut-pct{font-family:var(--serif);font-size:52px;font-weight:900;color:var(--red2);line-height:1}
 .donut-label{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.3}
-
 .donut-legend{display:flex;flex-direction:column;gap:10px;width:100%;max-width:240px}
 .legend-item{display:flex;align-items:center;gap:10px}
 .legend-dot{width:14px;height:14px;border-radius:3px;flex-shrink:0}
 .legend-text{font-size:16px;color:#fff;line-height:1.3}
 .legend-text small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
-
-/* mobile-only stat block replacing donut on small screens */
 .mobile-diag-stat{display:none}
-
-/* ── CALENDAR PANEL (slide 4) ── */
-.cal-panel{
-  position:relative;z-index:10;
-  display:flex;flex-direction:column;justify-content:center;
-  align-items:center;padding:60px 24px 108px 0;
-}
-.acrylic-cal{
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(20px);
-  border-radius:20px;
-  padding:24px;width:260px;
-  box-shadow:0 8px 40px rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.8) inset;
-  position:relative;
-}
-.cal-header{
-  background:var(--red);color:#fff;
-  border-radius:10px 10px 0 0;margin:-24px -24px 16px;
-  padding:14px 24px;text-align:center;
-}
+/* calendar panel (S3) */
+.cal-panel{position:relative;z-index:10;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:60px 24px 108px 0;}
+.acrylic-cal{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-radius:20px;padding:24px;width:260px;box-shadow:0 8px 40px rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.8) inset;position:relative;}
+.cal-header{background:var(--red);color:#fff;border-radius:10px 10px 0 0;margin:-24px -24px 16px;padding:14px 24px;text-align:center;}
 .cal-month{font-family:var(--serif);font-size:22px;font-weight:900;letter-spacing:.02em}
 .cal-year{font-size:12px;opacity:.85;font-weight:500;margin-top:2px}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
 .cal-day-name{font-size:9px;font-weight:700;color:#666;text-transform:uppercase;padding-bottom:4px}
-.cal-day{
-  font-size:12px;font-weight:500;color:#333;
-  width:28px;height:28px;border-radius:6px;
-  display:flex;align-items:center;justify-content:center;margin:0 auto;
-}
+.cal-day{font-size:12px;font-weight:500;color:#333;width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;margin:0 auto;}
 .cal-day.empty{color:transparent}
-.cal-day.highlight{
-  background:var(--red);color:#fff;font-weight:800;
-  font-size:14px;border-radius:50%;
-  box-shadow:0 2px 10px rgba(232,23,46,.5);
-  position:relative;
-}
-.cal-pit{
-  position:absolute;top:-18px;right:-24px;
-  background:#F7E84E;color:#1a1a1a;
-  font-family:var(--hand);font-size:14px;
-  padding:10px 14px 16px;width:140px;
-  transform:rotate(3deg);
-  box-shadow:2px 4px 14px rgba(0,0,0,.4);
-}
-.cal-pit::before{
-  content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);
-  width:12px;height:12px;border-radius:50%;
-  background:radial-gradient(circle at 35% 35%,#ff8080,#c0392b);
-}
-
-/* ── ACTA ILLUSTRATION (slide 7) ── */
-.acta-panel{
-  position:relative;z-index:10;
-  display:flex;flex-direction:column;justify-content:center;
-  align-items:center;padding:60px 24px 108px 0;
-}
-.acta-card{
-  background:#F5F0E8;border-radius:8px;
-  width:240px;padding:16px;
-  box-shadow:4px 6px 30px rgba(0,0,0,.55);
-  position:relative;overflow:hidden;
-  border:1px solid rgba(0,0,0,.1);
-}
-.acta-header{
-  background:#8B0000;color:#fff;
-  margin:-16px -16px 12px;padding:10px 16px;
-  text-align:center;
-}
-.acta-header-title{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
-.acta-header-sub{font-size:9px;opacity:.8;margin-top:2px}
-.acta-lines{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
-.acta-line{height:2px;background:#ccc;border-radius:1px}
-.acta-line:nth-child(2){width:70%}
-.acta-line:nth-child(3){width:85%}
-.acta-line.short{width:50%}
-.acta-stamp{
-  position:absolute;bottom:16px;right:12px;
-  width:56px;height:56px;border-radius:50%;
-  border:3px solid rgba(139,0,0,.6);
-  display:flex;align-items:center;justify-content:center;
-  transform:rotate(-12deg);
-  background:rgba(139,0,0,.05);
-}
-.acta-stamp-text{font-size:7px;font-weight:700;color:#8B0000;text-align:center;letter-spacing:.05em;line-height:1.3}
-
-/* watermark lines */
-.acta-watermark{
-  position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:repeating-linear-gradient(
-    90deg,
-    transparent,transparent 18px,
-    rgba(139,0,0,.06) 18px,rgba(139,0,0,.06) 19px
-  );
-}
-
-/* ── FIRMA SLIDE ── */
+.cal-day.highlight{background:var(--red);color:#fff;font-weight:800;font-size:14px;border-radius:50%;box-shadow:0 2px 10px rgba(232,23,46,.5);position:relative;}
+/* acta panel (S6) */
+.acta-panel{position:relative;z-index:10;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:60px 24px 108px 0;}
+/* firma slide */
 .firma-wrap{position:relative;z-index:40;width:100%;max-width:440px;margin:0 auto}
 .firma-head{text-align:center;margin-bottom:clamp(6px,1vh,14px)}
 .firma-head h2{font-family:var(--serif);font-size:clamp(22px,4.5vh,46px);font-weight:900;line-height:1.0;margin-bottom:clamp(4px,.8vh,10px);letter-spacing:-.02em;color:#fff}
@@ -423,8 +290,7 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 .firma-head p{font-size:clamp(12px,1.6vh,15px);color:var(--muted);line-height:1.45;max-width:360px;margin:0 auto}
 .counter-band{
   display:flex;align-items:center;justify-content:center;gap:10px;
-  margin-bottom:clamp(6px,1vh,12px);
-  padding:clamp(6px,1vh,11px) 14px;
+  margin-bottom:clamp(6px,1vh,12px);padding:clamp(6px,1vh,11px) 14px;
   background:rgba(245,184,0,.1);border:1px solid rgba(245,184,0,.25);border-radius:8px;
 }
 .counter-num{font-family:var(--serif);font-size:clamp(20px,3.5vh,28px);font-weight:900;color:var(--gold2)}
@@ -439,13 +305,8 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 }
 .finput::placeholder{color:rgba(255,255,255,.3)}
 .finput:focus{border-color:rgba(245,184,0,.6);background:rgba(255,255,255,.11)}
-.fselect{
-  appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='rgba(255,255,255,0.35)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 13px center;cursor:pointer;
-}
+.fselect{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='rgba(255,255,255,0.35)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;cursor:pointer;}
 .fselect option{background:#1a2540;color:#fff}
-#fciudad.finput{background-image:none}
 .fcheck{display:flex;align-items:flex-start;gap:9px;cursor:pointer}
 .fcheck input[type="checkbox"]{width:15px;height:15px;min-width:15px;margin-top:2px;accent-color:var(--red);cursor:pointer}
 .fcheck span{font-size:clamp(10px,1.4vh,12px);color:var(--muted);line-height:1.45}
@@ -463,133 +324,83 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 .success-icon{width:72px;height:72px;border-radius:50%;background:rgba(245,184,0,.14);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center}
 .success-wrap h3{font-family:var(--serif);font-size:34px;font-weight:900;color:var(--gold2)}
 .success-wrap>p{font-size:14px;color:var(--muted);line-height:1.65;max-width:300px}
-
-/* ══════════════════════════════════════
-   RESPONSIVE — MOBILE FIRST
-══════════════════════════════════════ */
-
-/* ── SMALL MOBILE (< 480px) ── */
+/* bridge to La Casa de la Dictadura */
+.bridge-card{
+  margin-top:16px;padding:14px 18px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);
+  border-radius:10px;text-align:left;width:100%;
+}
+.bridge-card p{font-size:12px;color:var(--muted);margin-bottom:8px;line-height:1.5}
+.bridge-link{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:700;color:var(--gold2);text-decoration:none;
+  border-bottom:1px solid rgba(245,184,0,.4);padding-bottom:2px;
+  transition:color .2s;
+}
+.bridge-link:hover{color:#fff}
+/* organizations slide */
+.orgs-grid{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.org-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 18px;border-radius:40px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
+  font-size:clamp(13px,1.7vw,15px);color:#fff;font-weight:500;
+  backdrop-filter:blur(8px);
+}
+.org-pill-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+/* mobile sticky sign button */
+#stickySign{
+  display:none;
+  position:fixed;bottom:72px;left:50%;transform:translateX(-50%);
+  z-index:75;
+  padding:14px 36px;background:var(--red);color:#fff;
+  font-family:var(--sans);font-size:15px;font-weight:700;
+  border:none;border-radius:40px;cursor:pointer;
+  box-shadow:0 4px 24px rgba(207,20,43,.55);
+  letter-spacing:.02em;white-space:nowrap;
+  animation:fadeUp .4s both;
+}
+/* ══ RESPONSIVE ══ */
 @media(max-width:480px){
-
-  /* panel becomes flex column to absorb post-its in flow */
-  .panel{
-    display:flex;flex-direction:column;justify-content:flex-end;
-    padding:52px 20px 90px;
-  }
-  /* ── POST-ITS ON MOBILE: absolute at top-center of each slide ── */
-  .pit{
-    position:absolute !important;
-    top:54px !important;
-    left:50% !important;
-    transform:translateX(-50%) !important;
-    right:auto !important;
-    bottom:auto !important;
-    margin-top:0 !important;
-    z-index:28 !important;
-    pointer-events:none;
-  }
-  .picard{
-    width:250px !important;
-    min-height:auto !important;
-    font-size:15px !important;
-    padding:16px 16px 26px !important;
-    transform:rotate(-1.5deg) !important;
-    box-shadow:2px 3px 12px rgba(0,0,0,.45) !important;
-    display:inline-block;
-  }
-  .wright-pit{
-    position:absolute !important;
-    top:54px !important;
-    left:50% !important;
-    transform:translateX(-50%) !important;
-    margin-top:0 !important;
-    z-index:28 !important;
-  }
-  .wright-pit .picard{
-    width:210px !important;
-    min-height:auto !important;
-    font-size:13px !important;
-    padding:14px 14px 22px !important;
-    transform:rotate(-1.5deg) !important;
-  }
-  /* S2 mobile: pit centred at top, panel text below it */
-  .s2-pits{
-    position:absolute !important;top:54px !important;
-    left:50% !important;right:auto !important;
-    transform:translateX(-50%) !important;
-    width:250px !important;
-  }
-  .s2-pits .picard{
-    width:250px !important;font-size:13px !important;
-    padding:12px 14px 20px !important;transform:rotate(-1.5deg) !important;
-  }
+  .panel{display:flex;flex-direction:column;justify-content:flex-end;padding:52px 20px 90px;}
+  .pit{position:absolute !important;top:54px !important;left:50% !important;transform:translateX(-50%) !important;right:auto !important;bottom:auto !important;margin-top:0 !important;z-index:28 !important;pointer-events:none;}
+  .picard{width:250px !important;min-height:auto !important;font-size:15px !important;padding:16px 16px 26px !important;transform:rotate(-1.5deg) !important;box-shadow:2px 3px 12px rgba(0,0,0,.45) !important;display:inline-block;}
+  .wright-pit{position:absolute !important;top:54px !important;left:50% !important;transform:translateX(-50%) !important;margin-top:0 !important;z-index:28 !important;}
+  .wright-pit .picard{width:210px !important;min-height:auto !important;font-size:13px !important;padding:14px 14px 22px !important;transform:rotate(-1.5deg) !important;}
+  .s2-pits{position:absolute !important;top:54px !important;left:50% !important;right:auto !important;transform:translateX(-50%) !important;width:250px !important;}
+  .s2-pits .picard{width:250px !important;font-size:13px !important;padding:12px 14px 20px !important;transform:rotate(-1.5deg) !important;}
   #s2 .panel{padding-top:270px !important;padding-bottom:80px !important}
-  .slide.split{
-    grid-template-columns:1fr;
-    grid-template-rows:1fr;
-    overflow-y:auto;
-  }
-
-  /* show mini illustrations on mobile */
+  .slide.split{grid-template-columns:1fr;grid-template-rows:1fr;overflow-y:auto;}
   .mini-ill{display:flex}
-
-  /* hide graphic panels — text only */
   .chart-panel,.cal-panel,.acta-panel{display:none !important}
   .panel.right{display:none !important}
-
-  /* show mobile stat replacing donut */
   .mobile-diag-stat{display:block}
-
-  /* titles */
   .t1{font-size:clamp(28px,8vw,40px);margin-bottom:12px}
   .body{font-size:15px}
-
-  /* stat grid */
+  .hook{font-size:14px}
   .sgrid{grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
   .scard{padding:12px 14px}
   .snum{font-size:26px}
   .slabel{font-size:11px}
-
-  /* big stat */
   .bignum{font-size:68px}
   .bigdesc{font-size:14px;max-width:180px}
-
-  /* bullets */
   .blist{gap:9px;margin-top:14px}
   .bitem{font-size:14px}
-
-  /* comparison panels */
   .cmpr{grid-template-columns:1fr;gap:8px;margin-top:14px}
   .cpitem{font-size:13px}
-
-  /* quote */
   .qblock{font-size:14px;padding:10px 14px}
-
-  /* dot row */
   .dotrow{gap:5px;margin-top:16px}
   .dot{width:26px;height:4px}
-
-  /* CTA */
   .ctabtn{padding:14px 24px;font-size:15px;margin-top:16px}
-
-  /* tag */
   .tag{font-size:10px;padding:3px 10px;margin-bottom:12px}
-
-  /* source */
   .srcbadge{font-size:9px;margin-top:12px}
-
-  /* bottom bar */
   .bot{padding:12px 18px 16px}
   .logo{font-size:15px}
   .ctr{font-size:11px}
   #btnLike{padding:7px 12px;font-size:12px}
-
-  /* progress */
   .prog{padding:10px 14px 0;gap:3px}
   #pauseBtn{top:10px;right:14px;width:32px;height:32px}
-
-  /* firma slide */
-  #s10{padding:0}
+  #s15{padding:0}
   .firma-wrap{max-width:100%}
   .share-column{display:none}
   .mobile-share-footer{display:flex}
@@ -606,55 +417,26 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
   .success-wrap h3{font-size:24px}
   .share-strip{gap:8px;flex-wrap:wrap}
   .share-btn{padding:8px 12px;font-size:12px}
+  .orgs-grid{gap:8px;margin-top:16px}
+  .org-pill{padding:8px 14px;font-size:12px}
+  .s0-counter{margin-bottom:10px;padding:8px 14px}
+  .s0-counter-num{font-size:22px}
+  .urgency-bar{font-size:12px;padding:8px 14px;margin-top:10px}
+  /* show sticky button on mobile (controlled by JS) */
+  #stickySign{display:none} /* JS handles display */
 }
-
-/* ── MEDIUM MOBILE (480–767px) ── */
 @media(min-width:480px) and (max-width:767px){
-
   .slide{padding:54px 26px 100px}
   .slide.split{grid-template-columns:1fr}
-
   .panel.right{display:none !important}
-  .chart-panel{
-    display:flex;padding:0 26px 100px;
-    justify-content:flex-start;align-items:center;
-    flex-direction:row;gap:20px;
-  }
+  .chart-panel{display:flex;padding:0 26px 100px;justify-content:flex-start;align-items:center;flex-direction:row;gap:20px;}
   .cal-panel,.acta-panel{display:none !important}
   .mobile-diag-stat{display:none}
-
-  /* post-its: inline, smaller */
-  .pit{
-    position:relative !important;
-    top:auto !important;right:auto !important;
-    left:auto !important;bottom:auto !important;
-    margin-top:12px;
-    display:block;
-  }
-  .picard{
-    width:175px !important;
-    min-height:175px !important;
-    font-size:15px !important;
-    padding:16px 16px 24px !important;
-    transform:rotate(-2deg) !important;
-    display:inline-block;
-  }
-  .pit:nth-child(even) .picard{ transform:rotate(2deg) !important }
-  .wright-pit{
-    position:absolute !important;
-    top:58px !important;
-    left:50% !important;
-    transform:translateX(-50%) !important;
-    margin-top:0 !important;
-    z-index:28 !important;
-  }
-  .wright-pit .picard{
-    width:210px !important;
-    min-height:auto !important;
-    font-size:14px !important;
-    transform:rotate(-1.5deg) !important;
-  }
-
+  .pit{position:relative !important;top:auto !important;right:auto !important;left:auto !important;bottom:auto !important;margin-top:12px;display:block;}
+  .picard{width:175px !important;min-height:175px !important;font-size:15px !important;padding:16px 16px 24px !important;transform:rotate(-2deg) !important;display:inline-block;}
+  .pit:nth-child(even) .picard{transform:rotate(2deg) !important}
+  .wright-pit{position:absolute !important;top:58px !important;left:50% !important;transform:translateX(-50%) !important;margin-top:0 !important;z-index:28 !important;}
+  .wright-pit .picard{width:210px !important;min-height:auto !important;font-size:14px !important;transform:rotate(-1.5deg) !important;}
   .t1{font-size:clamp(30px,7vw,44px)}
   .sgrid{grid-template-columns:1fr 1fr;gap:9px}
   .snum{font-size:28px}
@@ -665,27 +447,19 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
   .donut-label{font-size:10px}
   .legend-text{font-size:14px}
   .legend-text small{font-size:11px}
-
-  #s10{padding:50px 24px 90px}
+  #s15{padding:50px 24px 90px}
   .frow{grid-template-columns:1fr}
   .firma-head h2{font-size:clamp(28px,7vw,40px)}
 }
-
-/* ── TABLET (768–1023px) ── */
 @media(min-width:768px) and (max-width:1023px){
-
   .slide{padding:58px 40px 108px}
-  #s10{padding:50px 40px 100px}
+  #s15{padding:50px 40px 100px}
   .slide.split{grid-template-columns:1fr 1fr}
   .panel{padding:58px 32px 108px}
   .panel.right{padding:58px 32px 108px 20px}
-
-  .pit{position:absolute !important; top:58px !important}
+  .pit{position:absolute !important;top:58px !important}
   .picard{width:190px;font-size:16px;padding:18px 16px 28px}
-  /* restore horizontal position from inline style — only override top */
-  /* wright stays at its own position */
   .wright-pit{top:58px !important}
-
   .t1{font-size:clamp(30px,4.5vw,52px)}
   .donut-wrap{width:190px;height:190px}
   .donut-pct{font-size:44px}
@@ -693,21 +467,20 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
   .firma-wrap{max-width:460px}
   .frow{grid-template-columns:1fr 1fr}
 }
-
-/* ── DESKTOP (≥ 1024px) ── */
 @media(min-width:1024px){
   .slide{padding:64px 64px 116px}
   .panel{padding:64px 56px 116px}
   .panel.right{padding:64px 56px 116px 28px}
-  #s10{padding:52px 56px 108px}
+  #s15{padding:52px 56px 108px}
   .inner{max-width:680px}
-  .pit{position:absolute !important; top:58px !important}
+  .pit{position:absolute !important;top:58px !important}
 }
+/* mobile sticky button visible only on mobile */
+@media(min-width:768px){#stickySign{display:none !important}}
 </style>
 </head>
 <body>
 <div id="app">
-
 <canvas id="serp"></canvas>
 <div class="prog" id="prog"></div>
 <button id="pauseBtn" onclick="togglePause()" title="Pausar (P)">
@@ -716,10 +489,10 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
     <rect x="12" y="3" width="4" height="14" rx="1"/>
   </svg>
 </button>
+<!-- MOBILE STICKY SIGN BUTTON -->
+<button id="stickySign" onclick="goToFirma()">✍ Quiero firmar</button>
 
-<!-- ════════════════════════════════
-     S0 — PORTADA
-════════════════════════════════ -->
+<!-- S0 — PORTADA -->
 <div class="slide active" id="s0">
   <div class="slide-bg">
     <div style="position:absolute;inset:0;background:linear-gradient(145deg,#001870 0%,#0032A0 45%,#3a78d4 75%,#c8e0ff 92%,#f0f8ff 100%)"></div>
@@ -727,43 +500,48 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
     <div class="blob" style="width:400px;height:400px;background:#0032A0;bottom:-80px;left:-80px;opacity:.5"></div>
     <div class="blob" style="width:300px;height:200px;background:#FFD200;top:40%;left:30%;opacity:.1"></div>
   </div>
+  <!-- Post-it: 28J emotional anchor, NOT a constitutional scholar -->
   <div class="pit" style="top:12%;right:6%">
-    <div class="picard y">"Venezuela tiene todo el derecho constitucional de elegir."<em class="pisrc">— Jesús María Casal, constitucionalista</em></div>
+    <div class="picard y">El 28J millones votaron. Hasta hoy, el CNE no entregó las actas. Esa deuda no prescribe.<em class="pisrc">— 28 de julio de 2024</em></div>
   </div>
   <div class="panel">
-    <span class="tag"><span class="tag-dot"></span>Propuesta ciudadana · Abril 2026</span>
-    <h1 class="t1">Venezuela<br>merece <em>elegir.</em></h1>
-    <p class="body">El problema electoral venezolano no son fallas aisladas — es un colapso estructural. Estas son las condiciones mínimas para una transición democrática real.</p>
-    <div class="share-strip" style="margin-top:22px">
-      <span style="font-size:12px;color:var(--muted)">Comparte:</span>
-      <button class="share-btn x" onclick="compartir('twitter')">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
-        Compartir en X
-      </button>
-      <button class="share-btn ig" onclick="compartir('instagram')">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-        Historia de Instagram
-      </button>
+    <!-- tag: active movement, not static proposal -->
+    <span class="tag"><span class="tag-dot"></span>Movimiento ciudadano en marcha · 2026</span>
+    <!-- counter visible from first slide, with pulse -->
+    <div class="s0-counter">
+      <div class="s0-counter-num" id="s0Count">12.847</div>
+      <div class="s0-counter-label">personas ya firmaron<br>esta propuesta</div>
     </div>
-    <span class="srcbadge">Fuente: Transparencia Venezuela en el Exilio · transparenciave.org</span>
-    <!-- NAV HINT -->
-    <div style="display:flex;align-items:center;gap:10px;margin-top:18px;opacity:.55">
+    <h1 class="t1">Venezuela<br>merece <em>elegir.</em></h1>
+    <p class="body">El 28J el régimen robó la victoria a plena luz. Hoy exigimos lo mínimo: elecciones con condiciones reales, verificables y no negociables.</p>
+    <!-- urgency bar -->
+    <div class="urgency-bar">La ventana política está abierta. No es eterna.</div>
+    <!-- primary CTA -->
+    <button class="ctabtn" onclick="goToFirma()">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
+      Firmar la propuesta
+    </button>
+    <!-- secondary CTA — see conditions -->
+    <button class="ctabtn-ghost" onclick="nav(1)">
+      Ver las condiciones →
+    </button>
+    <span class="srcbadge">Fuente: Transparencia Venezuela en el Exilio · Red Electoral Ciudadana · Voto Joven</span>
+    <!-- nav hint -->
+    <div style="display:flex;align-items:center;gap:10px;margin-top:16px;opacity:.5">
       <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:.8"><circle cx="12" cy="12" r="10"/><path d="M15 12H9M12 9l-3 3 3 3"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M15 12H9M12 9l-3 3 3 3"/></svg>
         retroceder
       </div>
       <div style="width:1px;height:14px;background:rgba(240,235,224,.2)"></div>
       <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)">
         avanzar
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:.8"><circle cx="12" cy="12" r="10"/><path d="M9 12h6M12 15l3-3-3-3"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12h6M12 15l3-3-3-3"/></svg>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ════════════════════════════════
-     S1 — DIAGNÓSTICO (split)
-════════════════════════════════ -->
+<!-- S1 — DIAGNÓSTICO (split) -->
 <div class="slide split" id="s1">
   <div class="slide-bg">
     <div style="position:absolute;inset:0;background:linear-gradient(150deg,#0032A0 0%,#1a5abf 45%,#5090e0 75%,#c0d8ff 90%,#f0f8ff 100%)"></div>
@@ -773,7 +551,6 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
   <div class="pit" style="top:12%;left:42%;z-index:30">
     <div class="picard b">"No son fallas puntuales. Es un problema estructural."<em class="pisrc">— Transparencia Venezuela, 2026</em></div>
   </div>
-  <!-- LEFT -->
   <div class="panel">
     <span class="tag"><span class="tag-dot"></span>El diagnóstico</span>
     <h2 class="t1">No son errores.<br>Es un <em>sistema.</em></h2>
@@ -781,7 +558,6 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
       <div class="scard"><div class="snum">7.9<small>M</small></div><div class="slabel">venezolanos en el exterior (R4V, nov. 2025)</div></div>
       <div class="scard"><div class="snum">69.211</div><div class="slabel">inscritos para votar afuera en 2024</div></div>
     </div>
-    <!-- MOBILE-ONLY stat replacing donut -->
     <div class="mobile-diag-stat">
       <div style="display:flex;gap:12px;margin-top:14px">
         <div class="scard" style="flex:1;border-top:2px solid var(--red2)">
@@ -794,18 +570,13 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
         </div>
       </div>
     </div>
-    <span class="srcbadge">Fuente: Transparencia Venezuela · Registro Electoral 2024</span>
-    <!-- MINI ILLUSTRATION — mobile only -->
+    <span class="srcbadge">Fuente: Transparencia Venezuela · R4V · REC 2024</span>
     <div class="mini-ill">
       <div class="mini-ill-chart">
-        <svg width="72" height="72" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+        <svg width="72" height="72" viewBox="0 0 72 72" style="flex-shrink:0">
           <circle cx="36" cy="36" r="28" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="10"/>
-          <circle cx="36" cy="36" r="28" fill="none" stroke="#E8172E" stroke-width="10"
-            stroke-dasharray="173.5 175.9" stroke-dashoffset="0" stroke-linecap="butt"
-            transform="rotate(-90 36 36)"/>
-          <circle cx="36" cy="36" r="28" fill="none" stroke="#F5B800" stroke-width="13"
-            stroke-dasharray="2.46 175.9" stroke-dashoffset="-173.5" stroke-linecap="butt"
-            transform="rotate(-90 36 36)"/>
+          <circle cx="36" cy="36" r="28" fill="none" stroke="#E8172E" stroke-width="10" stroke-dasharray="173.5 175.9" stroke-dashoffset="0" stroke-linecap="butt" transform="rotate(-90 36 36)"/>
+          <circle cx="36" cy="36" r="28" fill="none" stroke="#F5B800" stroke-width="13" stroke-dasharray="2.46 175.9" stroke-dashoffset="-173.5" stroke-linecap="butt" transform="rotate(-90 36 36)"/>
           <text x="36" y="40" text-anchor="middle" font-family="Georgia,serif" font-size="13" font-weight="900" fill="#E8172E">98.6%</text>
         </svg>
         <div>
@@ -815,38 +586,13 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
       </div>
     </div>
   </div>
-  <!-- RIGHT: donut chart -->
   <div class="chart-panel">
     <div class="donut-wrap">
-      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        </defs>
-        <!-- background ring -->
+      <svg viewBox="0 0 200 200">
+        <defs><filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
         <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="22"/>
-        <!--
-          Circumference = 2π × 80 = 502.655
-          98.6% = 495.619  gap = 7.036
-          1.4%  =   7.037  gap = 495.618
-          Start at top (-90°), red fills almost everything,
-          gold occupies the tiny remaining arc at the end.
-          We offset gold by 495.619 so it starts right after red ends.
-        -->
-        <!-- RED: 98.6% -->
-        <circle cx="100" cy="100" r="80" fill="none"
-          stroke="#E8172E" stroke-width="22"
-          stroke-dasharray="495.619 502.655"
-          stroke-dashoffset="0"
-          stroke-linecap="butt"
-          filter="url(#glow)"
-          transform="rotate(-90 100 100)"/>
-        <!-- GOLD: 1.4% — starts exactly where red ends -->
-        <circle cx="100" cy="100" r="80" fill="none"
-          stroke="#F5B800" stroke-width="26"
-          stroke-dasharray="7.037 502.655"
-          stroke-dashoffset="-495.619"
-          stroke-linecap="butt"
-          transform="rotate(-90 100 100)"/>
+        <circle cx="100" cy="100" r="80" fill="none" stroke="#E8172E" stroke-width="22" stroke-dasharray="495.619 502.655" stroke-dashoffset="0" stroke-linecap="butt" filter="url(#glow)" transform="rotate(-90 100 100)"/>
+        <circle cx="100" cy="100" r="80" fill="none" stroke="#F5B800" stroke-width="26" stroke-dasharray="7.037 502.655" stroke-dashoffset="-495.619" stroke-linecap="butt" transform="rotate(-90 100 100)"/>
       </svg>
       <div class="donut-center">
         <div class="donut-pct">98.6%</div>
@@ -856,17 +602,11 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
     <div class="donut-legend">
       <div class="legend-item">
         <div class="legend-dot" style="background:var(--red2)"></div>
-        <div class="legend-text">
-          <strong style="color:#fff;font-size:15px">98.6% excluidos</strong>
-          <small>+7.8 millones sin voto efectivo</small>
-        </div>
+        <div class="legend-text"><strong style="color:#fff;font-size:15px">98.6% excluidos</strong><small>+7.8 millones sin voto efectivo</small></div>
       </div>
       <div class="legend-item">
         <div class="legend-dot" style="background:var(--gold)"></div>
-        <div class="legend-text">
-          <strong style="color:#fff;font-size:15px">1.4% puede votar</strong>
-          <small>Solo 69.211 de 7.9M en diáspora</small>
-        </div>
+        <div class="legend-text"><strong style="color:#fff;font-size:15px">1.4% puede votar</strong><small>Solo 69.211 de 7.9M en diáspora</small></div>
       </div>
     </div>
     <div style="text-align:center;margin-top:8px">
@@ -875,9 +615,7 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
   </div>
 </div>
 
-<!-- ════════════════════════════════
-     S2 — CNE INDEPENDIENTE
-════════════════════════════════ -->
+<!-- S2 — CONDICIÓN 1: CNE INDEPENDIENTE -->
 <div class="slide" id="s2">
   <div class="slide-bg">
     <div style="position:absolute;inset:0;background:linear-gradient(135deg,#001a80 0%,#0032A0 50%,#4880d0 75%,#b8d4ff 90%,#eef5ff 100%)"></div>
@@ -885,33 +623,33 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
     <div class="blob" style="width:280px;height:280px;background:#CF142B;bottom:10%;left:5%;opacity:.18"></div>
   </div>
   <div class="s2-pits">
-    <div class="picard b">"Estados Unidos quiere que la transición política de Venezuela culmine con una votación supervisada por una nueva junta electoral."<em class="pisrc">— Michael Kozak, Dpto. de Estado de EE.UU.</em></div>
+    <div class="picard b">"Estados Unidos quiere que la transición política de Venezuela culmine con una votación supervisada por una nueva junta electoral."<em class="pisrc">— Michael Kozak, Dpto. de Estado EE.UU.</em></div>
   </div>
   <div class="panel">
-    <span class="tag"><span class="tag-dot"></span>Condición 1</span>
+    <span class="tag"><span class="tag-dot"></span>Condición 1 de 11</span>
     <h2 class="t1">CNE <em>independiente</em><br>de verdad</h2>
+    <p class="hook">Sin árbitro independiente no hay carrera. Hay una puesta en escena.</p>
     <div class="blist">
-      <div class="bitem"><div class="bdot"></div><span>Rectores elegidos por <strong>mérito y trazabilidad pública</strong>, no por cuotas</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Rectores elegidos por <strong>mérito y trazabilidad pública</strong>, no por cuotas partidistas</span></div>
       <div class="bitem"><div class="bdot"></div><span>Régimen de <strong>incompatibilidades estricto</strong>: sin militancia ni vínculos gubernamentales</span></div>
       <div class="bitem"><div class="bdot"></div><span>Decisiones del directorio con <strong>publicidad, motivación y votos salvados</strong></span></div>
       <div class="bitem"><div class="bdot"></div><span>Contrataciones por <strong>licitación abierta</strong> incluyendo software electoral</span></div>
     </div>
+    <span class="srcbadge">Fuente: REC · 215 recomendaciones 2005–2024 — eje Autoridad Electoral: 13%</span>
   </div>
 </div>
 
-<!-- ════════════════════════════════
-     S3 — FECHA FIJA (split + calendar)
-════════════════════════════════ -->
+<!-- S3 — CONDICIÓN 2: FECHA FIJA (split + calendar) -->
 <div class="slide split" id="s3">
   <div class="slide-bg">
     <div style="position:absolute;inset:0;background:linear-gradient(155deg,#0032A0 0%,#4a1880 45%,#CF142B 80%,#ffd0d0 95%,#fff5f5 100%)"></div>
     <div class="blob" style="width:500px;height:280px;background:#CF142B;top:0%;right:-100px;opacity:.25"></div>
     <div class="blob" style="width:350px;height:350px;background:#0032A0;bottom:-50px;left:-50px;opacity:.55"></div>
   </div>
-  <!-- LEFT -->
   <div class="panel">
-    <span class="tag"><span class="tag-dot"></span>Condición 2</span>
+    <span class="tag"><span class="tag-dot"></span>Condición 2 de 11</span>
     <h2 class="t1">Fecha electoral<br><b>fija</b> e inamovible</h2>
+    <p class="hook">Sin fecha fija, la elección no existe. Solo existe la promesa de una elección.</p>
     <div class="bigstat">
       <div class="bignum">6</div>
       <div class="bigdesc">meses mínimos de anticipación obligatoria — Art. 298 constitucional</div>
@@ -920,29 +658,20 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
       <div class="bitem"><div class="bdot"></div><span>El cronograma <strong>no puede ser modificado</strong> por el CNE ni otros poderes</span></div>
       <div class="bitem"><div class="bdot"></div><span>Sanciones por actividad política <strong>fuera del período de campaña</strong></span></div>
     </div>
-    <!-- MINI ILLUSTRATION — mobile only -->
     <div class="mini-ill">
       <div class="mini-ill-chart" style="justify-content:center;gap:16px">
         <div style="background:rgba(255,255,255,.9);border-radius:10px;overflow:hidden;width:100px;flex-shrink:0;box-shadow:2px 4px 14px rgba(0,0,0,.4)">
-          <div style="background:var(--red);padding:6px;text-align:center">
-            <div style="font-family:var(--serif);font-size:11px;font-weight:900;color:#fff;letter-spacing:.05em">DICIEMBRE</div>
-          </div>
+          <div style="background:var(--red);padding:6px;text-align:center"><div style="font-family:var(--serif);font-size:11px;font-weight:900;color:#fff;letter-spacing:.05em">DICIEMBRE</div></div>
           <div style="padding:6px;display:flex;justify-content:center;align-items:center;gap:4px">
             <div style="width:22px;height:22px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff">14</div>
             <div style="font-family:var(--hand);font-size:11px;color:#333;line-height:1.2">Día<br>fijo ✓</div>
           </div>
         </div>
-        <div style="font-size:13px;color:var(--text);line-height:1.5">
-          Fecha publicada con <strong style="color:var(--gold2)">mínimo 6 meses</strong> de anticipación, inamovible por ley
-        </div>
+        <div style="font-size:13px;color:var(--text);line-height:1.5">Fecha publicada con <strong style="color:var(--gold2)">mínimo 6 meses</strong> de anticipación, inamovible por ley</div>
       </div>
     </div>
   </div>
-  <!-- post-it top right -->
-  <div class="pit" style="top:8%;right:4%">
-    <div class="picard y">📌 ¡Día fijo de elecciones!</div>
-  </div>
-  <!-- RIGHT: acrylic calendar -->
+  <div class="pit" style="top:8%;right:4%"><div class="picard y">📌 ¡Día fijo de elecciones!</div></div>
   <div class="cal-panel">
     <div style="position:relative">
       <div class="acrylic-cal">
@@ -951,35 +680,12 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
           <div class="cal-year" style="color:rgba(255,255,255,.8);font-family:var(--sans)">2025</div>
         </div>
         <div class="cal-grid">
-          <div class="cal-day-name">L</div><div class="cal-day-name">M</div>
-          <div class="cal-day-name">X</div><div class="cal-day-name">J</div>
-          <div class="cal-day-name">V</div><div class="cal-day-name">S</div>
-          <div class="cal-day-name">D</div>
-          <!-- week 1 -->
-          <div class="cal-day empty"></div><div class="cal-day empty"></div>
-          <div class="cal-day empty"></div><div class="cal-day empty"></div>
-          <div class="cal-day empty"></div><div class="cal-day">1</div>
-          <div class="cal-day">2</div>
-          <!-- week 2 -->
-          <div class="cal-day">3</div><div class="cal-day">4</div>
-          <div class="cal-day">5</div><div class="cal-day">6</div>
-          <div class="cal-day">7</div><div class="cal-day">8</div>
-          <div class="cal-day">9</div>
-          <!-- week 3 -->
-          <div class="cal-day">10</div><div class="cal-day">11</div>
-          <div class="cal-day">12</div><div class="cal-day">13</div>
-          <div class="cal-day">14</div>
-          <div class="cal-day">15</div><div class="cal-day">16</div>
-          <!-- week 4 -->
-          <div class="cal-day">17</div><div class="cal-day">18</div>
-          <div class="cal-day">19</div><div class="cal-day">20</div>
-          <div class="cal-day">21</div><div class="cal-day">22</div>
-          <div class="cal-day">23</div>
-          <!-- week 5 -->
-          <div class="cal-day">24</div><div class="cal-day">25</div>
-          <div class="cal-day">26</div><div class="cal-day">27</div>
-          <div class="cal-day">28</div><div class="cal-day">29</div>
-          <div class="cal-day">30</div>
+          <div class="cal-day-name">L</div><div class="cal-day-name">M</div><div class="cal-day-name">X</div><div class="cal-day-name">J</div><div class="cal-day-name">V</div><div class="cal-day-name">S</div><div class="cal-day-name">D</div>
+          <div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day">1</div><div class="cal-day">2</div>
+          <div class="cal-day">3</div><div class="cal-day">4</div><div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div><div class="cal-day">8</div><div class="cal-day">9</div>
+          <div class="cal-day">10</div><div class="cal-day">11</div><div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day highlight">14</div><div class="cal-day">15</div><div class="cal-day">16</div>
+          <div class="cal-day">17</div><div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day">22</div><div class="cal-day">23</div>
+          <div class="cal-day">24</div><div class="cal-day">25</div><div class="cal-day">26</div><div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div><div class="cal-day">30</div>
           <div class="cal-day">31</div>
         </div>
       </div>
@@ -987,9 +693,7 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
   </div>
 </div>
 
-<!-- ════════════════════════════════
-     S4 — VOTO EXTERIOR
-════════════════════════════════ -->
+<!-- S4 — CONDICIÓN 3: VOTO EN EL EXTERIOR -->
 <div class="slide" id="s4">
   <div class="slide-bg">
     <div style="position:absolute;inset:0;background:linear-gradient(140deg,#0032A0 0%,#7a0820 45%,#CF142B 75%,#ffb8b8 92%,#fff5f5 100%)"></div>
@@ -997,31 +701,30 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
     <div class="blob" style="width:300px;height:300px;background:#0032A0;bottom:8%;right:3%;opacity:.28"></div>
   </div>
   <div class="panel">
-    <span class="tag"><span class="tag-dot"></span>Condición 3</span>
+    <span class="tag"><span class="tag-dot"></span>Condición 3 de 11</span>
     <h2 class="t1">Voto en el exterior<br><em>real.</em></h2>
+    <p class="hook">Siete millones novecientos mil venezolanos viven fuera. Solo 69.211 pudieron votar. Eso no es un registro bajo. Eso es exclusión por diseño.</p>
     <div class="cmpr">
       <div class="cpanel bad">
         <div class="cphead bad">Hoy</div>
         <div class="cpitem bad">Art. 124 LOPRE exige residencia legal</div>
         <div class="cpitem bad">Solo consulados habilitados, sin red</div>
-        <div class="cpitem bad">69.211 inscritos de 7.9M</div>
-        <div class="cpitem bad">Circulares restrictivas del CNE</div>
+        <div class="cpitem bad">69.211 inscritos de 7.9M — el 0.9%</div>
+        <div class="cpitem bad">Sin registro remoto desde 2018</div>
       </div>
       <div class="cpanel good">
         <div class="cphead good">Lo que se exige</div>
         <div class="cpitem good">Reformar el art. 124 de la LOPRE</div>
-        <div class="cpitem good">Registro remoto + consulados</div>
-        <div class="cpitem good">Asistencia de ACNUR y OIM</div>
-        <div class="cpitem good">Inscripción vinculada a cédula</div>
+        <div class="cpitem good">Registro remoto + red consular ampliada</div>
+        <div class="cpitem good">Asistencia de ACNUR, OIM y Registro Civil</div>
+        <div class="cpitem good">Inscripción vinculada a cédula vigente</div>
       </div>
     </div>
-    <span class="srcbadge">Fuente: Transparencia Venezuela · R4V noviembre 2025</span>
+    <span class="srcbadge">Fuente: WYDE/EPD · Transparencia Venezuela · R4V nov. 2025</span>
   </div>
 </div>
 
-<!-- ════════════════════════════════
-     S5 — REGISTRO ELECTORAL
-════════════════════════════════ -->
+<!-- S5 — CONDICIÓN 4: REGISTRO ELECTORAL -->
 <div class="slide split" id="s5">
   <div class="slide-bg">
     <div style="position:absolute;inset:0;background:linear-gradient(145deg,#7a000e 0%,#CF142B 50%,#e85070 78%,#ffd8d8 92%,#fff5f5 100%)"></div>
@@ -1029,197 +732,56 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
     <div class="blob" style="width:280px;height:280px;background:#CF142B;bottom:5%;left:5%;opacity:.25"></div>
   </div>
   <div class="pit" style="top:8%;right:4%">
-    <div class="picard p">"Ninguna reforma producirá confianza si el CNE sigue capturado por el poder."<em class="pisrc">— Eugenio G. Martínez, Transparencia VE</em></div>
+    <div class="picard p">"Solo 69.211 inscritos para votar en el exterior. El sistema exige presencia física en capitales estadales — barreras insalvables para millones."<em class="pisrc">— WYDE / European Partnership for Democracy, 2024</em></div>
   </div>
-  <!-- LEFT -->
   <div class="panel">
-    <span class="tag"><span class="tag-dot"></span>Condición 4</span>
-    <h2 class="t1">Registro electoral<br><em>abierto</em> todo el año</h2>
+    <span class="tag"><span class="tag-dot"></span>Condición 4 de 11</span>
+    <h2 class="t1">Registro electoral<br><em>abierto</em> y accesible</h2>
+    <p class="hook">No puedes votar si no estás inscrito. Y no puedes inscribirte si el CNE pone la oficina a cuatro horas de donde vives.</p>
     <div class="blist">
       <div class="bitem"><div class="bdot"></div><span>Puntos de inscripción en los <strong>335 municipios</strong>, no solo capitales estadales</span></div>
-      <div class="bitem"><div class="bdot"></div><span>Operativos móviles para <strong>zonas rurales, fronterizas y de difícil acceso</strong></span></div>
-      <div class="bitem"><div class="bdot"></div><span>Incorporación <strong>automática al cumplir 18 años</strong> en coordinación con el Registro Civil</span></div>
-      <div class="bitem"><div class="bdot"></div><span>Padrón público auditable íntegramente por <strong>cualquier organización o veedor</strong></span></div>
+      <div class="bitem"><div class="bdot"></div><span>Registro <strong>en línea y operativos móviles</strong> para zonas rurales y fronterizas</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Incorporación <strong>automática al cumplir 18 años</strong> con el Registro Civil</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Padrón público auditable por <strong>cualquier organización o veedor</strong></span></div>
+      <div class="bitem"><div class="bdot"></div><span>Eliminación del <strong>período de espera de 3 meses</strong> post-inscripción</span></div>
     </div>
-    <span class="srcbadge">Fuente: Transparencia Venezuela · Sección II</span>
+    <span class="srcbadge">Fuente: WYDE · Transparencia Venezuela · REC Sección II</span>
   </div>
-  <!-- RIGHT: cédula venezolana ilustrada -->
   <div class="cal-panel" style="align-items:center;justify-content:center">
     <div style="position:relative;transform:rotate(-2deg);filter:drop-shadow(4px 8px 24px rgba(0,0,0,.7))">
       <svg width="300" height="192" viewBox="0 0 300 192" xmlns="http://www.w3.org/2000/svg" style="display:block">
         <defs>
-          <linearGradient id="cardgrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#F0EAD6"/>
-            <stop offset="100%" stop-color="#E0D8C0"/>
-          </linearGradient>
-          <linearGradient id="stripeY" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#CF9B00"/>
-            <stop offset="100%" stop-color="#F5C800"/>
-          </linearGradient>
-          <!-- fingerprint radial lines filter -->
-          <filter id="fp">
-            <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="4" seed="5"/>
-            <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 12 -4" result="mask"/>
-            <feComposite in="SourceGraphic" in2="mask" operator="in"/>
-          </filter>
-          <clipPath id="card-clip">
-            <rect width="300" height="192" rx="10"/>
-          </clipPath>
+          <linearGradient id="cardgrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F0EAD6"/><stop offset="100%" stop-color="#E0D8C0"/></linearGradient>
+          <linearGradient id="stripeY" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#CF9B00"/><stop offset="100%" stop-color="#F5C800"/></linearGradient>
+          <clipPath id="card-clip"><rect width="300" height="192" rx="10"/></clipPath>
         </defs>
-
-        <!-- CARD BASE -->
         <rect width="300" height="192" rx="10" fill="url(#cardgrad)"/>
-
-        <!-- PLASTIC SHEEN -->
-        <rect width="300" height="192" rx="10" fill="none"
-          stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
-
-        <!-- TOP TRICOLOR STRIPE -->
+        <rect width="300" height="192" rx="10" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
         <rect x="0" y="0" width="300" height="12" rx="0" clip-path="url(#card-clip)" fill="url(#stripeY)"/>
         <rect x="0" y="4" width="300" height="4" fill="#CF1020"/>
         <rect x="0" y="0" width="300" height="4" fill="#1a4099"/>
         <rect x="0" y="8" width="300" height="4" fill="#E8172E"/>
-        <!-- stripe outline pill -->
         <rect x="8" y="14" width="284" height="16" rx="8" fill="none" stroke="#1a4099" stroke-width="1"/>
-        <text x="150" y="25" text-anchor="middle" font-size="8" font-weight="700"
-          fill="#1a4099" font-family="Arial,sans-serif" letter-spacing="2.5">
-          REPÚBLICA BOLIVARIANA DE VENEZUELA
-        </text>
-
-        <!-- CÉDULA LABEL PILL -->
+        <text x="150" y="25" text-anchor="middle" font-size="8" font-weight="700" fill="#1a4099" font-family="Arial,sans-serif" letter-spacing="2.5">REPÚBLICA BOLIVARIANA DE VENEZUELA</text>
         <rect x="50" y="33" width="200" height="14" rx="7" fill="none" stroke="#888" stroke-width=".8"/>
-        <text x="150" y="43" text-anchor="middle" font-size="7.5" font-weight="600"
-          fill="#555" font-family="Arial,sans-serif" letter-spacing="3">
-          CÉDULA DE IDENTIDAD
-        </text>
-
-        <!-- CÉDULA NUMBER -->
-        <text x="95" y="62" text-anchor="middle" font-size="10" font-weight="700"
-          fill="#222" font-family="Arial,sans-serif" letter-spacing="1">
-          V-12.345.678
-        </text>
-
-        <!-- SECTION NUMBER top right -->
-        <text x="280" y="62" text-anchor="end" font-size="9" fill="#444"
-          font-family="Arial,sans-serif">028</text>
-
-        <!-- APELLIDOS -->
-        <text x="12" y="77" font-size="6.5" fill="#666" font-family="Arial,sans-serif"
-          letter-spacing=".5">APELLIDOS</text>
-        <text x="12" y="89" font-size="11" font-weight="700" fill="#111"
-          font-family="Arial,sans-serif" letter-spacing=".5">MARTÍNEZ COLMENARES</text>
-
-        <!-- NOMBRES -->
-        <text x="12" y="101" font-size="6.5" fill="#666" font-family="Arial,sans-serif"
-          letter-spacing=".5">NOMBRES</text>
-        <text x="12" y="113" font-size="11" font-weight="700" fill="#111"
-          font-family="Arial,sans-serif" letter-spacing=".5">ANDREÍNA JOSEFINA</text>
-
-        <!-- FIRMA TITULAR label -->
-        <text x="12" y="168" font-size="5.5" fill="#888" font-family="Arial,sans-serif"
-          letter-spacing=".5">FIRMA TITULAR</text>
-
-        <!-- Signature (stylized path) -->
-        <path d="M 14,155 C 20,148 28,145 34,148 C 40,151 36,158 44,154
-                 C 50,151 52,145 58,148 C 62,150 60,157 66,154"
-          fill="none" stroke="#222" stroke-width="1.2"
-          stroke-linecap="round" stroke-linejoin="round"/>
-
-        <!-- FINGERPRINT (stylized concentric arcs) -->
-        <g transform="translate(28,130)" opacity=".55">
-          <!-- center -->
-          <ellipse cx="0" cy="0" rx="2" ry="3" fill="none" stroke="#333" stroke-width=".7"/>
-          <!-- rings -->
-          <ellipse cx="0" cy="0" rx="5" ry="7"   fill="none" stroke="#333" stroke-width=".65"/>
-          <ellipse cx="0" cy="0" rx="9" ry="12"  fill="none" stroke="#333" stroke-width=".6"/>
-          <ellipse cx="0" cy="0" rx="13" ry="17" fill="none" stroke="#2a2a2a" stroke-width=".6"/>
-          <ellipse cx="0" cy="0" rx="17" ry="22" fill="none" stroke="#2a2a2a" stroke-width=".55"/>
-          <ellipse cx="0" cy="0" rx="21" ry="27" fill="none" stroke="#2a2a2a" stroke-width=".5"/>
-          <ellipse cx="0" cy="0" rx="25" ry="32" fill="none" stroke="#333" stroke-width=".5"/>
-          <ellipse cx="0" cy="0" rx="29" ry="37" fill="none" stroke="#333" stroke-width=".45"/>
-          <!-- clip to thumb shape -->
-          <ellipse cx="0" cy="0" rx="31" ry="40" fill="url(#cardgrad)" opacity=".85"/>
-        </g>
-
-        <!-- ESCUDO DE ARMAS — simplified SVG -->
-        <g transform="translate(155,95) scale(.65)" opacity=".22">
-          <!-- Shield outline -->
-          <path d="M0,-40 L35,-40 L35,10 Q35,40 0,55 Q-35,40 -35,10 L-35,-40 Z"
-            fill="#C8940A" stroke="#A07008" stroke-width="1.5"/>
-          <!-- left red field -->
-          <path d="M-35,-40 L0,-40 L0,55 Q-18,48 -35,35 L-35,-40 Z"
-            fill="#8B0000" opacity=".6"/>
-          <!-- right blue field -->
-          <path d="M0,-40 L35,-40 L35,35 Q18,48 0,55 L0,-40 Z"
-            fill="#1a3080" opacity=".6"/>
-          <!-- stars row -->
-          <g fill="#F5C800">
-            <polygon points="0,-8 1.5,-3 6,-3 2.5,0 4,5 0,2 -4,5 -2.5,0 -6,-3 -1.5,-3" transform="translate(-20,15)"/>
-            <polygon points="0,-8 1.5,-3 6,-3 2.5,0 4,5 0,2 -4,5 -2.5,0 -6,-3 -1.5,-3" transform="translate(-10,15)"/>
-            <polygon points="0,-8 1.5,-3 6,-3 2.5,0 4,5 0,2 -4,5 -2.5,0 -6,-3 -1.5,-3" transform="translate(0,15)"/>
-            <polygon points="0,-8 1.5,-3 6,-3 2.5,0 4,5 0,2 -4,5 -2.5,0 -6,-3 -1.5,-3" transform="translate(10,15)"/>
-            <polygon points="0,-8 1.5,-3 6,-3 2.5,0 4,5 0,2 -4,5 -2.5,0 -6,-3 -1.5,-3" transform="translate(20,15)"/>
-          </g>
-          <!-- laurel branches suggestion -->
-          <path d="M-40,35 Q-30,20 -20,0" fill="none" stroke="#2a6e00" stroke-width="3" stroke-linecap="round"/>
-          <path d="M40,35 Q30,20 20,0"  fill="none" stroke="#2a6e00" stroke-width="3" stroke-linecap="round"/>
-        </g>
-
-        <!-- DATES SECTION -->
-        <text x="90" y="135" font-size="5.5" fill="#777" font-family="Arial,sans-serif">F. NACIMIENTO</text>
-        <text x="90" y="145" font-size="9" font-weight="700" fill="#222" font-family="Arial,sans-serif">15/03/1990</text>
-        <text x="140" y="135" font-size="5.5" fill="#777" font-family="Arial,sans-serif">EDO CIVIL</text>
-        <text x="140" y="145" font-size="9" font-weight="700" fill="#222" font-family="Arial,sans-serif">SOLTERO</text>
-
-        <text x="90" y="160" font-size="5.5" fill="#777" font-family="Arial,sans-serif">F. EXPEDICION</text>
-        <text x="90" y="170" font-size="9" font-weight="700" fill="#222" font-family="Arial,sans-serif">10/06/2019</text>
-        <text x="140" y="160" font-size="5.5" fill="#777" font-family="Arial,sans-serif">F. VENCIMIENTO</text>
-        <text x="140" y="170" font-size="9" font-weight="700" fill="#222" font-family="Arial,sans-serif">06/2029</text>
-
-        <!-- VENEZOLANO bottom label -->
-        <text x="150" y="186" text-anchor="middle" font-size="13" font-weight="900"
-          fill="#111" font-family="Arial Black,Arial,sans-serif" letter-spacing="3">
-          VENEZOLANO
-        </text>
-
-        <!-- PHOTO PLACEHOLDER — empty box with X -->
-        <rect x="218" y="58" width="68" height="88" rx="3"
-          fill="#D8D0B8" stroke="#AAA" stroke-width=".8"/>
+        <text x="150" y="43" text-anchor="middle" font-size="7.5" font-weight="600" fill="#555" font-family="Arial,sans-serif" letter-spacing="3">CÉDULA DE IDENTIDAD</text>
+        <text x="95" y="62" text-anchor="middle" font-size="10" font-weight="700" fill="#222" font-family="Arial,sans-serif" letter-spacing="1">V-12.345.678</text>
+        <text x="12" y="77" font-size="6.5" fill="#666" font-family="Arial,sans-serif" letter-spacing=".5">APELLIDOS</text>
+        <text x="12" y="89" font-size="11" font-weight="700" fill="#111" font-family="Arial,sans-serif" letter-spacing=".5">MARTÍNEZ COLMENARES</text>
+        <text x="12" y="101" font-size="6.5" fill="#666" font-family="Arial,sans-serif" letter-spacing=".5">NOMBRES</text>
+        <text x="12" y="113" font-size="11" font-weight="700" fill="#111" font-family="Arial,sans-serif" letter-spacing=".5">ANDREÍNA JOSEFINA</text>
+        <text x="150" y="186" text-anchor="middle" font-size="13" font-weight="900" fill="#111" font-family="Arial Black,Arial,sans-serif" letter-spacing="3">VENEZOLANO</text>
+        <rect x="218" y="58" width="68" height="88" rx="3" fill="#D8D0B8" stroke="#AAA" stroke-width=".8"/>
         <line x1="218" y1="58" x2="286" y2="146" stroke="#BBB" stroke-width=".8"/>
         <line x1="286" y1="58" x2="218" y2="146" stroke="#BBB" stroke-width=".8"/>
-        <text x="252" y="107" text-anchor="middle" font-size="7" fill="#999"
-          font-family="Arial,sans-serif">FOTO</text>
-
-        <!-- DIRECTOR signature area -->
-        <path d="M 228,75 C 234,70 242,68 248,71 C 252,73 250,78 256,75"
-          fill="none" stroke="#333" stroke-width=".9" stroke-linecap="round"/>
-        <text x="228" y="84" font-size="5.5" fill="#555" font-family="Arial,sans-serif">Juan Dugarte</text>
-        <text x="228" y="91" font-size="5" fill="#777" font-family="Arial,sans-serif">Director</text>
-
-        <!-- plastic holographic hint — diagonal shimmer lines -->
-        <g opacity=".06">
-          <line x1="0" y1="0" x2="300" y2="192" stroke="white" stroke-width="8"/>
-          <line x1="20" y1="0" x2="300" y2="170" stroke="white" stroke-width="4"/>
-          <line x1="0" y1="20" x2="280" y2="192" stroke="white" stroke-width="4"/>
-        </g>
+        <text x="252" y="107" text-anchor="middle" font-size="7" fill="#999" font-family="Arial,sans-serif">FOTO</text>
       </svg>
-      <!-- small post-it on card -->
-      <div style="
-        position:absolute;bottom:-18px;right:-24px;
-        background:#F7E84E;color:#1a1a1a;
-        font-family:var(--hand);font-size:14px;
-        padding:12px 14px 18px;width:140px;
-        transform:rotate(3deg);
-        box-shadow:2px 4px 14px rgba(0,0,0,.5);
-        line-height:1.4;
-      ">¡Sin cédula no hay voto!</div>
+      <div style="position:absolute;bottom:-18px;right:-24px;background:#F7E84E;color:#1a1a1a;font-family:var(--hand);font-size:14px;padding:12px 14px 18px;width:140px;transform:rotate(3deg);box-shadow:2px 4px 14px rgba(0,0,0,.5);line-height:1.4;">¡Sin cédula no hay voto!</div>
     </div>
   </div>
 </div>
 
-<!-- ════════════════════════════════
-     S6 — RESULTADOS ACTA POR ACTA (split + acta illustration)
-════════════════════════════════ -->
+<!-- S6 — CONDICIÓN 5: RESULTADOS ACTA POR ACTA (split) -->
 <div class="slide split" id="s6">
   <div class="slide-bg">
     <div style="position:absolute;inset:0;background:linear-gradient(150deg,#6a0010 0%,#CF142B 50%,#e06060 78%,#ffc8c8 92%,#fff0f0 100%)"></div>
@@ -1227,173 +789,52 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
     <div class="blob" style="width:300px;height:300px;background:#e03050;bottom:5%;right:-30px;opacity:.25"></div>
   </div>
   <div class="pit" style="top:12%;left:42%;z-index:30">
-    <div class="picard o">"En 2024 el CNE mostró parcialidad a favor del oficialismo en todas las etapas."<em class="pisrc">— Centro Carter, Informe 2024</em></div>
+    <div class="picard o">"¿Dónde están las actas del 28J? El CNE proclamó un ganador sin publicarlas."<em class="pisrc">— Centro Carter · Informe Venezuela 2024</em></div>
   </div>
-  <!-- LEFT -->
   <div class="panel">
-    <span class="tag"><span class="tag-dot"></span>Condición 5</span>
+    <span class="tag"><span class="tag-dot"></span>Condición 5 de 11</span>
     <h2 class="t1">Resultados publicados<br><em>acta por acta.</em></h2>
-    <p class="body">El Estatuto Electoral Especial debe garantizar publicación íntegra, oportuna y desagregada de todos los resultados.</p>
+    <p class="hook">El 28 de julio de 2024, millones votaron. El CNE proclamó un ganador sin publicar las actas. Esa victoria fue robada a plena luz.</p>
     <div class="blist">
-      <div class="bitem"><div class="bdot"></div><span>Por <strong>mesa, centro, parroquia, municipio y estado</strong></span></div>
-      <div class="bitem"><div class="bdot"></div><span>Negativa a publicar = <strong>delito electoral</strong> tipificado</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Por <strong>mesa, centro, parroquia, municipio y estado</strong> — en tiempo real</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Negativa a publicar = <strong>delito electoral</strong> tipificado en el Estatuto</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Auditoría post-electoral <strong>obligatoria y desagregada</strong> (ausente en 25M 2025)</span></div>
       <div class="bitem"><div class="bdot"></div><span>Impugnaciones con lapsos <strong>perentorios de 72 horas</strong></span></div>
     </div>
+    <span class="srcbadge">Fuente: REC Informe 25M · Centro Carter · Transparencia Venezuela</span>
   </div>
-  <!-- RIGHT: acta CNE illustrated -->
   <div class="acta-panel">
     <div style="position:relative;display:inline-block">
       <svg width="210" height="310" viewBox="0 0 210 310" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <!-- diagonal stripe pattern — blue/white like real CNE acta border -->
-          <pattern id="diag" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(0)">
+          <pattern id="diag" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
             <rect width="10" height="10" fill="#fff"/>
             <polygon points="0,0 5,0 0,10" fill="#1a2f6e"/>
             <polygon points="5,0 10,0 10,10 5,10" fill="#1a2f6e"/>
           </pattern>
-          <!-- paper texture -->
-          <filter id="paper">
-            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" seed="2" result="noise"/>
-            <feColorMatrix type="saturate" values="0" in="noise" result="grey"/>
-            <feBlend in="SourceGraphic" in2="grey" mode="multiply" result="blend"/>
-            <feComposite in="blend" in2="SourceGraphic" operator="in"/>
-          </filter>
-          <!-- pen roughness for map -->
-          <filter id="boli" x="-4%" y="-4%" width="108%" height="108%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="3" seed="7" result="n"/>
-            <feDisplacementMap in="SourceGraphic" in2="n" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
-          </filter>
         </defs>
-
-        <!-- ── CARD BACKGROUND ── -->
-        <rect x="0" y="0" width="210" height="310" rx="6" fill="#DCDCDC" filter="url(#paper)"/>
-
-        <!-- ── TOP DIAGONAL STRIPE BORDER ── -->
-        <rect x="0" y="0" width="210" height="20" rx="0" fill="url(#diag)"/>
-        <rect x="0" y="0" width="210" height="20" rx="0" fill="none" stroke="rgba(0,0,0,.1)" stroke-width=".5"/>
-
-        <!-- ── 3 CNE LOGO BLOCKS (stacked) ── -->
-        <!-- separator lines -->
+        <rect x="0" y="0" width="210" height="310" rx="6" fill="#DCDCDC"/>
+        <rect x="0" y="0" width="210" height="20" fill="url(#diag)"/>
         <line x1="12" y1="120" x2="198" y2="120" stroke="rgba(0,0,0,.12)" stroke-width=".8"/>
         <line x1="12" y1="208" x2="198" y2="208" stroke="rgba(0,0,0,.12)" stroke-width=".8"/>
-
-        <!-- BLOCK 1 -->
         <text x="105" y="36" text-anchor="middle" font-size="6.5" font-weight="700" fill="#1a2f6e" font-family="Arial,sans-serif" letter-spacing="1.5" opacity=".75">PODER ELECTORAL</text>
-        <!-- CNE diamond logo block 1 -->
-        <g transform="translate(63,42)">
-          <polygon points="0,16 16,0 32,16 16,32" fill="#C8102E"/>
-          <polygon points="16,16 32,0 48,16 32,32" fill="#F5B800"/>
-          <polygon points="32,16 48,0 64,16 48,32" fill="#1a2f6e"/>
-          <!-- inner white diamond overlaps -->
-          <polygon points="16,16 24,8 32,16 24,24" fill="white" opacity=".35"/>
-          <polygon points="32,16 40,8 48,16 40,24" fill="white" opacity=".35"/>
-          <text x="32" y="20" text-anchor="middle" font-size="11" font-weight="900" fill="white" font-family="Arial Black,sans-serif" letter-spacing=".5">CNE</text>
-        </g>
+        <g transform="translate(63,42)"><polygon points="0,16 16,0 32,16 16,32" fill="#C8102E"/><polygon points="16,16 32,0 48,16 32,32" fill="#F5B800"/><polygon points="32,16 48,0 64,16 48,32" fill="#1a2f6e"/><text x="32" y="20" text-anchor="middle" font-size="11" font-weight="900" fill="white" font-family="Arial Black,sans-serif" letter-spacing=".5">CNE</text></g>
         <text x="105" y="86" text-anchor="middle" font-size="6" font-weight="600" fill="#1a2f6e" font-family="Arial,sans-serif" letter-spacing="1" opacity=".6">PODER ELECTORAL</text>
-
-        <!-- BLOCK 2 -->
         <text x="105" y="103" text-anchor="middle" font-size="6.5" font-weight="700" fill="#1a2f6e" font-family="Arial,sans-serif" letter-spacing="1.5" opacity=".75">PODER ELECTORAL</text>
-        <g transform="translate(63,109)">
-          <polygon points="0,16 16,0 32,16 16,32" fill="#C8102E"/>
-          <polygon points="16,16 32,0 48,16 32,32" fill="#F5B800"/>
-          <polygon points="32,16 48,0 64,16 48,32" fill="#1a2f6e"/>
-          <polygon points="16,16 24,8 32,16 24,24" fill="white" opacity=".35"/>
-          <polygon points="32,16 40,8 48,16 40,24" fill="white" opacity=".35"/>
-          <text x="32" y="20" text-anchor="middle" font-size="11" font-weight="900" fill="white" font-family="Arial Black,sans-serif" letter-spacing=".5">CNE</text>
-        </g>
+        <g transform="translate(63,109)"><polygon points="0,16 16,0 32,16 16,32" fill="#C8102E"/><polygon points="16,16 32,0 48,16 32,32" fill="#F5B800"/><polygon points="32,16 48,0 64,16 48,32" fill="#1a2f6e"/><text x="32" y="20" text-anchor="middle" font-size="11" font-weight="900" fill="white" font-family="Arial Black,sans-serif" letter-spacing=".5">CNE</text></g>
         <text x="105" y="153" text-anchor="middle" font-size="6" font-weight="600" fill="#1a2f6e" font-family="Arial,sans-serif" letter-spacing="1" opacity=".6">PODER ELECTORAL</text>
-
-        <!-- BLOCK 3 -->
         <text x="105" y="170" text-anchor="middle" font-size="6.5" font-weight="700" fill="#1a2f6e" font-family="Arial,sans-serif" letter-spacing="1.5" opacity=".75">PODER ELECTORAL</text>
-        <g transform="translate(63,176)">
-          <polygon points="0,16 16,0 32,16 16,32" fill="#C8102E"/>
-          <polygon points="16,16 32,0 48,16 32,32" fill="#F5B800"/>
-          <polygon points="32,16 48,0 64,16 48,32" fill="#1a2f6e"/>
-          <polygon points="16,16 24,8 32,16 24,24" fill="white" opacity=".35"/>
-          <polygon points="32,16 40,8 48,16 40,24" fill="white" opacity=".35"/>
-          <text x="32" y="20" text-anchor="middle" font-size="11" font-weight="900" fill="white" font-family="Arial Black,sans-serif" letter-spacing=".5">CNE</text>
-        </g>
+        <g transform="translate(63,176)"><polygon points="0,16 16,0 32,16 16,32" fill="#C8102E"/><polygon points="16,16 32,0 48,16 32,32" fill="#F5B800"/><polygon points="32,16 48,0 64,16 48,32" fill="#1a2f6e"/><text x="32" y="20" text-anchor="middle" font-size="11" font-weight="900" fill="white" font-family="Arial Black,sans-serif" letter-spacing=".5">CNE</text></g>
         <text x="105" y="220" text-anchor="middle" font-size="6" font-weight="600" fill="#1a2f6e" font-family="Arial,sans-serif" letter-spacing="1" opacity=".6">PODER ELECTORAL</text>
-
-        <!-- ── VENEZUELA MAP — bolígrafo style ── -->
-        <!-- Map sits below the 3 logos, in the lower portion of the acta -->
-        <g transform="translate(10,228)" filter="url(#boli)">
-          <!-- Main silhouette — pen stroke, dashed, recognizable shape -->
-          <path
-            d="M 14,38 C 11,34 8,29 9,24 C 10,19 14,16 18,15
-               C 20,14 22,15 23,13 C 24,11 22,8 24,6
-               C 26,4 29,5 31,4 C 33,3 34,1 37,1
-               C 40,1 41,3 44,3 C 47,3 48,1 51,1
-               C 54,1 55,3 58,3 C 61,3 62,1 65,2
-               C 68,3 69,5 72,5 C 75,5 76,3 79,4
-               C 82,5 83,7 86,8 C 88,9 90,8 92,9
-               C 95,10 96,13 99,14 C 102,15 104,13 107,14
-               C 110,15 111,18 113,19 C 115,20 117,18 119,20
-               C 121,22 121,25 123,27 C 125,29 127,30 128,33
-               C 129,36 127,39 126,42 C 125,45 123,47 122,50
-               C 121,53 121,56 119,58 C 117,60 114,60 112,62
-               C 110,64 109,67 107,68 C 105,69 102,68 100,70
-               C 98,72 97,75 95,76 C 93,77 91,75 89,76
-               C 87,77 86,80 84,81 C 82,82 80,80 78,81
-               C 76,82 75,85 73,86 C 71,87 69,85 67,86
-               C 65,87 64,90 62,91 C 60,92 58,90 56,91
-               C 54,92 53,95 51,95 C 49,95 48,92 46,92
-               C 44,92 42,95 40,95 C 38,95 37,92 35,91
-               C 33,90 31,91 29,90 C 27,89 26,86 24,86
-               C 22,86 20,88 18,87 C 16,86 15,83 14,81
-               C 13,79 14,76 13,74 C 12,72 10,70 10,67
-               C 10,64 12,62 12,59 C 12,56 10,54 10,51
-               C 10,48 13,46 14,43 C 15,40 14,38 14,38 Z"
-            fill="rgba(26,47,110,0.06)"
-            stroke="#1a2f6e"
-            stroke-width="1.4"
-            stroke-dasharray="4,2.5"
-            stroke-linejoin="round"
-            stroke-linecap="round"
-            opacity=".8"
-          />
-          <!-- Paria peninsula NE -->
-          <path d="M 119,20 C 124,19 128,17 130,16 C 132,15 133,13 131,12 C 129,11 126,13 124,14 C 122,15 121,18 119,20"
-            fill="none" stroke="#1a2f6e" stroke-width="1" stroke-dasharray="3,2" opacity=".6"/>
-          <!-- Golfo de Venezuela NW indent -->
-          <path d="M 14,38 C 16,41 15,45 16,48 C 17,51 20,51 21,48 C 22,45 21,41 22,38"
-            fill="none" stroke="#1a2f6e" stroke-width="1" stroke-dasharray="3,2" opacity=".5"/>
-          <!-- Orinoco river hint -->
-          <path d="M 35,91 C 48,87 62,84 75,83 C 88,82 100,82 112,80 C 118,75 122,68 123,62"
-            fill="none" stroke="#1a2f6e" stroke-width=".7" stroke-dasharray="2,3" opacity=".3"/>
-          <!-- Cities -->
-          <circle cx="72" cy="28" r="2.5" fill="#C8102E" opacity=".8"/>
-          <text x="75" y="32" font-size="7" fill="#1a2f6e" font-family="Georgia,serif" font-weight="700" opacity=".85">Caracas</text>
-          <circle cx="20" cy="35" r="1.8" fill="#1a2f6e" opacity=".6"/>
-          <text x="4" y="33" font-size="6" fill="#1a2f6e" font-family="Georgia,serif" opacity=".65">Mcbo.</text>
-          <circle cx="95" cy="58" r="1.8" fill="#1a2f6e" opacity=".5"/>
-        </g>
-
-        <!-- ── BOTTOM DIAGONAL STRIPE BORDER ── -->
         <rect x="0" y="290" width="210" height="20" fill="url(#diag)"/>
-        <rect x="0" y="290" width="210" height="20" fill="none" stroke="rgba(0,0,0,.1)" stroke-width=".5"/>
-
-        <!-- outer card border -->
         <rect x="0" y="0" width="210" height="310" rx="6" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1"/>
       </svg>
-
-      <!-- POST-IT -->
-      <div style="
-        position:absolute;bottom:-18px;right:-34px;
-        background:#F7E84E;color:#1a1a1a;
-        font-family:var(--hand);font-size:18px;line-height:1.4;
-        padding:18px 18px 26px;width:185px;
-        transform:rotate(3.5deg);
-        box-shadow:3px 6px 20px rgba(0,0,0,.6);
-        z-index:30;position:absolute;
-      ">¿Dónde están las actas del 28J?</div>
+      <div style="position:absolute;bottom:-18px;right:-34px;background:#F7E84E;color:#1a1a1a;font-family:var(--hand);font-size:18px;line-height:1.4;padding:18px 18px 26px;width:185px;transform:rotate(3.5deg);box-shadow:3px 6px 20px rgba(0,0,0,.6);">¿Dónde están las actas del 28J?</div>
     </div>
   </div>
 </div>
 
-<!-- ════════════════════════════════
-     S7 — OBSERVACIÓN
-════════════════════════════════ -->
+<!-- S7 — CONDICIÓN 6: OBSERVACIÓN INTERNACIONAL -->
 <div class="slide" id="s7">
   <div class="slide-bg">
     <div style="position:absolute;inset:0;background:linear-gradient(140deg,#CF142B 0%,#d84020 40%,#e89020 70%,#FFD200 85%,#fffce0 100%)"></div>
@@ -1401,55 +842,23 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
     <div class="blob" style="width:300px;height:300px;background:#CF142B;bottom:5%;left:0%;opacity:.35"></div>
   </div>
   <div class="panel">
-    <span class="tag"><span class="tag-dot"></span>Condición 6</span>
+    <span class="tag"><span class="tag-dot"></span>Condición 6 de 11</span>
     <h2 class="t1">Observación internacional<br><em>sin restricciones.</em></h2>
+    <p class="hook">¿Qué tienen que esconder si no tienen nada que esconder? La presencia internacional no amenaza unas elecciones limpias. Solo amenaza el fraude.</p>
     <div class="qblock">
       La MOE UE 2021 identificó falta de transparencia del CNE, publicación tardía de resoluciones, debilidad en separación de poderes y restricciones al acceso oportuno a la información.
       <span class="qsrc">— Misión de Observación Electoral UE · Venezuela 2021</span>
     </div>
     <div class="blist" style="margin-top:16px">
-      <div class="bitem"><div class="bdot"></div><span>Acceso irrestricto para <strong>ONU, OEA y Unión Europea</strong> en todas las etapas</span></div>
-      <div class="bitem"><div class="bdot"></div><span>Observadores nacionales (OEV, Súmate, CEPAZ) con <strong>acreditación automática</strong></span></div>
+      <div class="bitem"><div class="bdot"></div><span>Acceso irrestricto para <strong>ONU, OEA, Unión Europea y Carter Center</strong> en todas las etapas</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Observadores nacionales (OEV, Súmate, REC, CEPAZ) con <strong>acreditación automática</strong></span></div>
       <div class="bitem"><div class="bdot"></div><span>Impedimento de acceso = <strong>delito electoral</strong> con respuesta en 24 horas</span></div>
     </div>
-    <span class="srcbadge">Fuente: MOE UE Venezuela 2021 · Transparencia Venezuela</span>
-    <!-- MINI ILLUSTRATION — mobile only -->
-    <div class="mini-ill">
-      <div class="mini-ill-chart" style="padding:10px 14px">
-        <svg width="68" height="90" viewBox="0 0 210 310" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;border-radius:4px">
-          <rect width="210" height="310" rx="4" fill="#DCDCDC"/>
-          <rect x="0" y="0" width="210" height="14" fill="none"/>
-          <defs><pattern id="dm" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#fff"/><polygon points="0,0 5,0 0,10" fill="#1a2f6e"/><polygon points="5,0 10,0 10,10 5,10" fill="#1a2f6e"/></pattern></defs>
-          <rect x="0" y="0" width="210" height="16" fill="url(#dm)"/>
-          <text x="105" y="30" text-anchor="middle" font-size="7" font-weight="700" fill="#1a2f6e" font-family="Arial,sans-serif" letter-spacing="1.5" opacity=".8">PODER ELECTORAL</text>
-          <g transform="translate(63,36)">
-            <polygon points="0,14 14,0 28,14 14,28" fill="#C8102E"/>
-            <polygon points="14,14 28,0 42,14 28,28" fill="#F5B800"/>
-            <polygon points="28,14 42,0 56,14 42,28" fill="#1a2f6e"/>
-            <text x="28" y="18" text-anchor="middle" font-size="9" font-weight="900" fill="white" font-family="Arial,sans-serif">CNE</text>
-          </g>
-          <text x="105" y="76" text-anchor="middle" font-size="6" fill="#1a2f6e" font-family="Arial,sans-serif" opacity=".65">PODER ELECTORAL</text>
-          <line x1="10" y1="82" x2="200" y2="82" stroke="rgba(0,0,0,.1)" stroke-width=".6"/>
-          <g transform="translate(63,88)"><polygon points="0,14 14,0 28,14 14,28" fill="#C8102E"/><polygon points="14,14 28,0 42,14 28,28" fill="#F5B800"/><polygon points="28,14 42,0 56,14 42,28" fill="#1a2f6e"/><text x="28" y="18" text-anchor="middle" font-size="9" font-weight="900" fill="white" font-family="Arial,sans-serif">CNE</text></g>
-          <text x="105" y="128" text-anchor="middle" font-size="6" fill="#1a2f6e" font-family="Arial,sans-serif" opacity=".65">PODER ELECTORAL</text>
-          <line x1="10" y1="134" x2="200" y2="134" stroke="rgba(0,0,0,.1)" stroke-width=".6"/>
-          <g transform="translate(63,140)"><polygon points="0,14 14,0 28,14 14,28" fill="#C8102E"/><polygon points="14,14 28,0 42,14 28,28" fill="#F5B800"/><polygon points="28,14 42,0 56,14 42,28" fill="#1a2f6e"/><text x="28" y="18" text-anchor="middle" font-size="9" font-weight="900" fill="white" font-family="Arial,sans-serif">CNE</text></g>
-          <text x="105" y="180" text-anchor="middle" font-size="6" fill="#1a2f6e" font-family="Arial,sans-serif" opacity=".65">PODER ELECTORAL</text>
-          <rect x="0" y="294" width="210" height="16" fill="url(#dm)"/>
-          <rect width="210" height="310" rx="4" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
-        </svg>
-        <div style="font-size:13px;color:var(--text);line-height:1.5">
-          <strong style="color:var(--red2)">¿Dónde están las actas del 28J?</strong><br>
-          <span style="color:var(--muted)">Resultados publicados acta por acta — mesa, centro, parroquia, municipio y estado</span>
-        </div>
-      </div>
-    </div>
+    <span class="srcbadge">Fuente: MOE UE 2021 · REC Principios y Estándares · Transparencia Venezuela</span>
   </div>
 </div>
 
-<!-- ════════════════════════════════
-     S8 — INHABILITACIONES
-════════════════════════════════ -->
+<!-- S8 — CONDICIÓN 7: INHABILITACIONES -->
 <div class="slide" id="s8">
   <div class="slide-bg">
     <div style="position:absolute;inset:0;background:linear-gradient(155deg,#CF142B 0%,#d87010 40%,#FFD200 72%,#fff5a0 90%,#fffef0 100%)"></div>
@@ -1460,21 +869,126 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
     <div class="picard b">"Un proceso que excluye competidores por vía administrativa no cumple estándares democráticos mínimos."<em class="pisrc">— Transparencia Venezuela</em></div>
   </div>
   <div class="panel">
-    <span class="tag"><span class="tag-dot"></span>Condición 7</span>
+    <span class="tag"><span class="tag-dot"></span>Condición 7 de 11</span>
     <h2 class="t1">Inhabilitaciones revisadas.<br><em>Candidaturas libres.</em></h2>
+    <p class="hook">No puede haber elección libre si el gobierno decide quién puede candidatearse. Eso no es una elección. Es una selección.</p>
     <div class="blist">
       <div class="bitem"><div class="bdot"></div><span>Toda inhabilitación revisada por el <strong>TSJ en sala constitucional</strong></span></div>
       <div class="bitem"><div class="bdot"></div><span>Criterios <strong>objetivos y no discrecionales</strong> para registro de nuevas organizaciones</span></div>
       <div class="bitem"><div class="bdot"></div><span><strong>Prohibición expresa</strong> de modificación sobrevenida de tarjetas electorales</span></div>
       <div class="bitem"><div class="bdot"></div><span>Derecho a <strong>revisión judicial expedita</strong> de cualquier exclusión</span></div>
     </div>
+    <span class="srcbadge">Fuente: REC Informe 25M · Transparencia Venezuela · CAPEL</span>
   </div>
 </div>
 
-<!-- ════════════════════════════════
-     S9 — EL ESTATUTO
-════════════════════════════════ -->
+<!-- S9 — CONDICIÓN 8: TECNOLOGÍA ELECTORAL AUDITABLE (NEW) -->
 <div class="slide" id="s9">
+  <div class="slide-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(140deg,#040e22 0%,#081830 45%,#0a2448 75%,#0c1e3e 100%)"></div>
+    <div class="blob" style="width:450px;height:450px;background:#0a1e50;top:-80px;right:-80px;opacity:.6"></div>
+    <div class="blob" style="width:300px;height:300px;background:#CF142B;bottom:10%;left:5%;opacity:.14"></div>
+    <div class="blob" style="width:200px;height:200px;background:#FFD200;top:20%;left:60%;opacity:.06"></div>
+  </div>
+  <div class="pit" style="top:10%;right:5%">
+    <div class="picard y">EXCLÉ — empresa argentina, sancionada por EE.UU. (OFAC 2020) — maneja el registro electoral venezolano desde 2021.<em class="pisrc">— WYDE / European Partnership for Democracy</em></div>
+  </div>
+  <div class="panel">
+    <span class="tag"><span class="tag-dot"></span>Condición 8 de 11</span>
+    <h2 class="t1">Tecnología electoral<br><em>auditable.</em></h2>
+    <p class="hook">Quien controla el software controla el resultado. En Venezuela, la empresa que maneja el registro electoral fue sancionada por el Departamento del Tesoro de Estados Unidos.</p>
+    <div class="blist">
+      <div class="bitem"><div class="bdot"></div><span>Sustitución o auditoría certificada de <strong>EXCLÉ</strong> (empresa argentina con sanciones OFAC 2020)</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Código fuente del software electoral disponible para <strong>auditoría técnica independiente</strong></span></div>
+      <div class="bitem"><div class="bdot"></div><span><strong>Cadena de custodia verificable</strong> para máquinas de votación y datos del padrón</span></div>
+      <div class="bitem"><div class="bdot"></div><span>CNE debe publicar <strong>presupuesto electoral desglosado</strong> — no lo hace desde 2015</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Auditorías <strong>pre y post-electoral obligatorias</strong> con acceso de veedores</span></div>
+    </div>
+    <span class="srcbadge">Fuente: WYDE/EPD · REC Boletín Electoral — eje Tecnologías: 16% de 215 recomendaciones</span>
+  </div>
+</div>
+
+<!-- S10 — CONDICIÓN 9: MARCO NORMATIVO REFORMADO (NEW) -->
+<div class="slide" id="s10">
+  <div class="slide-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(150deg,#062030 0%,#083848 45%,#0e4860 78%,#144870 100%)"></div>
+    <div class="blob" style="width:500px;height:380px;background:#0a3050;top:-60px;left:-80px;opacity:.55"></div>
+    <div class="blob" style="width:280px;height:280px;background:#FFD200;bottom:8%;right:-20px;opacity:.07"></div>
+  </div>
+  <div class="pit" style="top:10%;right:5%">
+    <div class="picard g">215 recomendaciones en 20 años. La categoría más ignorada: Marco Legal y Normativo — el 20% del total.<em class="pisrc">— Red Electoral Ciudadana (REC), 2024</em></div>
+  </div>
+  <div class="panel">
+    <span class="tag"><span class="tag-dot"></span>Condición 9 de 11</span>
+    <h2 class="t1">Marco normativo<br><em>reformado.</em></h2>
+    <p class="hook">Veinte años de recomendaciones ignoradas. Doscientas quince observaciones de doce procesos electorales. Nada cambia si la ley no cambia.</p>
+    <div class="sgrid">
+      <div class="scard"><div class="snum">215</div><div class="slabel">recomendaciones acumuladas 2005–2024 (REC)</div></div>
+      <div class="scard"><div class="snum">20<small>%</small></div><div class="slabel">del total: marco legal — la categoría más urgente</div></div>
+    </div>
+    <div class="blist" style="margin-top:16px">
+      <div class="bitem"><div class="bdot"></div><span>Estatuto Electoral Especial <strong>transitorio y taxativo</strong> — no una derogación total</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Reforma de la LOPRE para <strong>eliminar artículos discriminatorios</strong></span></div>
+      <div class="bitem"><div class="bdot"></div><span>Normativa CNE con <strong>publicación obligatoria y consulta previa</strong></span></div>
+      <div class="bitem"><div class="bdot"></div><span>Mecanismos de <strong>impugnación efectivos</strong> con lapsos perentorios</span></div>
+    </div>
+    <span class="srcbadge">Fuente: REC Boletín Electoral 2005–2024 · Principios y Estándares CAPEL</span>
+  </div>
+</div>
+
+<!-- S11 — CONDICIÓN 10: EQUIDAD EN LA CAMPAÑA (NEW) -->
+<div class="slide" id="s11">
+  <div class="slide-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(145deg,#7a3800 0%,#b85a00 40%,#e07800 70%,#F5A800 88%,#ffe880 100%)"></div>
+    <div class="blob" style="width:420px;height:380px;background:#c06000;top:-50px;right:-60px;opacity:.45"></div>
+    <div class="blob" style="width:280px;height:280px;background:#8a3000;bottom:8%;left:-20px;opacity:.35"></div>
+  </div>
+  <div class="pit" style="top:10%;right:5%">
+    <div class="picard b">"Equidad en la contienda" es uno de los 7 principios internacionales para elecciones democráticas — y Venezuela viola sistemáticamente todos.<em class="pisrc">— CAPEL · Principios y Estándares 2024</em></div>
+  </div>
+  <div class="panel">
+    <span class="tag"><span class="tag-dot"></span>Condición 10 de 11</span>
+    <h2 class="t1">Campaña electoral<br><em>en igualdad.</em></h2>
+    <p class="hook">No hay elección justa cuando un candidato tiene el Estado entero a su disposición y el otro no puede poner un cartel.</p>
+    <div class="blist">
+      <div class="bitem"><div class="bdot"></div><span>Acceso equitativo a <strong>medios públicos y privados</strong> para todos los candidatos</span></div>
+      <div class="bitem"><div class="bdot"></div><span><strong>Prohibición de uso de recursos del Estado</strong> en campaña electoral (proselitismo institucional)</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Transparencia total en <strong>financiamiento de partidos y campañas</strong> con declaración pública</span></div>
+      <div class="bitem"><div class="bdot"></div><span><strong>Período de campaña delimitado</strong> con sanciones por actividad política previa</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Cese de <strong>cadenas nacionales</strong> con contenido partidista fuera de emergencias</span></div>
+    </div>
+    <span class="srcbadge">Fuente: CAPEL · REC Boletín — eje Medios y redes: 8% · Financiamiento: 5%</span>
+  </div>
+</div>
+
+<!-- S12 — CONDICIÓN 11: PLURALISMO POLÍTICO SIN DISCRIMINACIÓN (NEW) -->
+<div class="slide" id="s12">
+  <div class="slide-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(145deg,#14063a 0%,#1a1055 40%,#261878 70%,#302090 100%)"></div>
+    <div class="blob" style="width:480px;height:480px;background:#1a0860;top:-80px;right:-80px;opacity:.55"></div>
+    <div class="blob" style="width:320px;height:320px;background:#CF142B;bottom:5%;left:-30px;opacity:.15"></div>
+    <div class="blob" style="width:200px;height:200px;background:#FFD200;top:30%;left:40%;opacity:.07"></div>
+  </div>
+  <div class="pit" style="top:10%;right:5%">
+    <div class="picard p">En las elecciones del 25M (2025), el CNE no publicó resultados desagregados. Las comunidades indígenas fueron relegadas al voto indirecto desde 2020.<em class="pisrc">— REC Informe 25M · 2025</em></div>
+  </div>
+  <div class="panel">
+    <span class="tag"><span class="tag-dot"></span>Condición 11 de 11</span>
+    <h2 class="t1">Pluralismo político<br><em>sin discriminación.</em></h2>
+    <p class="hook">La democracia requiere que todos puedan participar — sin importar su partido, su género, su etnia, o si el gobierno los considera un enemigo.</p>
+    <div class="blist">
+      <div class="bitem"><div class="bdot"></div><span>Restitución de <strong>tarjetas electorales y personería jurídica</strong> de partidos arbitrariamente despojados</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Eliminación de <strong>discriminación por afiliación política</strong> en el registro electoral</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Garantías para <strong>comunidades indígenas</strong>: voto directo y secreto restituido (suprimido en 2020)</span></div>
+      <div class="bitem"><div class="bdot"></div><span><strong>Personas privadas de libertad</strong> con derecho a votar sin condena firme</span></div>
+      <div class="bitem"><div class="bdot"></div><span>Personas trans e intersex: <strong>registro con identidad autopercibida</strong></span></div>
+    </div>
+    <span class="srcbadge">Fuente: REC Informe 25M · CAPEL · WYDE/EPD · Principios y Estándares 2024</span>
+  </div>
+</div>
+
+<!-- S13 — EL ESTATUTO ELECTORAL ESPECIAL (was S9) -->
+<div class="slide" id="s13">
   <div class="pit wright-pit" style="top:10%;right:4%;left:auto;transform:rotate(-1.5deg);z-index:30">
     <div class="picard y" style="width:260px;font-size:15px;transform:rotate(-1.5deg)">"El siguiente paso es ir hacia unas elecciones democráticas. Yo espero y confío en que será durante la administración de Donald Trump."<em class="pisrc">— Doug Wright, Secretario de Energía de EEUU</em></div>
   </div>
@@ -1485,35 +999,58 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
     <div class="blob" style="width:250px;height:250px;background:#CF142B;top:30%;left:40%;opacity:.1"></div>
   </div>
   <div class="panel">
-    <span class="tag"><span class="tag-dot"></span>La solución · Transparencia Venezuela</span>
+    <span class="tag"><span class="tag-dot"></span>La solución · Transparencia Venezuela en el Exilio</span>
     <h2 class="t1">Un <em>Estatuto Electoral<br>Especial</em> lo hace posible</h2>
     <p class="body">Transitorio, taxativo, con caducidad automática. No una derogación total — una corrección excepcional de lo que hoy permite la arbitrariedad y la exclusión.</p>
     <div class="dotrow">
-      <div class="dot done"></div><div class="dot done"></div>
-      <div class="dot done"></div><div class="dot done"></div>
-      <div class="dot done"></div><div class="dot done"></div>
-      <div class="dot done"></div><div class="dot curr"></div>
+      <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot done"></div>
+      <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot done"></div>
+      <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot curr"></div>
     </div>
-    <p style="font-size:13px;color:var(--muted);margin-top:10px">7 condiciones mínimas para una elección legítima</p>
-    <button class="ctabtn" onclick="nav(1)">
+    <p style="font-size:13px;color:rgba(26,26,26,.7);margin-top:10px">11 condiciones mínimas para una elección legítima y verificable</p>
+    <button class="ctabtn" onclick="goToFirma()" style="background:#CF142B">
       <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
       Quiero elegir — firma aquí
     </button>
-    <span class="srcbadge">Basado en: Transparencia Venezuela en el Exilio · transparenciave.org · Abril 2026</span>
+    <span class="srcbadge" style="color:rgba(26,26,26,.45)">Basado en: Transparencia Venezuela · REC · Voto Joven · Laboratorio de Paz · CAPEL · Abril 2026</span>
   </div>
 </div>
 
-<!-- ════════════════════════════════
-     S10 — FIRMA
-════════════════════════════════ -->
-<div class="slide" id="s10">
+<!-- S14 — ORGANIZACIONES (NEW) -->
+<div class="slide" id="s14">
+  <div class="slide-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(150deg,#001870 0%,#0032A0 50%,#1a50c0 80%,#4878d8 100%)"></div>
+    <div class="blob" style="width:500px;height:400px;background:#0040c0;top:-60px;right:-80px;opacity:.4"></div>
+    <div class="blob" style="width:350px;height:350px;background:#001050;bottom:-60px;left:-60px;opacity:.5"></div>
+    <div class="blob" style="width:200px;height:200px;background:#FFD200;top:40%;left:50%;opacity:.07"></div>
+  </div>
+  <div class="panel" style="justify-content:center;padding-top:80px">
+    <span class="tag"><span class="tag-dot"></span>El movimiento</span>
+    <h2 class="t1">No estamos solos.<br>Somos un <em>movimiento.</em></h2>
+    <p class="body">Organizaciones venezolanas de la sociedad civil que respaldan estas condiciones mínimas con investigación, observación y presencia internacional.</p>
+    <div class="orgs-grid">
+      <div class="org-pill"><span class="org-pill-dot" style="background:#FFD200"></span>Transparencia Venezuela en el Exilio</div>
+      <div class="org-pill"><span class="org-pill-dot" style="background:#e83348"></span>Voto Joven Venezuela</div>
+      <div class="org-pill"><span class="org-pill-dot" style="background:#9EE8B4"></span>Red Electoral Ciudadana (REC)</div>
+      <div class="org-pill"><span class="org-pill-dot" style="background:#A8CCEE"></span>Observatorio Global de Comunicación y Democracia</div>
+      <div class="org-pill"><span class="org-pill-dot" style="background:#FFB347"></span>Laboratorio de Paz</div>
+      <div class="org-pill" style="border-style:dashed;opacity:.65"><span class="org-pill-dot" style="background:rgba(255,255,255,.4)"></span>+ organizaciones aliadas</div>
+    </div>
+    <button class="ctabtn" onclick="goToFirma()" style="margin-top:28px">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
+      Firmar la propuesta
+    </button>
+  </div>
+</div>
+
+<!-- S15 — FIRMA (was S10) -->
+<div class="slide" id="s15">
   <div class="slide-bg">
     <div style="position:absolute;inset:0;background:linear-gradient(160deg,#FFD200 0%,#f5c800 18%,#0032A0 38%,#001a70 55%,#8a000e 72%,#CF142B 88%,#e8304a 100%)"></div>
     <div class="blob" style="width:500px;height:500px;background:#FFD200;top:-80px;left:-80px;opacity:.25"></div>
     <div class="blob" style="width:500px;height:500px;background:#CF142B;bottom:-80px;right:-80px;opacity:.22"></div>
   </div>
 
-  <!-- layout: form left, share right on desktop -->
   <div style="position:relative;z-index:40;width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:44px 28px 80px;gap:40px;flex-wrap:nowrap;overflow:hidden">
 
     <!-- FORM COLUMN -->
@@ -1521,9 +1058,9 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
       <div id="fstate">
         <div class="firma-head">
           <h2>¿Quieres <em>elegir?</em><br>Firma aquí.</h2>
-          <p>Únete a los venezolanos que exigimos elecciones libres y verificadas.</p>
+          <p>Únete a los venezolanos que exigimos elecciones libres y verificadas — desde Venezuela y la diáspora.</p>
         </div>
-        <div class="counter-band">
+        <div class="counter-band" style="animation:pulse 2s ease-in-out infinite">
           <div class="counter-num" id="sigCount">12.847</div>
           <div class="counter-label">personas ya han<br>firmado esta propuesta</div>
         </div>
@@ -1533,85 +1070,44 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
             <input class="finput" id="fapellido" type="text" placeholder="Apellido" autocomplete="family-name">
           </div>
           <input class="finput" id="femail" type="email" placeholder="Correo electrónico" autocomplete="email">
+          <!-- city/country prominent row -->
           <div class="frow">
             <select class="finput fselect" id="fpais">
-              <option value="" disabled selected>País de residencia</option>
+              <option value="" disabled selected>País de residencia ★</option>
               <option>Venezuela</option>
               <option>──────────</option>
               <option>Afganistán</option><option>Albania</option><option>Alemania</option>
-              <option>Andorra</option><option>Angola</option><option>Antigua y Barbuda</option>
-              <option>Arabia Saudita</option><option>Argelia</option><option>Argentina</option>
+              <option>Andorra</option><option>Angola</option><option>Argentina</option>
               <option>Armenia</option><option>Australia</option><option>Austria</option>
-              <option>Azerbaiyán</option><option>Bahamas</option><option>Bahréin</option>
-              <option>Bangladesh</option><option>Barbados</option><option>Bélgica</option>
-              <option>Belice</option><option>Benín</option><option>Bielorrusia</option>
-              <option>Bolivia</option><option>Bosnia y Herzegovina</option><option>Botsuana</option>
-              <option>Brasil</option><option>Brunéi</option><option>Bulgaria</option>
-              <option>Burkina Faso</option><option>Burundi</option><option>Bután</option>
-              <option>Cabo Verde</option><option>Camboya</option><option>Camerún</option>
-              <option>Canadá</option><option>Catar</option><option>Chad</option>
-              <option>Chile</option><option>China</option><option>Chipre</option>
-              <option>Colombia</option><option>Comoras</option><option>Congo</option>
-              <option>Corea del Norte</option><option>Corea del Sur</option><option>Costa de Marfil</option>
-              <option>Costa Rica</option><option>Croacia</option><option>Cuba</option>
-              <option>Dinamarca</option><option>Dominica</option><option>Ecuador</option>
-              <option>Egipto</option><option>El Salvador</option><option>Emiratos Árabes Unidos</option>
-              <option>Eritrea</option><option>Eslovaquia</option><option>Eslovenia</option>
-              <option>España</option><option>Estados Unidos</option><option>Estonia</option>
-              <option>Etiopía</option><option>Filipinas</option><option>Finlandia</option>
-              <option>Fiyi</option><option>Francia</option><option>Gabón</option>
-              <option>Gambia</option><option>Georgia</option><option>Ghana</option>
-              <option>Granada</option><option>Grecia</option><option>Guatemala</option>
-              <option>Guinea</option><option>Guinea-Bisáu</option><option>Guinea Ecuatorial</option>
-              <option>Guyana</option><option>Haití</option><option>Honduras</option>
-              <option>Hungría</option><option>India</option><option>Indonesia</option>
-              <option>Irak</option><option>Irán</option><option>Irlanda</option>
-              <option>Islandia</option><option>Islas Marshall</option><option>Islas Salomón</option>
-              <option>Israel</option><option>Italia</option><option>Jamaica</option>
-              <option>Japón</option><option>Jordania</option><option>Kazajistán</option>
-              <option>Kenia</option><option>Kirguistán</option><option>Kiribati</option>
-              <option>Kuwait</option><option>Laos</option><option>Lesoto</option>
-              <option>Letonia</option><option>Líbano</option><option>Liberia</option>
-              <option>Libia</option><option>Liechtenstein</option><option>Lituania</option>
-              <option>Luxemburgo</option><option>Madagascar</option><option>Malasia</option>
-              <option>Malaui</option><option>Maldivas</option><option>Malí</option>
-              <option>Malta</option><option>Marruecos</option><option>Mauricio</option>
-              <option>Mauritania</option><option>México</option><option>Micronesia</option>
-              <option>Moldavia</option><option>Mónaco</option><option>Mongolia</option>
-              <option>Montenegro</option><option>Mozambique</option><option>Myanmar</option>
-              <option>Namibia</option><option>Nauru</option><option>Nepal</option>
-              <option>Nicaragua</option><option>Níger</option><option>Nigeria</option>
-              <option>Noruega</option><option>Nueva Zelanda</option><option>Omán</option>
-              <option>Países Bajos</option><option>Pakistán</option><option>Palaos</option>
-              <option>Panamá</option><option>Papúa Nueva Guinea</option><option>Paraguay</option>
+              <option>Azerbaiyán</option><option>Bahamas</option><option>Bélgica</option>
+              <option>Bolivia</option><option>Brasil</option><option>Bulgaria</option>
+              <option>Canadá</option><option>Chile</option><option>China</option>
+              <option>Colombia</option><option>Costa Rica</option><option>Cuba</option>
+              <option>Dinamarca</option><option>Ecuador</option><option>El Salvador</option>
+              <option>Emiratos Árabes Unidos</option><option>España</option><option>Estados Unidos</option>
+              <option>Filipinas</option><option>Finlandia</option><option>Francia</option>
+              <option>Georgia</option><option>Guatemala</option><option>Guyana</option>
+              <option>Honduras</option><option>Hungría</option><option>India</option>
+              <option>Indonesia</option><option>Irlanda</option><option>Israel</option>
+              <option>Italia</option><option>Jamaica</option><option>Japón</option>
+              <option>México</option><option>Nicaragua</option><option>Noruega</option>
+              <option>Países Bajos</option><option>Panamá</option><option>Paraguay</option>
               <option>Perú</option><option>Polonia</option><option>Portugal</option>
-              <option>Reino Unido</option><option>República Centroafricana</option><option>República Checa</option>
-              <option>República Democrática del Congo</option><option>República Dominicana</option>
-              <option>Ruanda</option><option>Rumanía</option><option>Rusia</option>
-              <option>Samoa</option><option>San Cristóbal y Nieves</option><option>San Marino</option>
-              <option>San Vicente y las Granadinas</option><option>Santa Lucía</option>
-              <option>Santo Tomé y Príncipe</option><option>Senegal</option><option>Serbia</option>
-              <option>Seychelles</option><option>Sierra Leona</option><option>Singapur</option>
-              <option>Siria</option><option>Somalia</option><option>Sri Lanka</option>
-              <option>Suazilandia</option><option>Sudáfrica</option><option>Sudán</option>
-              <option>Sudán del Sur</option><option>Suecia</option><option>Suiza</option>
-              <option>Surinam</option><option>Tailandia</option><option>Tanzania</option>
-              <option>Tayikistán</option><option>Timor Oriental</option><option>Togo</option>
-              <option>Tonga</option><option>Trinidad y Tobago</option><option>Túnez</option>
-              <option>Turkmenistán</option><option>Turquía</option><option>Tuvalu</option>
-              <option>Ucrania</option><option>Uganda</option><option>Uruguay</option>
-              <option>Uzbekistán</option><option>Vanuatu</option><option>Ciudad del Vaticano</option>
-              <option>Vietnam</option><option>Yemen</option><option>Yibuti</option>
+              <option>Reino Unido</option><option>República Dominicana</option>
+              <option>Rumanía</option><option>Rusia</option>
+              <option>Suecia</option><option>Suiza</option><option>Surinam</option>
+              <option>Trinidad y Tobago</option><option>Turquía</option>
+              <option>Ucrania</option><option>Uruguay</option>
               <option>Zambia</option><option>Zimbabue</option>
             </select>
-            <input class="finput" id="fciudad" type="text" placeholder="Tu ciudad" autocomplete="address-level2">
+            <input class="finput" id="fciudad" type="text" placeholder="Tu ciudad ★" autocomplete="address-level2">
           </div>
+          <input class="finput" id="femail2" type="email" placeholder="Confirma tu correo electrónico" autocomplete="off" onpaste="return false">
+          <div id="emailError" style="display:none;font-size:12px;color:#FF3347;margin-top:-6px;padding-left:4px">⚠ Los correos no coinciden</div>
           <label class="fcheck">
             <input type="checkbox" id="fterms">
             <span>Acepto que mis datos sean usados exclusivamente para esta campaña ciudadana. <a href="#">Política de privacidad.</a></span>
           </label>
-          <input class="finput" id="femail2" type="email" placeholder="Confirma tu correo electrónico" autocomplete="off" onpaste="return false">
-          <div id="emailError" style="display:none;font-size:12px;color:#FF3347;margin-top:-6px;padding-left:4px">⚠ Los correos no coinciden</div>
           <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:8px 12px;display:flex;align-items:center;gap:10px">
             <div style="flex:1">
               <div style="font-size:9px;color:var(--muted);margin-bottom:3px;letter-spacing:.08em;text-transform:uppercase">Verificación — no soy un robot</div>
@@ -1621,7 +1117,7 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
               style="width:60px;flex-shrink:0;text-align:center;font-size:16px;font-weight:700;padding:7px 6px">
           </div>
           <div id="captchaError" style="display:none;font-size:12px;color:#FF3347;margin-top:-6px;padding-left:4px">⚠ Respuesta incorrecta, inténtalo de nuevo</div>
-          <button class="fbtn" id="fbtn" disabled onclick="firmar()">Firmar la propuesta</button>
+          <button class="fbtn" id="fbtn" disabled onclick="firmar()">✍ Firmar la propuesta</button>
         </div>
       </div>
 
@@ -1632,14 +1128,34 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
         </div>
         <h3>¡Tu firma cuenta!</h3>
         <p>Quedaste registrado como parte de esta propuesta ciudadana por elecciones libres en Venezuela.</p>
-        <div class="counter-band" style="margin-top:0">
+        <div class="counter-band" style="margin-top:0;animation:pulse 2s ease-in-out infinite">
           <div class="counter-num" id="sigCount2">12.848</div>
           <div class="counter-label">personas firmando esta propuesta</div>
+        </div>
+        <!-- share buttons with prewritten text for post-signature -->
+        <p style="font-size:12px;color:var(--muted);margin-top:4px">Comparte y suma más voces:</p>
+        <div class="share-strip" style="justify-content:center">
+          <button class="share-btn x" onclick="compartirFirmado('twitter')">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+            Compartir en X
+          </button>
+          <button class="share-btn ig" onclick="compartirFirmado('instagram')">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            Historia de Instagram
+          </button>
+        </div>
+        <!-- bridge to La Casa de la Dictadura -->
+        <div class="bridge-card">
+          <p>Conoce la documentación de los crímenes del régimen. La democracia necesita memoria.</p>
+          <a href="https://casadeladictadura.org" target="_blank" rel="noopener" class="bridge-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+            La Casa de la Dictadura →
+          </a>
         </div>
       </div>
     </div>
 
-    <!-- SHARE COLUMN — desktop: right side; mobile: hidden here, shown in footer -->
+    <!-- SHARE COLUMN — desktop right side -->
     <div class="share-column">
       <div style="font-family:var(--serif);font-size:clamp(22px,3vw,34px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:20px">
         Comparte<br>y suma<br><em style="color:var(--red2)">más voces.</em>
@@ -1656,13 +1172,12 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
       </div>
       <p style="font-size:11px;color:var(--muted);margin-top:16px;line-height:1.5;max-width:200px">
         quieroelegir.org<br>
-        <span style="opacity:.6">Basado en: Transparencia Venezuela<br>en el Exilio · Abril 2026</span>
+        <span style="opacity:.6">Transparencia Venezuela · REC<br>Voto Joven · Laboratorio de Paz<br>Abril 2026</span>
       </p>
     </div>
-
   </div>
 
-  <!-- MOBILE FOOTER: share buttons shown below form on mobile -->
+  <!-- MOBILE FOOTER: share -->
   <div class="mobile-share-footer">
     <button class="share-btn x" onclick="compartir('twitter')">
       <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
@@ -1678,7 +1193,7 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 <!-- BOTTOM BAR -->
 <div class="bot">
   <div class="logo">quiero<span>elegir</span>.org</div>
-  <span class="ctr" id="ctr">1 / 11</span>
+  <span class="ctr" id="ctr">1 / 16</span>
   <button id="btnLike" onclick="toggleLike()">
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9">
       <path d="M6 9V17M2 10.5V17a.5.5 0 0 0 .5.5H5a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1H2.5A.5.5 0 0 0 2 8.5v2ZM6 9s1-1 1-3.5a2.5 2.5 0 0 1 5 0c0 2-.5 3.5-.5 3.5H15a2 2 0 0 1 1.94 2.5l-1.5 5A2 2 0 0 1 13.5 18H6"/>
@@ -1691,14 +1206,91 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 
 <script>
 /* ── STATE ── */
-const N=11, DUR=10000;
-let cur=0, tmr=null, t0=null, paused=false;
-let liked=false;
+const N=16, DUR=10000;
+let cur=0, tmr=null, t0=null, paused=false, liked=false;
 
-/* ── SERPENTINE ── */
+/* ── PROGRESS BAR ── */
+function buildProg(){
+  const p=document.getElementById('prog');
+  for(let i=0;i<N;i++){
+    const seg=document.createElement('div');seg.className='pseg';
+    const fill=document.createElement('div');fill.className='pfill';fill.id='pf'+i;
+    fill.style.width='0%';
+    seg.appendChild(fill);p.appendChild(seg);
+  }
+}
+
+/* ── SHOW SLIDE ── */
+function showSlide(idx){
+  document.querySelectorAll('.slide').forEach((s,i)=>{
+    s.classList.remove('active','exit');
+    if(i===idx)s.classList.add('active');
+  });
+  document.getElementById('ctr').textContent=(idx+1)+' / '+N;
+  // sticky sign button: show after S0, hide on firma slide
+  const ss=document.getElementById('stickySign');
+  if(ss){
+    if(window.innerWidth<768){
+      ss.style.display=(idx>0&&idx<N-1)?'flex':'none';
+    }else{
+      ss.style.display='none';
+    }
+  }
+  // reset all fills except current
+  for(let i=0;i<N;i++){
+    const pf=document.getElementById('pf'+i);
+    if(!pf)continue;
+    if(i<idx){pf.style.width='100%';pf.style.background='var(--gold)'}
+    else if(i===idx){pf.style.background='var(--gold)'}
+    else{pf.style.width='0%';pf.style.background='var(--gold)'}
+  }
+}
+
+/* ── NAV ── */
+function nav(d){
+  if(d===1&&cur===N-1)return;
+  if(d===-1&&cur===0)return;
+  const prev=cur;
+  cur=Math.max(0,Math.min(N-1,cur+d));
+  if(cur===prev)return;
+  // trigger serpentine on forward nav
+  if(d===1)triggerSerp();
+  showSlide(cur);
+  startTick();
+}
+
+function goToFirma(){
+  const prev=cur;
+  cur=N-1;
+  if(cur!==prev)triggerSerp();
+  showSlide(cur);
+  startTick();
+}
+
+/* ── TICK (progress bar animation) ── */
+function startTick(){
+  clearInterval(tmr);
+  if(cur===N-1)return; // no auto-advance on firma
+  t0=Date.now();
+  const pf=document.getElementById('pf'+cur);
+  if(pf)pf.style.width='0%';
+  tmr=setInterval(()=>{
+    if(paused)return;
+    const elapsed=Date.now()-t0;
+    const pct=Math.min(100,(elapsed/DUR)*100);
+    const f=document.getElementById('pf'+cur);
+    if(f)f.style.width=pct+'%';
+    if(elapsed>=DUR){
+      clearInterval(tmr);
+      if(cur<N-1)nav(1);
+    }
+  },50);
+}
+
+/* ── SERPENTINE CANVAS ── */
 const canvas=document.getElementById('serp');
 const ctx=canvas.getContext('2d');
-let serpAnim=null, serpLocked=false;
+let serpAnim=null,serpLocked=false;
 function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
 window.addEventListener('resize',resize);resize();
 
@@ -1710,7 +1302,6 @@ function drawSerp(progress){
     const delay=s*.16;
     const p=Math.max(0,Math.min(1,(progress-delay)*1.4));
     if(p<=0)continue;
-
     const mobile=W<600;
     const xBase=W*(.22+s*.28);
     const sw=mobile?(50+s*6):(58+s*8);
@@ -1719,79 +1310,50 @@ function drawSerp(progress){
     const amp=mobile?(28+s*10):(55+s*18);
     const freq=mobile?0.20:0.13;
     const phase=s*1.3;
-
-    /* ribbon height = full spine length */
-    const sh=segH*steps; // = H*1.6
-    /* ribbon enters fully from off-screen top (bottom edge at y=−20 when p=0)
-       and exits fully off-screen bottom (top edge at H+20 when p=1) */
+    const sh=segH*steps;
     const yTop=(-sh-20)+p*(H+sh+40);
     const alpha=Math.max(0,.92*(1-Math.max(0,p-.82)*5));
     if(alpha<=0)continue;
-
-    /* build spine along the sine wave */
     const spine=[];
     for(let i=0;i<=steps;i++){
       const y=yTop+i*segH;
       const x=xBase+Math.sin(i*freq+phase)*amp;
       spine.push({x,y});
     }
-
-    /* perpendicular offset helper */
     function perp(i,side){
       const nx=i<steps?(spine[i+1].x-spine[i].x):(spine[i].x-spine[i-1].x);
       const ny=i<steps?(spine[i+1].y-spine[i].y):segH;
       const len=Math.sqrt(nx*nx+ny*ny)||1;
-      return {ox:(-ny/len)*(sw/2)*side, oy:(nx/len)*(sw/2)*side};
+      return{ox:(-ny/len)*(sw/2)*side,oy:(nx/len)*(sw/2)*side};
     }
-
-    ctx.save();
-    ctx.globalAlpha=alpha;
-
-    /* ── 1. Paper fill ── */
+    ctx.save();ctx.globalAlpha=alpha;
     ctx.beginPath();
-    for(let i=0;i<=steps;i++){const {ox,oy}=perp(i,1);i===0?ctx.moveTo(spine[i].x+ox,spine[i].y+oy):ctx.lineTo(spine[i].x+ox,spine[i].y+oy);}
-    for(let i=steps;i>=0;i--){const {ox,oy}=perp(i,-1);ctx.lineTo(spine[i].x+ox,spine[i].y+oy);}
-    ctx.closePath();
-    ctx.fillStyle='#F6F5EF';ctx.fill();
-
-    /* ── 2. Blue diagonal-stripe borders (left & right, like real CNE acta) ── */
+    for(let i=0;i<=steps;i++){const{ox,oy}=perp(i,1);i===0?ctx.moveTo(spine[i].x+ox,spine[i].y+oy):ctx.lineTo(spine[i].x+ox,spine[i].y+oy);}
+    for(let i=steps;i>=0;i--){const{ox,oy}=perp(i,-1);ctx.lineTo(spine[i].x+ox,spine[i].y+oy);}
+    ctx.closePath();ctx.fillStyle='#F6F5EF';ctx.fill();
     const bw=sw*0.22;
     [1,-1].forEach(sg=>{
-      /* build clip path for this border strip */
-      ctx.save();
-      ctx.beginPath();
-      for(let i=0;i<=steps;i++){
-        const {ox,oy}=perp(i,sg);
-        i===0?ctx.moveTo(spine[i].x+ox,spine[i].y+oy):ctx.lineTo(spine[i].x+ox,spine[i].y+oy);
-      }
+      ctx.save();ctx.beginPath();
+      for(let i=0;i<=steps;i++){const{ox,oy}=perp(i,sg);i===0?ctx.moveTo(spine[i].x+ox,spine[i].y+oy):ctx.lineTo(spine[i].x+ox,spine[i].y+oy);}
       for(let i=steps;i>=0;i--){
         const nx2=i<steps?(spine[i+1].x-spine[i].x):(spine[i].x-spine[i-1].x);
         const ny2=i<steps?(spine[i+1].y-spine[i].y):segH;
         const l2=Math.sqrt(nx2*nx2+ny2*ny2)||1;
-        ctx.lineTo(spine[i].x+(-ny2/l2)*(sw/2-bw)*sg, spine[i].y+(nx2/l2)*(sw/2-bw)*sg);
+        ctx.lineTo(spine[i].x+(-ny2/l2)*(sw/2-bw)*sg,spine[i].y+(nx2/l2)*(sw/2-bw)*sg);
       }
-      ctx.closePath();
-      ctx.clip();
-      /* blue fill */
+      ctx.closePath();ctx.clip();
       ctx.fillStyle='#1a3570';ctx.fillRect(-W,-H,W*3,H*3);
-      /* white diagonal stripes */
       ctx.strokeStyle='rgba(255,255,255,0.42)';ctx.lineWidth=2;
-      for(let d=-H*3;d<H*3;d+=8){
-        ctx.beginPath();ctx.moveTo(-W,d);ctx.lineTo(W*2,d+W*3);ctx.stroke();
-      }
+      for(let d=-H*3;d<H*3;d+=8){ctx.beginPath();ctx.moveTo(-W,d);ctx.lineTo(W*2,d+W*3);ctx.stroke();}
       ctx.restore();
     });
-
-    /* ── 3. CNE logo × 3 at 15 / 50 / 85% ── */
     [.15,.50,.85].forEach(frac=>{
       const idx=Math.min(Math.round(frac*steps),steps);
       const pt=spine[idx];
       if(!pt||pt.y<-50||pt.y>H+50)return;
       const cx=pt.x,cy=pt.y;
-      const ls=sw*0.46; /* logo size proportional to strip */
-      const hw=ls/2, r=ls*0.12;
-
-      /* outer rounded-rect */
+      const ls=sw*0.46;
+      const hw=ls/2,r=ls*0.12;
       ctx.strokeStyle='#1a3570';ctx.lineWidth=1.5;
       ctx.beginPath();
       ctx.moveTo(cx-hw+r,cy-hw);ctx.lineTo(cx+hw-r,cy-hw);ctx.arcTo(cx+hw,cy-hw,cx+hw,cy-hw+r,r);
@@ -1799,103 +1361,41 @@ function drawSerp(progress){
       ctx.lineTo(cx-hw+r,cy+hw);ctx.arcTo(cx-hw,cy+hw,cx-hw,cy+hw-r,r);
       ctx.lineTo(cx-hw,cy-hw+r);ctx.arcTo(cx-hw,cy-hw,cx-hw+r,cy-hw,r);
       ctx.closePath();ctx.stroke();
-
-      /* inner rounded-rect (double border like real logo) */
-      const iw=hw*0.78,ir=r*0.7;
-      ctx.lineWidth=0.8;
-      ctx.beginPath();
-      ctx.moveTo(cx-iw+ir,cy-iw);ctx.lineTo(cx+iw-ir,cy-iw);ctx.arcTo(cx+iw,cy-iw,cx+iw,cy-iw+ir,ir);
-      ctx.lineTo(cx+iw,cy+iw-ir);ctx.arcTo(cx+iw,cy+iw,cx+iw-ir,cy+iw,ir);
-      ctx.lineTo(cx-iw+ir,cy+iw);ctx.arcTo(cx-iw,cy+iw,cx-iw,cy+iw-ir,ir);
-      ctx.lineTo(cx-iw,cy-iw+ir);ctx.arcTo(cx-iw,cy-iw,cx-iw+ir,cy-iw,ir);
-      ctx.closePath();ctx.stroke();
-
-      /* CNE text */
+      const dw=ls*0.78,dh=ls*0.52;
+      const dx=cx-dw/2,dy=cy-dh/2;
+      const ts=ls/3;
+      ctx.fillStyle='#C8102E';
+      ctx.beginPath();ctx.moveTo(dx,dy+dh/2);ctx.lineTo(dx+dw/3,dy);ctx.lineTo(dx+dw/3,dy+dh);ctx.closePath();ctx.fill();
+      ctx.fillStyle='#F5B800';
+      ctx.beginPath();ctx.moveTo(dx+dw/3,dy+dh/2);ctx.lineTo(dx+dw*2/3,dy);ctx.lineTo(dx+dw*2/3,dy+dh);ctx.closePath();ctx.fill();
       ctx.fillStyle='#1a3570';
-      ctx.font=`bold ${ls*0.38}px Arial,sans-serif`;
-      ctx.textAlign='center';ctx.textBaseline='middle';
-      ctx.fillText('CNE',cx,cy);
-
-      /* PODER ELECTORAL below */
-      ctx.font=`${ls*0.22}px Arial,sans-serif`;
-      ctx.fillText('PODER ELECTORAL',cx,cy+ls*0.74);
+      ctx.beginPath();ctx.moveTo(dx+dw*2/3,dy+dh/2);ctx.lineTo(dx+dw,dy);ctx.lineTo(dx+dw,dy+dh);ctx.closePath();ctx.fill();
+      ctx.fillStyle='white';ctx.font=`bold ${ts}px Arial Black,sans-serif`;
+      ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('CNE',cx+ls*0.05,cy);
     });
-
     ctx.restore();
   }
 }
 
-function animateSerp(onMid){
-  if(serpAnim)cancelAnimationFrame(serpAnim);
+function triggerSerp(){
+  if(serpLocked)return;
   serpLocked=true;
   canvas.style.opacity='1';
-  const dur=2200,start=performance.now();
-  let midFired=false;
-  function frame(now){
-    const p=Math.min(1,(now-start)/dur);
-    try{drawSerp(p);}catch(e){console.error(e);}
-    if(!midFired&&p>=0.38){
-      midFired=true;
-      serpLocked=false; // unlock nav as soon as slide changes
-      if(onMid)onMid();
-    }
+  let start=null;
+  const dur=900;
+  function frame(ts){
+    if(!start)start=ts;
+    const p=Math.min(1,(ts-start)/dur);
+    drawSerp(p);
     if(p<1){serpAnim=requestAnimationFrame(frame);}
     else{
       ctx.clearRect(0,0,canvas.width,canvas.height);
       canvas.style.opacity='0';
-      serpAnim=null;
       serpLocked=false;
     }
   }
+  cancelAnimationFrame(serpAnim);
   serpAnim=requestAnimationFrame(frame);
-}
-
-/* ── PROGRESS ── */
-function buildProg(){
-  const b=document.getElementById('prog');b.innerHTML='';
-  for(let i=0;i<N;i++){
-    const s=document.createElement('div');s.className='pseg';s.id='ps'+i;
-    const f=document.createElement('div');f.className='pfill';f.id='pf'+i;
-    f.style.width=i<cur?'100%':'0%';
-    s.appendChild(f);b.appendChild(s);
-  }
-}
-
-/* ── NAVIGATION ── */
-function showSlide(idx){
-  document.getElementById('s'+cur).classList.remove('active');
-  cur=Math.max(0,Math.min(N-1,idx));
-  document.getElementById('s'+cur).classList.add('active');
-  document.getElementById('ctr').textContent=(cur+1)+' / '+N;
-  buildProg();
-  const firma=cur===N-1;
-  // On firma slide: left nav stays active (go back), right nav hidden (no forward)
-  document.getElementById('navL').style.pointerEvents='';
-  document.getElementById('navL').style.opacity='';
-  document.getElementById('navR').style.pointerEvents=firma?'none':'';
-  document.getElementById('navR').style.opacity=firma?'0':'';
-  if(firma)clearInterval(tmr);
-  else if(!paused)startTick();
-}
-
-function nav(d){
-  if(serpLocked)return;
-  const t=cur+d;
-  if(t<0||t>=N)return; // bounds check BEFORE clearing timer
-  clearInterval(tmr);
-  animateSerp(()=>showSlide(t));
-}
-
-function startTick(){
-  clearInterval(tmr);t0=Date.now();
-  const f=document.getElementById('pf'+cur);
-  if(!f)return;
-  tmr=setInterval(()=>{
-    if(paused)return;
-    const p=Math.min(100,(Date.now()-t0)/DUR*100);
-    if(f)f.style.width=p+'%';
-    if(p>=100)nav(1);
-  },60);
 }
 
 /* ── PAUSE ── */
@@ -1907,7 +1407,7 @@ function togglePause(){
   if(!paused)t0=Date.now()-(parseFloat((document.getElementById('pf'+cur)||{}).style?.width||'0')/100*DUR);
 }
 
-/* ── LIKE (once per session) ── */
+/* ── LIKE ── */
 function toggleLike(){
   if(liked)return;
   liked=true;
@@ -1919,7 +1419,7 @@ function toggleLike(){
 }
 
 /* ── CAPTCHA ── */
-let captchaAnswer = 0;
+let captchaAnswer=0;
 function genCaptcha(){
   const ops=['+','+','+','-','×'];
   const op=ops[Math.floor(Math.random()*ops.length)];
@@ -1937,18 +1437,12 @@ function validate(){
   const nombre=document.getElementById('fnombre').value.trim();
   const email1=document.getElementById('femail').value.trim();
   const email2=document.getElementById('femail2').value.trim();
-  const pais  =document.getElementById('fpais').value;
-  const terms =document.getElementById('fterms').checked;
-  const cap   =parseInt(document.getElementById('fcaptcha').value);
-
-  // email match feedback
+  const pais=document.getElementById('fpais').value;
+  const terms=document.getElementById('fterms').checked;
+  const cap=parseInt(document.getElementById('fcaptcha').value);
   const errEl=document.getElementById('emailError');
-  if(email2&&email1&&email2!==email1){
-    errEl.style.display='block';
-  } else {
-    errEl.style.display='none';
-  }
-
+  if(email2&&email1&&email2!==email1){errEl.style.display='block';}
+  else{errEl.style.display='none';}
   const emailValid=email1.includes('@')&&email1.includes('.')&&email1===email2&&email2.length>0;
   const captchaOk=!isNaN(cap)&&cap===captchaAnswer&&document.getElementById('fcaptcha').value!=='';
   const ok=nombre&&emailValid&&pais&&terms&&captchaOk;
@@ -1960,13 +1454,10 @@ function validate(){
 });
 
 function firmar(){
-  // double-check captcha on submit
   const cap=parseInt(document.getElementById('fcaptcha').value);
   if(cap!==captchaAnswer){
     document.getElementById('captchaError').style.display='block';
-    genCaptcha();
-    validate();
-    return;
+    genCaptcha();validate();return;
   }
   document.getElementById('captchaError').style.display='none';
   const n=(12847+Math.floor(Math.random()*60)+3).toLocaleString('es-VE');
@@ -1994,94 +1485,46 @@ async function generateStoryImage(){
     document.fonts.load('500 44px "DM Sans"'),
   ]);
   const W=1080,H=1920;
-  const sc=document.createElement('canvas');
-  sc.width=W;sc.height=H;
+  const sc=document.createElement('canvas');sc.width=W;sc.height=H;
   const c=sc.getContext('2d');
-
-  /* background */
   const bg=c.createLinearGradient(0,0,W*.8,H);
   bg.addColorStop(0,'#1e3a6e');bg.addColorStop(.5,'#3d1a6e');bg.addColorStop(1,'#5c1a28');
   c.fillStyle=bg;c.fillRect(0,0,W,H);
-
-  /* color blobs */
   const rb=c.createRadialGradient(W+200,-150,0,W+200,-150,900);
   rb.addColorStop(0,'rgba(200,16,46,0.38)');rb.addColorStop(1,'rgba(200,16,46,0)');
   c.fillStyle=rb;c.fillRect(0,0,W,H);
   const bb=c.createRadialGradient(-150,H+150,0,-150,H+150,800);
   bb.addColorStop(0,'rgba(30,58,138,0.42)');bb.addColorStop(1,'rgba(30,58,138,0)');
   c.fillStyle=bb;c.fillRect(0,0,W,H);
-  const gb=c.createRadialGradient(W*.3,H*.45,0,W*.3,H*.45,380);
-  gb.addColorStop(0,'rgba(245,184,0,0.10)');gb.addColorStop(1,'rgba(245,184,0,0)');
-  c.fillStyle=gb;c.fillRect(0,0,W,H);
-
-  /* right tricolor vertical pills */
-  const pilW=44,pilX=W-130,pilGap=24;
-  const pilH=(H-pilGap*2-120)/3;
-  [['#F5B800',0],['#1E3A8A',1],['#C8102E',2]].forEach(([col,i])=>{
-    const py=60+i*(pilH+pilGap);
-    _rr(c,pilX,py,pilW,pilH,pilW/2);
-    c.fillStyle=col;c.fill();
-  });
-
   const lx=100;
   const sepLen=W-lx-180;
-
-  /* tag badge */
   c.font='600 40px "DM Sans",sans-serif';
   const tagTxt='#QuieroElegir';
   const tw=c.measureText(tagTxt).width;
   _rr(c,lx,130,tw+44,58,29);
   c.strokeStyle='rgba(245,184,0,0.75)';c.lineWidth=2;c.stroke();
   c.fillStyle='rgba(240,235,220,0.88)';c.textBaseline='middle';c.fillText(tagTxt,lx+22,159);
-
-  /* main headline */
   c.textBaseline='alphabetic';
-  c.fillStyle='#F0EBE0';
-  c.font='900 164px "Playfair Display",serif';
-  c.fillText('Venezuela',lx,440);
-  c.font='italic 900 164px "Playfair Display",serif';
-  c.fillText('merece',lx,630);
-  c.fillStyle='#F5B800';
-  c.fillText('elegir.',lx,820);
-
-  /* tricolor separator */
+  c.fillStyle='#F0EBE0';c.font='900 164px "Playfair Display",serif';c.fillText('Venezuela',lx,440);
+  c.font='italic 900 164px "Playfair Display",serif';c.fillText('merece',lx,630);
+  c.fillStyle='#F5B800';c.fillText('elegir.',lx,820);
   function triSep(y){
     [['#F5B800',0],['#1E3A8A',1],['#C8102E',2]].forEach(([col,i])=>{
       c.fillStyle=col;c.fillRect(lx+i*(sepLen/3),y,sepLen/3-6,5);
     });
   }
   triSep(900);
-
-  /* body */
-  c.fillStyle='rgba(240,235,224,0.62)';
-  c.font='400 46px "DM Sans",sans-serif';
-  ['El problema electoral venezolano','no son fallas aisladas — es un','colapso estructural.']
+  c.fillStyle='rgba(240,235,224,0.62)';c.font='400 46px "DM Sans",sans-serif';
+  ['El 28J el régimen robó la victoria.','Hoy exigimos elecciones','libres y verificables.']
     .forEach((ln,i)=>c.fillText(ln,lx,990+i*70));
-
-  /* proposal badge */
-  c.fillStyle='rgba(240,235,224,0.42)';
-  c.font='500 40px "DM Sans",sans-serif';
-  c.fillText('Propuesta ciudadana · Abril 2026',lx,1240);
   triSep(1284);
-
-  /* CTA */
-  c.fillStyle='rgba(240,235,224,0.90)';
-  c.font='700 56px "DM Sans",sans-serif';
+  c.fillStyle='rgba(240,235,224,0.90)';c.font='700 56px "DM Sans",sans-serif';
   c.fillText('Firma y comparte.',lx,1390);
-
-  /* source */
-  c.fillStyle='rgba(240,235,224,0.38)';
-  c.font='400 36px "DM Sans",sans-serif';
-  c.fillText('Fuente: Transparencia Venezuela en el Exilio',lx,1478);
-
-  /* bottom separator */
+  c.fillStyle='rgba(240,235,224,0.38)';c.font='400 36px "DM Sans",sans-serif';
+  c.fillText('Fuente: Transparencia Venezuela · REC · Voto Joven',lx,1478);
   triSep(H-186);
-
-  /* URL */
-  c.fillStyle='rgba(240,235,224,0.90)';
-  c.font='700 58px "DM Sans",sans-serif';
+  c.fillStyle='rgba(240,235,224,0.90)';c.font='700 58px "DM Sans",sans-serif';
   c.fillText('quieroelegir.org',lx,H-108);
-
   return sc;
 }
 
@@ -2099,23 +1542,36 @@ function _showToast(msg){
 async function compartir(red){
   const url='https://quieroelegir.org';
   const txt='Me uno a la propuesta ciudadana por elecciones libres en Venezuela. Firma aquí: '+url+' #QuieroElegir #Venezuela';
-  if(red==='twitter'){
-    window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(txt),'_blank','noopener');
-    return;
-  }
+  if(red==='twitter'){window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(txt),'_blank','noopener');return;}
   if(red==='instagram'){
     try{
       const sc=await generateStoryImage();
-      const a=document.createElement('a');
-      a.href=sc.toDataURL('image/png');
-      a.download='quieroelegir-historia.png';
+      const a=document.createElement('a');a.href=sc.toDataURL('image/png');a.download='quieroelegir-historia.png';
       document.body.appendChild(a);a.click();document.body.removeChild(a);
       navigator.clipboard?.writeText(url).catch(()=>{});
       _showToast('✓ Imagen descargada · enlace copiado');
     }catch(err){
-      console.error(err);
       navigator.clipboard?.writeText(url+' '+txt).catch(()=>{});
       _showToast('Enlace copiado — comparte en tu historia');
+    }
+  }
+}
+
+/* post-signature share: different prewritten text */
+async function compartirFirmado(red){
+  const url='https://quieroelegir.org';
+  const txt='Acabo de firmar con #QuieroElegir. Venezuela merece elegir. '+url;
+  if(red==='twitter'){window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(txt),'_blank','noopener');return;}
+  if(red==='instagram'){
+    try{
+      const sc=await generateStoryImage();
+      const a=document.createElement('a');a.href=sc.toDataURL('image/png');a.download='quieroelegir-firmado.png';
+      document.body.appendChild(a);a.click();document.body.removeChild(a);
+      navigator.clipboard?.writeText(txt).catch(()=>{});
+      _showToast('✓ Imagen descargada · texto copiado');
+    }catch(err){
+      navigator.clipboard?.writeText(txt).catch(()=>{});
+      _showToast('Texto copiado — comparte en tu historia');
     }
   }
 }
@@ -2127,21 +1583,18 @@ document.addEventListener('touchend',e=>{
   const dx=e.changedTouches[0].clientX-tx;
   const dy=Math.abs(e.changedTouches[0].clientY-ty);
   if(Math.abs(dx)>48&&dy<70){
-    if(cur===N-1&&dx<0)return; // no forward from firma
+    if(cur===N-1&&dx<0)return;
     nav(dx<0?1:-1);
   }
 },{passive:true});
 document.addEventListener('keydown',e=>{
-  if(e.key==='ArrowRight'||e.key===' '){
-    if(cur===N-1)return; // no forward from firma
-    e.preventDefault();nav(1);
-  }
-  if(e.key==='ArrowLeft'){e.preventDefault();nav(-1)}
+  if(e.key==='ArrowRight'||e.key===' '){if(cur===N-1)return;e.preventDefault();nav(1);}
+  if(e.key==='ArrowLeft'){e.preventDefault();nav(-1);}
   if(e.key==='p'||e.key==='P')togglePause();
 });
 
 /* ── INIT ── */
-buildProg();startTick();genCaptcha();
+buildProg();showSlide(0);startTick();genCaptcha();
 </script>
 </body>
 </html>

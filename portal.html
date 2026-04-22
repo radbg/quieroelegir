@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuieroElegir — Venezuela merece elegir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#CF142B;--gold:#FFD200;--gold2:#ffe040;
+  --black:#0a0a0a;--white:#FFFFFF;--cream:#F5EDD8;
+  --muted:#888;--border:rgba(0,0,0,.1);
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);background:var(--white);color:var(--black);
+  -webkit-font-smoothing:antialiased;min-height:100vh;
+}
+
+/* ── TOP BAR ── */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 32px;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.topbar-logo{
+  font-family:var(--serif);font-size:20px;font-weight:900;
+  letter-spacing:-.02em;color:var(--black);text-decoration:none;
+}
+.topbar-logo span{color:var(--red)}
+.topbar-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 24px;background:var(--red);color:#fff;
+  font-family:var(--sans);font-size:14px;font-weight:700;
+  border:none;border-radius:3px;cursor:pointer;text-decoration:none;
+  transition:background .2s,transform .15s;
+  letter-spacing:.02em;
+}
+.topbar-cta:hover{background:#b01020;transform:translateY(-1px)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:120px 32px 80px;
+  background:var(--white);
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+/* subtle tricolor background bands */
+.hero::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(to right,var(--gold) 33.3%,var(--flag-blue,#0032A0) 33.3% 66.6%,var(--red) 66.6%);
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;margin-bottom:28px;
+  font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--red);border:1.5px solid rgba(207,20,43,.3);
+  padding:5px 16px;border-radius:2px;
+}
+.hero-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--red);animation:blink 1.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-q{
+  font-family:var(--serif);font-size:clamp(14px,2vw,18px);
+  font-weight:400;color:var(--muted);margin-bottom:16px;
+  letter-spacing:.04em;
+}
+.hero-title{
+  font-family:var(--serif);
+  font-size:clamp(52px,8vw,112px);
+  font-weight:900;line-height:.95;
+  letter-spacing:-.03em;color:var(--black);
+  margin-bottom:32px;
+}
+.hero-title em{color:var(--red);font-style:italic}
+/* counter */
+.hero-counter{
+  display:inline-flex;align-items:center;gap:14px;
+  margin-bottom:48px;
+  padding:14px 28px;
+  border:1.5px solid rgba(207,20,43,.2);
+  border-radius:6px;
+  background:rgba(207,20,43,.03);
+}
+.hero-counter-num{
+  font-family:var(--serif);font-size:clamp(28px,4vw,40px);font-weight:900;
+  color:var(--red);
+  animation:counterPulse 2.2s ease-in-out infinite;
+}
+@keyframes counterPulse{
+  0%,100%{opacity:1}
+  50%{opacity:.75;text-shadow:0 0 20px rgba(207,20,43,.4)}
+}
+.hero-counter-label{font-size:14px;color:var(--muted);line-height:1.4;text-align:left}
+.hero-counter-label strong{display:block;font-size:12px;font-weight:700;color:var(--black);text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px}
+
+/* ── CARDS ── */
+.cards-section{
+  padding:0 32px 80px;
+  max-width:1080px;margin:0 auto;
+}
+.cards-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:24px;
+  margin-bottom:48px;
+}
+.card{
+  border:1.5px solid rgba(0,0,0,.1);border-radius:8px;
+  overflow:hidden;text-decoration:none;color:inherit;
+  transition:transform .2s,box-shadow .2s,border-color .2s;
+  display:flex;flex-direction:column;
+  position:relative;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.12);border-color:rgba(0,0,0,.2)}
+.card-header{
+  padding:32px 32px 24px;
+  display:flex;flex-direction:column;gap:12px;
+}
+.card-eyebrow{
+  font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  display:flex;align-items:center;gap:8px;
+}
+.card-eyebrow-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.card-title{
+  font-family:var(--serif);font-size:clamp(26px,3.5vw,38px);
+  font-weight:900;line-height:1.05;letter-spacing:-.02em;
+}
+.card-title em{font-style:italic}
+.card-desc{font-size:clamp(14px,1.6vw,16px);line-height:1.65;color:#444;margin-top:4px}
+.card-footer{
+  margin-top:auto;padding:20px 32px;
+  border-top:1px solid rgba(0,0,0,.07);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.card-link{
+  font-size:14px;font-weight:700;color:inherit;
+  display:inline-flex;align-items:center;gap:8px;
+  text-decoration:none;letter-spacing:.01em;
+}
+.card-link svg{transition:transform .2s}
+.card:hover .card-link svg{transform:translateX(4px)}
+
+/* card A: #QuieroElegir manifesto */
+.card-a{background:var(--black);color:var(--white)}
+.card-a .card-eyebrow{color:var(--gold)}
+.card-a .card-title{color:var(--white)}
+.card-a .card-title em{color:var(--red)}
+.card-a .card-desc{color:rgba(255,255,255,.65)}
+.card-a .card-footer{border-top-color:rgba(255,255,255,.1)}
+.card-a .card-link{color:var(--gold)}
+.card-a::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(207,20,43,.12) 0%,transparent 60%);
+  pointer-events:none;
+}
+/* card B: La Casa de la Dictadura */
+.card-b{background:var(--cream)}
+.card-b .card-eyebrow{color:#7a3a00}
+.card-b .card-title{color:var(--black)}
+.card-b .card-desc{color:#555}
+.card-b .card-link{color:var(--black)}
+
+/* ── ORGS PILLS ── */
+.orgs-section{
+  max-width:1080px;margin:0 auto;padding:0 32px 64px;
+}
+.orgs-label{
+  font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:16px;
+}
+.orgs-row{display:flex;flex-wrap:wrap;gap:10px}
+.opill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 18px;border-radius:40px;border:1px solid rgba(0,0,0,.12);
+  font-size:13px;font-weight:500;color:#333;
+  background:var(--white);
+}
+.opill-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--border);
+  padding:32px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+}
+.footer-logo{font-family:var(--serif);font-size:18px;font-weight:900;color:var(--black);letter-spacing:-.02em}
+.footer-logo span{color:var(--red)}
+.footer-meta{font-size:12px;color:var(--muted);line-height:1.6;text-align:right}
+
+/* ── RESPONSIVE ── */
+@media(max-width:767px){
+  .topbar{padding:14px 20px}
+  .topbar-logo{font-size:17px}
+  .topbar-cta{padding:9px 18px;font-size:13px}
+  .hero{padding:100px 20px 60px;text-align:center}
+  .hero-counter{flex-direction:column;gap:6px;text-align:center}
+  .hero-counter-label{text-align:center}
+  .cards-section,.orgs-section{padding-left:20px;padding-right:20px}
+  .cards-grid{grid-template-columns:1fr;gap:16px}
+  .card-header{padding:24px 24px 18px}
+  .card-footer{padding:16px 24px}
+  footer{padding:24px 20px;flex-direction:column;text-align:center}
+  .footer-meta{text-align:center}
+}
+@media(min-width:768px) and (max-width:1023px){
+  .hero-title{font-size:clamp(52px,7vw,80px)}
+  .cards-grid{gap:16px}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="quieroelegir.html" class="topbar-logo">quiero<span>elegir</span>.org</a>
+  <a href="quieroelegir.html#firma" class="topbar-cta">
+    <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
+    Firmar la propuesta
+  </a>
+</header>
+
+<main>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-tag">
+      <span class="hero-tag-dot"></span>
+      Movimiento ciudadano · Venezuela · 2026
+    </div>
+    <p class="hero-q">¿Qué quieres hacer hoy?</p>
+    <h1 class="hero-title">Venezuela<br>merece <em>elegir.</em></h1>
+    <div class="hero-counter" aria-live="polite">
+      <div class="hero-counter-num" id="heroCount">12.847</div>
+      <div class="hero-counter-label">
+        <strong>personas firmando</strong>
+        este manifiesto ciudadano
+      </div>
+    </div>
+    <!-- scroll hint -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;opacity:.4">
+      <span style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">Elige tu camino</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </div>
+  </section>
+
+  <!-- ── TWO-PATH CARDS ── -->
+  <section class="cards-section">
+    <div class="cards-grid">
+
+      <!-- Card A: #QuieroElegir manifesto -->
+      <a href="quieroelegir.html" class="card card-a" aria-label="Leer el manifiesto QuieroElegir">
+        <div class="card-header">
+          <div class="card-eyebrow">
+            <span class="card-eyebrow-dot" style="background:var(--gold)"></span>
+            #QuieroElegir · Manifiesto ciudadano
+          </div>
+          <h2 class="card-title">Las 11 condiciones<br>mínimas para <em>elegir.</em></h2>
+          <p class="card-desc">Las condiciones verificables y no negociables que exige la sociedad civil venezolana para que pueda existir una elección legítima. Respaldadas por investigación de organizaciones independientes.</p>
+        </div>
+        <div class="card-footer">
+          <div class="card-link">
+            Leer y firmar el manifiesto
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+          <div style="font-size:11px;color:rgba(255,255,255,.35);font-weight:600;letter-spacing:.08em;text-transform:uppercase">Firmar →</div>
+        </div>
+      </a>
+
+      <!-- Card B: La Casa de la Dictadura -->
+      <a href="https://casadeladictadura.org" target="_blank" rel="noopener" class="card card-b" aria-label="Visitar La Casa de la Dictadura">
+        <div class="card-header">
+          <div class="card-eyebrow">
+            <span class="card-eyebrow-dot" style="background:#7a3a00"></span>
+            Documentación · Memoria histórica
+          </div>
+          <h2 class="card-title">La Casa de<br>la <em>Dictadura.</em></h2>
+          <p class="card-desc">Archivo vivo de los crímenes, abusos y violaciones cometidos por el régimen de Maduro. Porque la democracia también se construye con memoria. Porque el pueblo venezolano merece verdad.</p>
+        </div>
+        <div class="card-footer">
+          <div class="card-link">
+            Acceder al archivo
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </div>
+          <div style="font-size:11px;color:rgba(0,0,0,.3);font-weight:600;letter-spacing:.08em;text-transform:uppercase">Externo →</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── ORGANIZATIONS ── -->
+  <section class="orgs-section">
+    <p class="orgs-label">Organizaciones que respaldan #QuieroElegir</p>
+    <div class="orgs-row">
+      <div class="opill"><span class="opill-dot" style="background:#CF142B"></span>Transparencia Venezuela en el Exilio</div>
+      <div class="opill"><span class="opill-dot" style="background:#0032A0"></span>Voto Joven Venezuela</div>
+      <div class="opill"><span class="opill-dot" style="background:#2a8a50"></span>Red Electoral Ciudadana (REC)</div>
+      <div class="opill"><span class="opill-dot" style="background:#5050a0"></span>Observatorio Global de Comunicación y Democracia</div>
+      <div class="opill"><span class="opill-dot" style="background:#c07000"></span>Laboratorio de Paz</div>
+      <div class="opill" style="opacity:.55;border-style:dashed"><span class="opill-dot" style="background:#ccc"></span>+ organizaciones aliadas</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-logo">quiero<span>elegir</span>.org</div>
+  <div class="footer-meta">
+    Campaña ciudadana · Abril 2026<br>
+    Basada en investigación de Transparencia Venezuela · REC · Voto Joven · Laboratorio de Paz
+  </div>
+</footer>
+
+</body>
+</html>
