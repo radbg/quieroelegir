@@ -23,8 +23,13 @@ body{
 }
 
 /* ── TOP BAR ── */
+.tricolor{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:4px;
+  background:linear-gradient(to right,#FFD200 33.33%,#0032A0 33.33% 66.66%,#CF142B 66.66%);
+}
 .topbar{
-  position:fixed;top:0;left:0;right:0;z-index:100;
+  position:fixed;top:4px;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
   padding:16px 32px;
   background:rgba(255,255,255,.92);
@@ -218,6 +223,7 @@ footer{
 </head>
 <body>
 
+<div class="tricolor" aria-hidden="true"></div>
 <header class="topbar">
   <a href="https://radbg.github.io/quieroelegir/" class="topbar-logo">quiero<span>elegir</span>.org</a>
   <a href="https://radbg.github.io/quieroelegir/" class="topbar-cta">
