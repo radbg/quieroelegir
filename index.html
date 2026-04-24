@@ -1253,18 +1253,22 @@ function nav(d){
   const prev=cur;
   cur=Math.max(0,Math.min(N-1,cur+d));
   if(cur===prev)return;
-  // trigger serpentine on forward nav
-  if(d===1)triggerSerp();
-  showSlide(cur);
-  startTick();
+  if(d===1){
+    // actas caen → slide cambia a mitad de la animación
+    triggerSerp(()=>{showSlide(cur);startTick();});
+  } else {
+    showSlide(cur);startTick();
+  }
 }
 
 function goToFirma(){
   const prev=cur;
   cur=N-1;
-  if(cur!==prev)triggerSerp();
-  showSlide(cur);
-  startTick();
+  if(cur!==prev){
+    triggerSerp(()=>{showSlide(cur);startTick();});
+  } else {
+    showSlide(cur);startTick();
+  }
 }
 
 /* ── TICK (progress bar animation) ── */
@@ -1377,16 +1381,19 @@ function drawSerp(progress){
   }
 }
 
-function triggerSerp(){
+function triggerSerp(midCb){
   if(serpLocked)return;
   serpLocked=true;
   canvas.style.opacity='1';
   let start=null;
-  const dur=900;
+  const dur=1800;      /* duración total de la caída de actas */
+  const midAt=0.40;   /* el slide cambia cuando las actas llevan 40% del recorrido */
+  let midFired=false;
   function frame(ts){
     if(!start)start=ts;
     const p=Math.min(1,(ts-start)/dur);
     drawSerp(p);
+    if(!midFired&&p>=midAt&&midCb){midFired=true;midCb();}
     if(p<1){serpAnim=requestAnimationFrame(frame);}
     else{
       ctx.clearRect(0,0,canvas.width,canvas.height);
