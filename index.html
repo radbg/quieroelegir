@@ -475,6 +475,38 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
   .inner{max-width:680px}
   .pit{position:absolute !important;top:58px !important}
 }
+/* ── WALL SLIDE (S16) ── */
+#s16{display:block;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.2) transparent}
+#s16::-webkit-scrollbar{width:4px}
+#s16::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:2px}
+.wall-wrap{position:relative;z-index:40;width:100%;max-width:900px;margin:0 auto;padding:72px 28px 100px}
+.wall-title{font-family:var(--serif);font-size:clamp(28px,4vw,52px);font-weight:900;color:#fff;line-height:1;letter-spacing:-.02em;margin-bottom:6px}
+.wall-title em{color:var(--red2);font-style:italic}
+.wall-sub{font-size:clamp(13px,1.6vw,15px);color:var(--muted);margin-bottom:28px;line-height:1.5}
+.wall-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.wcard{
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);
+  border-radius:12px;overflow:hidden;text-decoration:none;color:inherit;
+  display:flex;flex-direction:column;
+  transition:background .2s,transform .2s,border-color .2s;
+}
+.wcard:hover{background:rgba(255,255,255,.12);transform:translateY(-3px);border-color:rgba(255,255,255,.25)}
+.wcard-thumb{
+  width:100%;aspect-ratio:16/9;
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;position:relative;overflow:hidden;flex-shrink:0;
+}
+.wcard-body{padding:14px 16px 16px;flex:1;display:flex;flex-direction:column;gap:6px}
+.wcard-type{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.wcard-type-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.wcard-title{font-size:clamp(13px,1.4vw,15px);font-weight:600;color:#fff;line-height:1.4}
+.wcard-source{font-size:11px;color:var(--muted);margin-top:auto;padding-top:8px}
+.wcard-link{font-size:11px;color:var(--gold);font-weight:600;margin-top:4px;display:inline-flex;align-items:center;gap:4px;text-decoration:none}
+@media(max-width:767px){
+  .wall-grid{grid-template-columns:1fr 1fr}
+  .wall-wrap{padding:64px 18px 90px}
+}
+@media(max-width:479px){.wall-grid{grid-template-columns:1fr}}
 /* mobile sticky button visible only on mobile */
 @media(min-width:768px){#stickySign{display:none !important}}
 </style>
@@ -1007,7 +1039,7 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
       <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot done"></div>
       <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot curr"></div>
     </div>
-    <p style="font-size:13px;color:rgba(26,26,26,.7);margin-top:10px">11 condiciones mínimas para una elección legítima y verificable</p>
+    <p style="font-size:13px;color:rgba(26,26,26,.7);margin-top:10px">11 condiciones prioritarias para una elección legítima y verificable</p>
     <button class="ctabtn" onclick="goToFirma()" style="background:#CF142B">
       <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
       Quiero elegir — firma aquí
@@ -1027,7 +1059,7 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
   <div class="panel" style="justify-content:center;padding-top:80px">
     <span class="tag"><span class="tag-dot"></span>El movimiento</span>
     <h2 class="t1">No estamos solos.<br>Somos un <em>movimiento.</em></h2>
-    <p class="body">Organizaciones venezolanas de la sociedad civil que respaldan estas condiciones mínimas con investigación, observación y presencia internacional.</p>
+    <p class="body">Organizaciones venezolanas de la sociedad civil que respaldan estas condiciones prioritarias con investigación, observación y presencia internacional.</p>
     <div class="orgs-grid">
       <div class="org-pill"><span class="org-pill-dot" style="background:#FFD200"></span>Transparencia Venezuela en el Exilio</div>
       <div class="org-pill"><span class="org-pill-dot" style="background:#e83348"></span>Voto Joven Venezuela</div>
@@ -1190,6 +1222,110 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
   </div>
 </div>
 
+
+<!-- S16 — LA GENTE QUIERE ELEGIR (wall / timeline) -->
+<div class="slide" id="s16">
+  <div class="slide-bg">
+    <div style="position:absolute;inset:0;background:linear-gradient(150deg,#04080f 0%,#080e1c 40%,#0a1428 75%,#0c1830 100%)"></div>
+    <div class="blob" style="width:500px;height:400px;background:#0a1a50;top:-80px;right:-80px;opacity:.5"></div>
+    <div class="blob" style="width:350px;height:350px;background:#CF142B;bottom:-60px;left:-60px;opacity:.1"></div>
+    <div class="blob" style="width:250px;height:250px;background:#FFD200;top:40%;left:50%;opacity:.04"></div>
+  </div>
+  <div class="wall-wrap">
+    <div class="wall-title">La gente quiere <em>elegir.</em></div>
+    <p class="wall-sub">Foros, informes, videos y voces que documentan la lucha por el camino electoral en Venezuela · 2026<br>
+    <span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.45"><!-- CUSTOMIZATION: reemplaza los links de cada wcard con los URLs reales de cada recurso --></span></p>
+    <div class="wall-grid">
+
+      <!-- FORO -->
+      <a class="wcard" href="#" target="_blank" rel="noopener">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#0032A0,#1a5abf)">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <div class="wcard-body">
+          <div class="wcard-type"><span class="wcard-type-dot" style="background:#A8CCEE"></span><span style="color:#A8CCEE">Foro</span></div>
+          <div class="wcard-title">¿Qué condiciones se necesitan para unas elecciones legítimas en Venezuela?</div>
+          <div class="wcard-source">Transparencia Venezuela en el Exilio · Abril 2026</div>
+          <span class="wcard-link">Ver foro <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- VIDEO -->
+      <a class="wcard" href="#" target="_blank" rel="noopener">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#7a0010,#CF142B)">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <div class="wcard-body">
+          <div class="wcard-type"><span class="wcard-type-dot" style="background:#e83348"></span><span style="color:#e83348">Video</span></div>
+          <div class="wcard-title">28J: lo que el CNE no quiere que sepas sobre las actas electorales</div>
+          <div class="wcard-source">Voto Joven Venezuela · YouTube</div>
+          <span class="wcard-link">Ver video <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- INFORME -->
+      <a class="wcard" href="#" target="_blank" rel="noopener">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#1a4a00,#2a7000)">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div class="wcard-body">
+          <div class="wcard-type"><span class="wcard-type-dot" style="background:#9EE8B4"></span><span style="color:#9EE8B4">Informe</span></div>
+          <div class="wcard-title">Votar sin voz: Radiografía del desmantelamiento del sistema electoral venezolano</div>
+          <div class="wcard-source">Red Electoral Ciudadana (REC) · 2025</div>
+          <span class="wcard-link">Leer informe <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- VIDEO 2 -->
+      <a class="wcard" href="#" target="_blank" rel="noopener">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#5a3a00,#c07000)">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <div class="wcard-body">
+          <div class="wcard-type"><span class="wcard-type-dot" style="background:#FFB347"></span><span style="color:#FFB347">Video</span></div>
+          <div class="wcard-title">La utopía de las elecciones libres: 20 años de negociaciones fallidas</div>
+          <div class="wcard-source">Laboratorio de Paz · Rafael Uzcategui</div>
+          <span class="wcard-link">Ver video <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- INFORME 2 -->
+      <a class="wcard" href="#" target="_blank" rel="noopener">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#2a0050,#5a10b0)">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div class="wcard-body">
+          <div class="wcard-type"><span class="wcard-type-dot" style="background:#F5AABF"></span><span style="color:#F5AABF">Informe</span></div>
+          <div class="wcard-title">Principios y Estándares para Elecciones Democráticas — Venezuela en perspectiva comparada</div>
+          <div class="wcard-source">Red Electoral Ciudadana · CAPEL · 2024</div>
+          <span class="wcard-link">Leer informe <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- LINK / RECURSO -->
+      <a class="wcard" href="#" target="_blank" rel="noopener">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#001870,#0032A0)">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.5" stroke-linecap="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+        </div>
+        <div class="wcard-body">
+          <div class="wcard-type"><span class="wcard-type-dot" style="background:#FFD200"></span><span style="color:#FFD200">Recurso</span></div>
+          <div class="wcard-title">Registro electoral para venezolanos en el exterior: costos, barreras y soluciones</div>
+          <div class="wcard-source">WYDE · European Partnership for Democracy · 2024</div>
+          <span class="wcard-link">Acceder <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+    </div><!-- /wall-grid -->
+
+    <div style="margin-top:28px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+      <span style="font-size:11px;color:rgba(240,235,224,.35);letter-spacing:.08em;text-transform:uppercase">quieroelegir.org · Venezuela merece elegir</span>
+      <button class="ctabtn" onclick="nav(-1)" style="margin-top:0;padding:11px 24px;font-size:14px">
+        ← Volver al manifiesto
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- BOTTOM BAR -->
 <div class="bot">
   <div class="logo">quiero<span>elegir</span>.org</div>
@@ -1206,7 +1342,7 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 
 <script>
 /* ── STATE ── */
-const N=16, DUR=10000;
+const N=17, DUR=10000;
 let cur=0, tmr=null, t0=null, paused=false, liked=false;
 
 /* ── PROGRESS BAR ── */
