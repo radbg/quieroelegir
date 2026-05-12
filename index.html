@@ -7,6 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=DM+Sans:wght@300;400;500;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<!-- Google reCAPTCHA v2 — reemplaza SITE_KEY con tu clave en console.cloud.google.com/recaptcha -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -61,6 +63,13 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
   position:relative;z-index:10;
   display:flex;flex-direction:column;justify-content:flex-end;
   padding:60px 36px 108px;
+  overflow:hidden;
+}
+/* fade-out gradient mask at the bottom so content never bleeds past the footer */
+.panel::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;
+  height:96px;pointer-events:none;z-index:20;
+  background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 100%);
 }
 .panel.right{justify-content:center;padding:60px 36px 108px 24px;}
 .tag{
@@ -232,6 +241,8 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 @keyframes scaleIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
 @keyframes scaleInCenter{from{opacity:0;transform:translateX(-50%) scale(.9)}to{opacity:1;transform:translateX(-50%) scale(1)}}
+/* s13 wright-pit: use scaleIn (not scaleInCenter) — it's right-anchored, not centered */
+#s13 .wright-pit{animation:scaleIn .6s .28s both !important}
 .slide.active .panel>*{animation:fadeUp .5s both}
 .slide.active .panel>*:nth-child(1){animation-delay:.05s}
 .slide.active .panel>*:nth-child(2){animation-delay:.13s}
@@ -580,8 +591,8 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
     <div class="blob" style="width:500px;height:400px;background:#2060c0;top:5%;left:-100px;opacity:.45"></div>
     <div class="blob" style="width:350px;height:350px;background:#001870;bottom:0%;right:0%;opacity:.4"></div>
   </div>
-  <div class="pit" style="top:12%;left:42%;z-index:30">
-    <div class="picard b">"No son fallas puntuales. Es un problema estructural."<em class="pisrc">— Transparencia Venezuela, 2026</em></div>
+  <div class="pit" style="top:8%;right:4%">
+    <div class="picard p">"Solo 69.211 inscritos para votar en el exterior. El sistema exige presencia física en capitales estadales — barreras insalvables para millones."<em class="pisrc">— WYDE / European Partnership for Democracy, 2024</em></div>
   </div>
   <div class="panel">
     <span class="tag"><span class="tag-dot"></span>El diagnóstico</span>
@@ -709,7 +720,7 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
       <div class="acrylic-cal">
         <div class="cal-header">
           <div class="cal-month" style="color:#fff;font-family:var(--serif)">DICIEMBRE</div>
-          <div class="cal-year" style="color:rgba(255,255,255,.8);font-family:var(--sans)">2025</div>
+          <div class="cal-year" style="color:rgba(255,255,255,.8);font-family:var(--sans)">2026</div>
         </div>
         <div class="cal-grid">
           <div class="cal-day-name">L</div><div class="cal-day-name">M</div><div class="cal-day-name">X</div><div class="cal-day-name">J</div><div class="cal-day-name">V</div><div class="cal-day-name">S</div><div class="cal-day-name">D</div>
@@ -762,9 +773,6 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
     <div style="position:absolute;inset:0;background:linear-gradient(145deg,#7a000e 0%,#CF142B 50%,#e85070 78%,#ffd8d8 92%,#fff5f5 100%)"></div>
     <div class="blob" style="width:400px;height:400px;background:#a00018;top:-80px;right:-50px;opacity:.4"></div>
     <div class="blob" style="width:280px;height:280px;background:#CF142B;bottom:5%;left:5%;opacity:.25"></div>
-  </div>
-  <div class="pit" style="top:8%;right:4%">
-    <div class="picard p">"Solo 69.211 inscritos para votar en el exterior. El sistema exige presencia física en capitales estadales — barreras insalvables para millones."<em class="pisrc">— WYDE / European Partnership for Democracy, 2024</em></div>
   </div>
   <div class="panel">
     <span class="tag"><span class="tag-dot"></span>Condición 4 de 11</span>
@@ -1140,15 +1148,16 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
             <input type="checkbox" id="fterms">
             <span>Acepto que mis datos sean usados exclusivamente para esta campaña ciudadana. <a href="#">Política de privacidad.</a></span>
           </label>
-          <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:8px 12px;display:flex;align-items:center;gap:10px">
-            <div style="flex:1">
-              <div style="font-size:9px;color:var(--muted);margin-bottom:3px;letter-spacing:.08em;text-transform:uppercase">Verificación — no soy un robot</div>
-              <div style="font-size:14px;color:#fff;font-weight:600;font-family:var(--sans)" id="captchaQ"></div>
+          <!-- reCAPTCHA v2 — cambia data-sitekey por tu clave real (Google reCAPTCHA Admin Console) -->
+          <div style="display:flex;justify-content:center;transform:scale(0.92);transform-origin:left center">
+            <div class="g-recaptcha"
+              data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+              data-callback="onRecaptcha"
+              data-expired-callback="onRecaptchaExpired"
+              data-theme="dark">
             </div>
-            <input class="finput" id="fcaptcha" type="number" placeholder="=" autocomplete="off"
-              style="width:60px;flex-shrink:0;text-align:center;font-size:16px;font-weight:700;padding:7px 6px">
           </div>
-          <div id="captchaError" style="display:none;font-size:12px;color:#FF3347;margin-top:-6px;padding-left:4px">⚠ Respuesta incorrecta, inténtalo de nuevo</div>
+          <div id="captchaError" style="display:none;font-size:12px;color:#FF3347;margin-top:-6px;padding-left:4px">⚠ Completa la verificación reCAPTCHA</div>
           <button class="fbtn" id="fbtn" disabled onclick="firmar()">✍ Firmar la propuesta</button>
         </div>
       </div>
@@ -1561,19 +1570,10 @@ function toggleLike(){
   btn.style.cursor='default';
 }
 
-/* ── CAPTCHA ── */
-let captchaAnswer=0;
-function genCaptcha(){
-  const ops=['+','+','+','-','×'];
-  const op=ops[Math.floor(Math.random()*ops.length)];
-  let a,b,ans;
-  if(op==='+'){a=Math.floor(Math.random()*20)+1;b=Math.floor(Math.random()*20)+1;ans=a+b}
-  else if(op==='-'){a=Math.floor(Math.random()*20)+10;b=Math.floor(Math.random()*10)+1;ans=a-b}
-  else{a=Math.floor(Math.random()*9)+2;b=Math.floor(Math.random()*9)+2;ans=a*b}
-  captchaAnswer=ans;
-  document.getElementById('captchaQ').textContent=`¿Cuánto es ${a} ${op} ${b}?`;
-  document.getElementById('fcaptcha').value='';
-}
+/* ── RECAPTCHA ── */
+let recaptchaOk=false;
+function onRecaptcha(token){recaptchaOk=true;validate();}
+function onRecaptchaExpired(){recaptchaOk=false;validate();}
 
 /* ── FORM VALIDATION ── */
 function validate(){
@@ -1582,25 +1582,21 @@ function validate(){
   const email2=document.getElementById('femail2').value.trim();
   const pais=document.getElementById('fpais').value;
   const terms=document.getElementById('fterms').checked;
-  const cap=parseInt(document.getElementById('fcaptcha').value);
   const errEl=document.getElementById('emailError');
   if(email2&&email1&&email2!==email1){errEl.style.display='block';}
   else{errEl.style.display='none';}
   const emailValid=email1.includes('@')&&email1.includes('.')&&email1===email2&&email2.length>0;
-  const captchaOk=!isNaN(cap)&&cap===captchaAnswer&&document.getElementById('fcaptcha').value!=='';
-  const ok=nombre&&emailValid&&pais&&terms&&captchaOk;
+  const ok=nombre&&emailValid&&pais&&terms&&recaptchaOk;
   document.getElementById('fbtn').disabled=!ok;
 }
-['fnombre','fapellido','femail','femail2','fpais','fterms','fcaptcha'].forEach(id=>{
+['fnombre','fapellido','femail','femail2','fpais','fterms'].forEach(id=>{
   const el=document.getElementById(id);
   if(el){el.addEventListener('input',validate);el.addEventListener('change',validate)}
 });
 
 function firmar(){
-  const cap=parseInt(document.getElementById('fcaptcha').value);
-  if(cap!==captchaAnswer){
-    document.getElementById('captchaError').style.display='block';
-    genCaptcha();validate();return;
+  if(!recaptchaOk){
+    document.getElementById('captchaError').style.display='block';return;
   }
   document.getElementById('captchaError').style.display='none';
   const n=(12847+Math.floor(Math.random()*60)+3).toLocaleString('es-VE');
@@ -1737,7 +1733,7 @@ document.addEventListener('keydown',e=>{
 });
 
 /* ── INIT ── */
-buildProg();showSlide(0);startTick();genCaptcha();
+buildProg();showSlide(0);startTick();
 </script>
 </body>
 </html>
