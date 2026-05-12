@@ -181,7 +181,7 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
   border:1.5px solid rgba(207,20,43,.5);border-radius:6px;
   font-size:clamp(13px,1.6vw,15px);color:#fff;font-weight:600;width:fit-content;
 }
-.urgency-bar::before{content:'⚡';font-size:14px}
+.urgency-bar::before{content:'';display:none}
 /* secondary CTA — ghost button */
 .ctabtn-ghost{
   display:inline-flex;align-items:center;gap:10px;margin-top:14px;
@@ -542,7 +542,7 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
   </div>
   <div class="panel">
     <!-- tag: active movement, not static proposal -->
-    <span class="tag"><span class="tag-dot"></span>Movimiento ciudadano en marcha · 2026</span>
+    <span class="tag"><span class="tag-dot"></span>Movimiento ciudadano por la libertad · 2026</span>
     <!-- counter visible from first slide, with pulse -->
     <div class="s0-counter">
       <div class="s0-counter-num" id="s0Count">12.847</div>
@@ -551,7 +551,7 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
     <h1 class="t1">Venezuela<br>merece <em>elegir.</em></h1>
     <p class="body">El 28J el régimen robó la victoria a plena luz. Hoy exigimos lo mínimo: elecciones con condiciones reales, verificables y no negociables.</p>
     <!-- urgency bar -->
-    <div class="urgency-bar">La ventana política está abierta. No es eterna.</div>
+    <div class="urgency-bar">La ventana política está abierta, pero no por mucho.</div>
     <!-- primary CTA -->
     <button class="ctabtn" onclick="goToFirma()">
       <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
