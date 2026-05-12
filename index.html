@@ -374,13 +374,8 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 /* ══ RESPONSIVE ══ */
 @media(max-width:480px){
   .panel{display:flex;flex-direction:column;justify-content:flex-start;padding:66px 20px 80px;}
-  .pit{position:absolute !important;top:54px !important;left:50% !important;transform:translateX(-50%) !important;right:auto !important;bottom:auto !important;margin-top:0 !important;z-index:28 !important;pointer-events:none;}
-  .picard{width:250px !important;min-height:auto !important;font-size:15px !important;padding:16px 16px 26px !important;transform:rotate(-1.5deg) !important;box-shadow:2px 3px 12px rgba(0,0,0,.45) !important;display:inline-block;}
-  .wright-pit{position:absolute !important;top:54px !important;left:50% !important;transform:translateX(-50%) !important;margin-top:0 !important;z-index:28 !important;}
-  .wright-pit .picard{width:210px !important;min-height:auto !important;font-size:13px !important;padding:14px 14px 22px !important;transform:rotate(-1.5deg) !important;}
-  .s2-pits{position:absolute !important;top:54px !important;left:50% !important;right:auto !important;transform:translateX(-50%) !important;width:250px !important;}
-  .s2-pits .picard{width:250px !important;font-size:13px !important;padding:12px 14px 20px !important;transform:rotate(-1.5deg) !important;}
-  #s2 .panel{padding-top:270px !important;padding-bottom:80px !important}
+  /* ocultar todos los post-its en móvil — evitan superposición con texto */
+  .pit,.wright-pit,.s2-pits{display:none !important}
   .slide.split{grid-template-columns:1fr;grid-template-rows:1fr;overflow-y:auto;}
   .mini-ill{display:flex}
   .chart-panel,.cal-panel,.acta-panel{display:none !important}
@@ -433,8 +428,8 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
   .s0-counter{margin-bottom:10px;padding:8px 14px}
   .s0-counter-num{font-size:22px}
   .urgency-bar{font-size:12px;padding:8px 14px;margin-top:10px}
-  /* show sticky button on mobile (controlled by JS) */
-  #stickySign{display:none} /* JS handles display */
+  /* botón sticky siempre oculto */
+  #stickySign{display:none !important}
 }
 @media(min-width:480px) and (max-width:767px){
   .slide{padding:54px 26px 100px}
@@ -1371,15 +1366,9 @@ function showSlide(idx){
     if(i===idx)s.classList.add('active');
   });
   document.getElementById('ctr').textContent=(idx+1)+' / '+N;
-  // sticky sign button: show after S0, hide on firma slide
+  // sticky sign button: always hidden (tapaba texto en móvil)
   const ss=document.getElementById('stickySign');
-  if(ss){
-    if(window.innerWidth<768){
-      ss.style.display=(idx>0&&idx<N-1)?'flex':'none';
-    }else{
-      ss.style.display='none';
-    }
-  }
+  if(ss)ss.style.display='none';
   // reset all fills except current
   for(let i=0;i<N;i++){
     const pf=document.getElementById('pf'+i);
@@ -1532,6 +1521,11 @@ function drawSerp(progress){
 
 function triggerSerp(midCb){
   if(serpLocked)return;
+  /* en móvil saltar la animación de actas — canvas invisible y transición inmediata */
+  if(window.innerWidth<600){
+    if(midCb)midCb();
+    return;
+  }
   serpLocked=true;
   canvas.style.opacity='1';
   let start=null;
