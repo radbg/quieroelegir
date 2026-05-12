@@ -63,13 +63,6 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
   position:relative;z-index:10;
   display:flex;flex-direction:column;justify-content:flex-end;
   padding:60px 36px 108px;
-  overflow:hidden;
-}
-/* fade-out gradient mask at the bottom so content never bleeds past the footer */
-.panel::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;
-  height:96px;pointer-events:none;z-index:20;
-  background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 100%);
 }
 .panel.right{justify-content:center;padding:60px 36px 108px 24px;}
 .tag{
