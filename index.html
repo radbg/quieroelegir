@@ -49,7 +49,7 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 .blob{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
 .prog{position:absolute;top:0;left:0;right:0;z-index:80;display:flex;gap:4px;padding:14px 22px 0}
 .pseg{flex:1;height:3px;background:rgba(255,255,255,.2);border-radius:2px;overflow:hidden}
-.pfill{height:100%;background:var(--gold);border-radius:2px;transition:width .07s linear}
+.pfill{height:100%;background:var(--gold);border-radius:2px}
 #pauseBtn{
   position:absolute;top:12px;right:18px;z-index:80;
   width:36px;height:36px;border-radius:50%;
@@ -1377,26 +1377,24 @@ function showSlide(idx){
   for(let i=0;i<N;i++){
     const pf=document.getElementById('pf'+i);
     if(!pf)continue;
-    if(i<idx){pf.style.width='100%';pf.style.background='var(--gold)'}
-    else if(i===idx){pf.style.background='var(--gold)'}
-    else{pf.style.width='0%';pf.style.background='var(--gold)'}
+    if(i<idx){pf.style.width='100%'}
+    else if(i===idx){pf.style.width='0%'}
+    else{pf.style.width='0%'}
   }
 }
 
 /* ── NAV ── */
 function nav(d){
+  if(serpLocked)return;           // block clicks during serp animation
   if(d===1&&cur===N-1)return;
   if(d===-1&&cur===0)return;
   const prev=cur;
   cur=Math.max(0,Math.min(N-1,cur+d));
   if(cur===prev)return;
-  // ── stop the previous slide's timer immediately so it doesn't
-  //    bleed into the next slide's progress bar during serp animation
-  clearInterval(tmr);
+  clearInterval(tmr);             // stop old timer before anything else
   const prevFill=document.getElementById('pf'+prev);
-  if(prevFill&&d===1)prevFill.style.width='100%'; // mark prev segment as complete
+  if(prevFill)prevFill.style.width='100%'; // mark prev segment complete instantly
   if(d===1){
-    // actas caen → slide cambia a mitad de la animación
     triggerSerp(()=>{showSlide(cur);startTick();});
   } else {
     showSlide(cur);startTick();
@@ -1404,9 +1402,11 @@ function nav(d){
 }
 
 function goToFirma(){
+  if(serpLocked)return;
   const prev=cur;
   cur=N-1;
   if(cur!==prev){
+    clearInterval(tmr);
     triggerSerp(()=>{showSlide(cur);startTick();});
   } else {
     showSlide(cur);startTick();
