@@ -61,8 +61,8 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 #pauseBtn svg{width:14px;height:14px}
 .panel{
   position:relative;z-index:10;
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding:60px 36px 108px;
+  display:flex;flex-direction:column;justify-content:flex-start;
+  padding:80px 36px 90px;
 }
 .panel.right{justify-content:center;padding:60px 36px 108px 24px;}
 .tag{
@@ -250,8 +250,8 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 /* S2 pits position */
 .s2-pits{position:absolute;top:56px;right:4%;z-index:20;pointer-events:none;width:260px;}
 .s2-pits .picard{width:100%;font-size:16px}
-#s2 .panel{justify-content:flex-start;padding-top:80px}
-#s3 .panel{justify-content:flex-start;padding-top:80px}
+/* s2 pit is absolute top-right — panel inherits flex-start from base */
+#s3 .panel{padding-top:80px}
 /* red-bg slides: remap --red→yellow, --red2→white so bullets/titles visible */
 #s5,#s6,#s7,#s8,#s11{--red:#FFD200;--red2:#ffffff;}
 /* serpentine canvas */
@@ -366,7 +366,7 @@ html,body{height:100%;font-family:var(--sans);overflow:hidden;-webkit-font-smoot
 }
 /* ══ RESPONSIVE ══ */
 @media(max-width:480px){
-  .panel{display:flex;flex-direction:column;justify-content:flex-end;padding:52px 20px 90px;}
+  .panel{display:flex;flex-direction:column;justify-content:flex-start;padding:66px 20px 80px;}
   .pit{position:absolute !important;top:54px !important;left:50% !important;transform:translateX(-50%) !important;right:auto !important;bottom:auto !important;margin-top:0 !important;z-index:28 !important;pointer-events:none;}
   .picard{width:250px !important;min-height:auto !important;font-size:15px !important;padding:16px 16px 26px !important;transform:rotate(-1.5deg) !important;box-shadow:2px 3px 12px rgba(0,0,0,.45) !important;display:inline-block;}
   .wright-pit{position:absolute !important;top:54px !important;left:50% !important;transform:translateX(-50%) !important;margin-top:0 !important;z-index:28 !important;}
