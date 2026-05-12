@@ -1390,6 +1390,11 @@ function nav(d){
   const prev=cur;
   cur=Math.max(0,Math.min(N-1,cur+d));
   if(cur===prev)return;
+  // ── stop the previous slide's timer immediately so it doesn't
+  //    bleed into the next slide's progress bar during serp animation
+  clearInterval(tmr);
+  const prevFill=document.getElementById('pf'+prev);
+  if(prevFill&&d===1)prevFill.style.width='100%'; // mark prev segment as complete
   if(d===1){
     // actas caen → slide cambia a mitad de la animación
     triggerSerp(()=>{showSlide(cur);startTick();});
